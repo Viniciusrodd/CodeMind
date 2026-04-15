@@ -1,0 +1,1 @@
+< Seu análisador de código com AI local >
