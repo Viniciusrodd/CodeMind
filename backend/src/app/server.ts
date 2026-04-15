@@ -6,6 +6,9 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import compression from 'compression';
 
+// import routes
+import { routes } from "@app/routes";
+
 // import env
 import dotenv from 'dotenv';
 dotenv.config({});
@@ -19,6 +22,7 @@ class Server {
       
       this.securityMiddlewares(app);
       this.dataMiddlewaresConfig(app);
+      this.routerConfig(app);
    };
 
 
@@ -46,6 +50,14 @@ class Server {
       }));
 
       console.log('✔️ Data middlewares');
+   };
+
+
+   // route config
+   private routerConfig(app: Application): void {
+      app.use('/api', routes); // index routes
+
+      console.log('✔️ Routes');
    };
 
 
