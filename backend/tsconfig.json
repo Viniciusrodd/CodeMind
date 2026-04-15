@@ -1,0 +1,69 @@
+{
+   "compilerOptions": {
+      // File Layout
+      "ignoreDeprecations": "6.0",
+      "baseUrl": ".",
+      "rootDir": "../",
+      "module": "commonjs",
+      "target": "esnext",
+      "types": [],
+      // For nodejs:
+      // "lib": ["esnext"],
+      // "types": ["node"],
+      // and npm install -D @types/node
+
+      // Other Outputs
+      "sourceMap": true,
+      "declaration": true,
+      "declarationMap": true,
+
+      // Stricter Typechecking Options
+      "noUncheckedIndexedAccess": true,
+      "exactOptionalPropertyTypes": true,
+
+      // Style Options
+      // "noImplicitReturns": true,
+      // "noImplicitOverride": true,
+      // "noUnusedLocals": true,
+      // "noUnusedParameters": true,
+      // "noFallthroughCasesInSwitch": true,
+      // "noPropertyAccessFromIndexSignature": true,
+
+      // Recommended Options
+      "strict": true,
+      "jsx": "react-jsx",
+      "verbatimModuleSyntax": true,
+      "isolatedModules": true,
+      "noUncheckedSideEffectImports": true,
+      "moduleDetection": "force",
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "paths": {
+         // app
+         "@app/*": ["src/app/*"],
+
+         // infra
+         "@embeddings/*": ["src/app/embeddings/*"],         
+         "@ollama/*": ["src/app/ollama/*"],
+         "@storage/*": ["src/app/storage/*"],
+
+         // modules
+         "@ai/*": ["src/modules/ai/*"],
+         "@analysis/*": ["src/modules/analysis/*"],
+         "@document/*": ["src/modules/document/*"],
+         "@project/*": ["src/modules/project/*"],
+         "@rag/*": ["src/modules/rag/*"],
+         "@user/*": ["src/modules/user/*"],
+
+         // shared
+         "@config/*": ["src/shared/config/*"],
+         "@database/*": ["src/shared/database/*"],
+         "@errors/*": ["src/shared/errors/*"],
+         "@types/*": ["src/shared/types/*"],
+         "@utils/*": ["src/shared/utils/*"],
+
+         // root
+         "@root/*": ["src/*"]
+      }
+   }
+}
