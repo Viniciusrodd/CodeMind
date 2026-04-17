@@ -11,7 +11,7 @@ const documentSchema: Schema = new Schema<IDocument>({
    projectId: { type: String, required: true },
    name: { type: String, required: true },
    type: { type: String, enum: ['code', 'doc'], required: true },
-   content: { type: String },
+   content: { type: String, required: true },
    createdAt: { type: Date, default: Date.now },
    updatedAt: { type: Date, default: Date.now }
 });

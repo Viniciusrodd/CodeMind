@@ -10,12 +10,12 @@ import { IDocumentChunk } from "@rag/interfaces/rag.interface";
 const documentChunkSchema = new Schema({
    documentId: { type: String, required: true },
    projectId: { type: String, required: true },
-   content: String,
-   embedding: [Number],
+   content: { type: String, required: true },
+   embedding: { type: [Number], required: true },
    metadata: {
-      type: String,
-      chunkIndex: Number,
-      tokens: Number
+      type: { type: String, required: true },
+      chunkIndex: { type: Number, required: true },
+      tokens: { type: Number, required: true }
    }
 });
 

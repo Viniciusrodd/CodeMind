@@ -8,14 +8,10 @@ import { IProjectDocument } from "@project/interfaces/project.interface";
 
 // schema
 const projectSchema: Schema = new Schema<IProjectDocument>({
-   name: { type: String },
-   description: { type: String },
+   name: { type: String, required: true },
+   description: { type: String, required: true },
    context: {
-      type: {
-         type: String,
-         enum: ['backend', 'frontend', 'fullstack'],
-         required: true
-      },
+      type: { type: String, enum: ['backend', 'frontend', 'fullstack'], required: true },
       languages: { type: [String], required: true },
       frameworks: { type: [String], required: true },
       purpose: { type: String, required: true },
