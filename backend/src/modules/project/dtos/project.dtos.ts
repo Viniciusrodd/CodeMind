@@ -25,6 +25,7 @@ export interface CreateProjectDTO {
 
 // update project
 export interface UpdateProjectDTO {
+   _id: string | ObjectId,
    name?: string,
    description?: string,
    context?: IContextUpdate,
