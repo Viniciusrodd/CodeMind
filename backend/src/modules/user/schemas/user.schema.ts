@@ -9,8 +9,8 @@ import { IUserDocument } from "@user/interfaces/user.interface";
 // schema
 const userSchema: Schema = new Schema<IUserDocument>({
    name: { type: String },
-   createdAt: { type: Date },
-   updatedAt: { type: Date }
+   createdAt: { type: Date, default: Date.now },
+   updatedAt: { type: Date, default: Date.now }
 });
 
 

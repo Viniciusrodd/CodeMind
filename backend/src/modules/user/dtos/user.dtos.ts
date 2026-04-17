@@ -1,5 +1,5 @@
 
-// create user DTO
-export interface UserDTOs{
+// create user
+export interface UserDTOs {
    name: string
 };
