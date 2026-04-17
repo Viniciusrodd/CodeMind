@@ -1,0 +1,17 @@
+
+// imports
+import { ObjectId } from "mongoose";
+
+
+// create RAG
+export interface CreateDocumentChunkDTO {
+   documentId: string | ObjectId,
+   projectId: string | ObjectId,
+   content: string,
+   embedding: number[],
+   metadata: {
+      type: string,
+      chunkIndex: number,
+      tokens: number,
+   }
+};
