@@ -34,7 +34,7 @@ class ProjectRepository implements IProjectRepository {
       return projectModel.findByIdAndUpdate(
          id,
          data,
-         { new: true }
+         { new: true } // Returns the modified document
       );
    };
 

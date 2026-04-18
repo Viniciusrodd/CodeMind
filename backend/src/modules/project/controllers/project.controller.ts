@@ -91,5 +91,29 @@ class ProjectController {
       }
    };
 
+   // update project
+   public async updateProject(
+      req: Request<{id: string | ObjectId}, {}, UpdateProjectDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const project: IProjectDocument | null = await projectService.updateProject(req.params.id, req.body);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Update project with successfully',
+            data: project
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at update project: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at update project',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const projectController: ProjectController = new ProjectController();

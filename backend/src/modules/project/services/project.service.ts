@@ -32,7 +32,20 @@ class ProjectService {
 
    // get project by id
    public async getProjectById(id: string | ObjectId): Promise<IProjectDocument | null> {
+      if(!id) throw new Error('A identificação do projeto é obrigatória');
+      
       const project: IProjectDocument | null = await projectRepository.getById(id);
+      return project;
+   };
+
+   // update project
+   public async updateProject(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null> {
+      if(!id) throw new Error('A identificação do projeto é obrigatória');
+      if(!data.name || !data.description || !data.context){
+         throw new Error('Todos os campos são obrigatórios');
+      }
+
+      const project: IProjectDocument | null = await projectRepository.update(id, data);
       return project;
    };
 
