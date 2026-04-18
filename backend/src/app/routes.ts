@@ -1,13 +1,14 @@
 
 // imports
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+
+// import routes
+import { userRoutes } from "@user/routes/user.routes";
 
 
 // export router
 export const routes: Router = Router();
 
 
-// routes - test
-routes.get('/test', (req: Request, res: Response) => {
-   res.send('✔️ Sucesso');
-});
+// use routes
+routes.use('/users', userRoutes);

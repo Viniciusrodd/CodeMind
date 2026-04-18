@@ -7,7 +7,7 @@ import { Request, Response, NextFunction } from "express";
 import { iApiResponse } from "@typesGlobal/apiResponse.interface";
 
 
-export const validate = (
+export const handleValidation = (
    req: Request,
    res: Response<iApiResponse>,
    next: NextFunction
