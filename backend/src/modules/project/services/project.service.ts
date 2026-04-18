@@ -16,8 +16,8 @@ class ProjectService {
 
    // create project
    public async createProject(data: CreateProjectDTO): Promise<IProjectDocument> {
-      if(!data.name || !data.description || !data.context){
-         throw new Error('Todos os campos são obrigatórios');
+      if(!data.name || !data.context){
+         throw new Error('Campos de nome e contexto são obrigatórios');
       }
 
       const project: IProjectDocument = await projectRepository.create(data);
@@ -41,9 +41,6 @@ class ProjectService {
    // update project
    public async updateProject(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null> {
       if(!id) throw new Error('A identificação do projeto é obrigatória');
-      if(!data.name || !data.description || !data.context){
-         throw new Error('Todos os campos são obrigatórios');
-      }
 
       const project: IProjectDocument | null = await projectRepository.update(id, data);
       return project;

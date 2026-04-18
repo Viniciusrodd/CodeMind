@@ -6,7 +6,7 @@ import { IContext, IContextUpdate } from "@project/interfaces/project.interface"
 // create project
 export interface CreateProjectDTO {
    name: string,
-   description: string,
+   description?: string,
    context: IContext,
 };
 
