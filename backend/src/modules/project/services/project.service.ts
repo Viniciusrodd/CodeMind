@@ -21,5 +21,11 @@ class ProjectService {
       return project;
    };
 
+   // get all projects
+   public async getAllProjects(): Promise<IProjectDocument[]> {
+      const projects: IProjectDocument[] = await projectRepository.getAll();
+      return projects;
+   };
+
 };
 export const projectService: ProjectService = new ProjectService();

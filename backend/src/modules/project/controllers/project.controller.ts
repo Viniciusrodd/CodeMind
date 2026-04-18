@@ -33,10 +33,34 @@ class ProjectController {
          });
       }
       catch(error){
-         console.error('❌ Internal server error at Project creation: ', error);
+         console.error('❌ Internal server error at project creation: ', error);
          return res.status(500).send({
             success: false,
-            message: '❌ Internal server error at Project creation',
+            message: '❌ Internal server error at project creation',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
+   // get all projects
+   public async getAllProjects(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const projects: IProjectDocument[] = await projectService.getAllProjects();
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting all projects with success',
+            data: projects
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting all projects: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at getting all projects',
             errorMessage: getErrorMessage(error) 
          });
       }

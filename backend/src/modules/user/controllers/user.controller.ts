@@ -33,10 +33,10 @@ class UserController {
          });
       }
       catch(error){
-         console.error('❌ Internal server error at User creation: ', error);
+         console.error('❌ Internal server error at user creation: ', error);
          return res.status(500).send({
             success: false,
-            message: '❌ Internal server error at User creation',
+            message: '❌ Internal server error at user creation',
             errorMessage: getErrorMessage(error) 
          });
       }
@@ -52,15 +52,15 @@ class UserController {
 
          return res.status(200).send({
             success: true,
-            message: '✔️ User get successfully',
+            message: '✔️ Getting user with success',
             data: user
          });
       }
       catch(error){
-         console.error('❌ Internal server error at Get user: ', error);
+         console.error('❌ Internal server error at get user: ', error);
          return res.status(500).send({
             success: false,
-            message: '❌ Internal server error at Get user',
+            message: '❌ Internal server error at get user',
             errorMessage: getErrorMessage(error) 
          });
       }
@@ -81,10 +81,10 @@ class UserController {
          });
       }
       catch(error){
-         console.error('❌ Internal server error at Update user: ', error);
+         console.error('❌ Internal server error at update user: ', error);
          return res.status(500).send({
             success: false,
-            message: '❌ Internal server error at Update user',
+            message: '❌ Internal server error at update user',
             errorMessage: getErrorMessage(error) 
          });
       }
@@ -104,10 +104,10 @@ class UserController {
          });
       }
       catch(error){
-         console.error('❌ Internal server error at Delete user: ', error);
+         console.error('❌ Internal server error at delete user: ', error);
          return res.status(500).send({
             success: false,
-            message: '❌ Internal server error at Delete user',
+            message: '❌ Internal server error at delete user',
             errorMessage: getErrorMessage(error) 
          });
       }
