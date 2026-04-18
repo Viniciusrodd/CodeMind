@@ -6,7 +6,7 @@ import { userRepository } from "@user/repositories/user.repository";
 import { UserDTOs } from "@user/dtos/user.dtos";
 
 // import interfaces
-import { IUserDocument, IUserRepository } from "@user/interfaces/user.interface";
+import { IUserDocument } from "@user/interfaces/user.interface";
 
 
 class UserService {
@@ -37,6 +37,15 @@ class UserService {
       if(!user) throw new Error('Erro ao atualizar usuário');
 
       return user!;
+   };
+
+   // delete user
+   public async deleteUser(): Promise<void> {
+      const result = await userRepository.delete();
+
+      if(!result.acknowledged || result.deletedCount === 0){
+         throw new Error('Erro ao deletar usuário')
+      };
    };
 
 };
