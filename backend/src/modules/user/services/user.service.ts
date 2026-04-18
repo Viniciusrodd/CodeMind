@@ -6,7 +6,7 @@ import { userRepository } from "@user/repositories/user.repository";
 import { UserDTOs } from "@user/dtos/user.dtos";
 
 // import interfaces
-import { IUserRepository } from "@user/interfaces/user.interface";
+import { IUserDocument, IUserRepository } from "@user/interfaces/user.interface";
 
 
 class UserService {
@@ -19,6 +19,14 @@ class UserService {
       if(existingUser > 0) throw new Error('Apenas 1 usuário é permitido na aplicação');
 
       await userRepository.create(data);
+   };
+
+   // get user
+   public async getUser(): Promise<IUserDocument> {
+      const user = await userRepository.get();
+      if(!user) throw new Error('Usuário não encontrado');
+
+      return user;
    };
 
 };
