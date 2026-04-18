@@ -1,4 +1,7 @@
 
+// imports
+import { ObjectId } from "mongoose";
+
 // import repository
 import { projectRepository } from "@project/repositories/project.repository";
 
@@ -22,9 +25,15 @@ class ProjectService {
    };
 
    // get all projects
-   public async getAllProjects(): Promise<IProjectDocument[]> {
-      const projects: IProjectDocument[] = await projectRepository.getAll();
+   public async getAllProjects(): Promise<IProjectDocument[] | null> {
+      const projects: IProjectDocument[] | null = await projectRepository.getAll();
       return projects;
+   };
+
+   // get project by id
+   public async getProjectById(id: string | ObjectId): Promise<IProjectDocument | null> {
+      const project: IProjectDocument | null = await projectRepository.getById(id);
+      return project;
    };
 
 };

@@ -1,6 +1,7 @@
 
 // imports
 import { Request, Response } from "express";
+import { ObjectId } from "mongoose";
 
 // import interfaces
 import { iApiResponse } from "@typesGlobal/apiResponse.interface";
@@ -48,7 +49,7 @@ class ProjectController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const projects: IProjectDocument[] = await projectService.getAllProjects();
+         const projects: IProjectDocument[] | null = await projectService.getAllProjects();
 
          return res.status(200).send({
             success: true,
@@ -61,6 +62,30 @@ class ProjectController {
          return res.status(500).send({
             success: false,
             message: '❌ Internal server error at getting all projects',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
+   // get project by id
+   public async getProjectById(
+      req: Request<{id: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const project: IProjectDocument | null = await projectService.getProjectById(req.params.id);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting project with success',
+            data: project
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting project: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at getting project',
             errorMessage: getErrorMessage(error) 
          });
       }

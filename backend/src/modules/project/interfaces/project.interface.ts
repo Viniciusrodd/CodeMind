@@ -40,7 +40,7 @@ export interface IProjectDocument {
 // project repository
 export interface IProjectRepository {
    create(data: CreateProjectDTO): Promise<IProjectDocument>,
-   getAll(): Promise<IProjectDocument[]>,
+   getAll(): Promise<IProjectDocument[] | null>,
    getById(id: string | ObjectId): Promise<IProjectDocument | null>,
    update(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null>,
    delete(id: string | ObjectId): Promise<DeleteResult>
