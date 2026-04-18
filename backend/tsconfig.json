@@ -59,7 +59,7 @@
          "@config/*": ["src/shared/config/*"],
          "@database/*": ["src/shared/database/*"],
          "@errors/*": ["src/shared/errors/*"],
-         "@types/*": ["src/shared/types/*"],
+         "@typesGlobal/*": ["src/shared/types/*"],
          "@utils/*": ["src/shared/utils/*"],
 
          // root
