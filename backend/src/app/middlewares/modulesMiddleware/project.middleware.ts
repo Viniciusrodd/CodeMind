@@ -24,8 +24,7 @@ class ProjectValidations {
          // invalid context
          body('context')
             .notEmpty().withMessage('Contexto é obrigatório')
-            .isObject().withMessage('Contexto deve ser um objeto')
-            .trim(),
+            .isObject().withMessage('Contexto deve ser um objeto'),
 
          // invalid context type
          body('context.type')
@@ -80,8 +79,7 @@ class ProjectValidations {
          // invalid context
          body('context')
             .optional()
-            .isObject().withMessage('Contexto deve ser um objeto')
-            .trim(),
+            .isObject().withMessage('Contexto deve ser um objeto'),
 
          // invalid context type
          body('context.type')

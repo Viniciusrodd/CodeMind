@@ -16,7 +16,7 @@ export const userRoutes: Router = Router();
 //// user routes - 5225
 
 
-// creation user
+// create user
 userRoutes.post(
    '/user',
    userValidations.creation(),
