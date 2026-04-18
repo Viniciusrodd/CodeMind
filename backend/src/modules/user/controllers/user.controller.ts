@@ -41,5 +41,29 @@ class UserController {
       }
    };
 
+   // get user
+   public async getUser(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const user: IUserDocument = await userService.getUser();
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ User get successfully',
+            data: user
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Get user: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at Get user',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const userController: UserController = new UserController();
