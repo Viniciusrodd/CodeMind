@@ -100,7 +100,7 @@ class UserController {
 
          return res.status(200).send({
             success: true,
-            message: '✔️ Delete user successfully'
+            message: '✔️ Delete user with success'
          });
       }
       catch(error){

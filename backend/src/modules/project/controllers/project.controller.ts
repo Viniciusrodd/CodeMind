@@ -115,5 +115,28 @@ class ProjectController {
       }
    };
 
+   // delete project
+   public async deleteProject(
+      req: Request<{id: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         await projectService.deleteProject(req.params.id);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Delete project with success',
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at delete project: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at delete project',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const projectController: ProjectController = new ProjectController();
