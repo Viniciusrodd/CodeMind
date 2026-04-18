@@ -65,5 +65,29 @@ class UserController {
       }
    };
 
+   // update user
+   public async updateUser(
+      req: Request<{}, {}, UserDTOs>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const user: IUserDocument = await userService.updateUser(req.body);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Update user successfully',
+            data: user
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Update user: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at Update user',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const userController: UserController = new UserController();
