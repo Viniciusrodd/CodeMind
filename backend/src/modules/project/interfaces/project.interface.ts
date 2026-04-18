@@ -1,6 +1,9 @@
 
 // imports
-import { ObjectId } from "mongoose";
+import { ObjectId, DeleteResult } from "mongoose";
+
+// import DTOs
+import { CreateProjectDTO, UpdateProjectDTO, } from "@project/dtos/project.dtos";
 
 
 // context types
@@ -32,4 +35,13 @@ export interface IProjectDocument {
    context: IContext,
    createdAt: Date,
    updatedAt: Date
+};
+
+// project repository
+export interface IProjectRepository {
+   create(data: CreateProjectDTO): Promise<IProjectDocument>,
+   getAll(): Promise<IProjectDocument[]>,
+   getById(id: string | ObjectId): Promise<IProjectDocument | null>,
+   update(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null>,
+   delete(id: string | ObjectId): Promise<DeleteResult>
 };

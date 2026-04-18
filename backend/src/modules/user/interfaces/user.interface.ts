@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId } from "mongoose";
+import { DeleteResult, ObjectId } from "mongoose";
 
 // import DTOs
 import { UserDTOs } from "@user/dtos/user.dtos";
@@ -16,9 +16,9 @@ export interface IUserDocument {
 
 // user repository
 export interface IUserRepository {
-   create(data: UserDTOs): Promise<any>,
-   get(): Promise<any>,
-   update(data: UserDTOs): Promise<any>,
-   delete(): Promise<any>,
+   create(data: UserDTOs): Promise<IUserDocument>,
+   get(): Promise<IUserDocument | null>,
+   update(data: UserDTOs): Promise<IUserDocument | null>,
+   delete(): Promise<DeleteResult>,
    count(): Promise<number>
 };

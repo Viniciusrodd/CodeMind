@@ -23,5 +23,5 @@ const projectSchema: Schema = new Schema<IProjectDocument>({
 
 
 // model
-const ProjectModel: Model<IProjectDocument> = model<IProjectDocument>('Project', projectSchema, 'Project');
-export { ProjectModel };
+const projectModel: Model<IProjectDocument> = model<IProjectDocument>('Project', projectSchema, 'Project');
+export { projectModel };

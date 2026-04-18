@@ -15,5 +15,5 @@ const userSchema: Schema = new Schema<IUserDocument>({
 
 
 // model
-const UserModel: Model<IUserDocument> = model<IUserDocument>('User', userSchema, 'User'); // model("model_name", "schema", "collection_name")
-export { UserModel };
+const userModel: Model<IUserDocument> = model<IUserDocument>('User', userSchema, 'User'); // model("model_name", "schema", "collection_name")
+export { userModel };

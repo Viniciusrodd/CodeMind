@@ -1,29 +1,32 @@
 
+// imports
+import { DeleteResult } from "mongoose";
+
 // import models
-import { UserModel } from "@user/schemas/user.schema";
+import { userModel } from "@user/schemas/user.schema";
 
 // import DTOs
 import { UserDTOs } from "@user/dtos/user.dtos";
 
 // import interfaces
-import { IUserRepository } from "@user/interfaces/user.interface";
+import { IUserDocument, IUserRepository } from "@user/interfaces/user.interface";
 
 
 class UserRepository implements IUserRepository {
 
    // create user
-   public async create(data: UserDTOs) {
-      return UserModel.create(data);
+   public async create(data: UserDTOs): Promise<IUserDocument> {
+      return userModel.create(data);
    };
 
    // get user
-   public async get() {
-      return UserModel.findOne();
+   public async get(): Promise<IUserDocument | null> {
+      return userModel.findOne();
    };
 
    // update user
-   public async update(data: UserDTOs) {
-      return UserModel.findOneAndUpdate(
+   public async update(data: UserDTOs): Promise<IUserDocument | null> {
+      return userModel.findOneAndUpdate(
          {},
          { $set: {name: data.name} },
          { returnDocument: 'after' }
@@ -31,13 +34,13 @@ class UserRepository implements IUserRepository {
    };
 
    // delete user
-   public async delete() {
-      return UserModel.deleteOne({});
+   public async delete(): Promise<DeleteResult> {
+      return userModel.deleteOne({});
    };
 
    // user count
-   public async count() {
-      return UserModel.countDocuments({});
+   public async count(): Promise<number> {
+      return userModel.countDocuments({});
    };
 
 };

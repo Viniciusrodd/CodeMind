@@ -24,11 +24,12 @@ class UserController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         await userService.createUser(req.body);
+         const user: IUserDocument = await userService.createUser(req.body);
 
          return res.status(200).send({
             success: true,
-            message: '✔️ User successfully created'
+            message: '✔️ User successfully created',
+            data: user
          });
       }
       catch(error){
@@ -47,7 +48,7 @@ class UserController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const user: IUserDocument = await userService.getUser();
+         const user: IUserDocument | null = await userService.getUser();
 
          return res.status(200).send({
             success: true,
@@ -71,7 +72,7 @@ class UserController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const user: IUserDocument = await userService.updateUser(req.body);
+         const user: IUserDocument | null = await userService.updateUser(req.body);
 
          return res.status(200).send({
             success: true,
