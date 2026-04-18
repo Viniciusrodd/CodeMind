@@ -16,8 +16,9 @@ export interface IUserDocument {
 
 // user repository
 export interface IUserRepository {
-   create(data: UserDTOs): Promise<any>;
-   get(): Promise<any>;
-   update(data: UserDTOs): Promise<any>;
-   delete(): Promise<any>;
+   create(data: UserDTOs): Promise<any>,
+   get(): Promise<any>,
+   update(data: UserDTOs): Promise<any>,
+   delete(): Promise<any>,
+   count(): Promise<number>
 };
