@@ -23,9 +23,10 @@ class UserRepository implements IUserRepository {
 
    // update user
    public async update(data: UserDTOs) {
-      return UserModel.updateOne(
+      return UserModel.findOneAndUpdate(
          {},
-         { $set: {name: data.name} }
+         { $set: {name: data.name} },
+         { returnDocument: 'after' }
       )
    };
 

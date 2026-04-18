@@ -29,5 +29,15 @@ class UserService {
       return user;
    };
 
+   // update user
+   public async updateUser(data: UserDTOs): Promise<IUserDocument> {
+      if(!data.name) throw new Error('Nome de usuário é obrigatório');
+
+      const user = await userRepository.update(data);
+      if(!user) throw new Error('Erro ao atualizar usuário');
+
+      return user!;
+   };
+
 };
 export const userService: UserService = new UserService();
