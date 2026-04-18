@@ -89,5 +89,28 @@ class UserController {
       }
    };
 
+   // delete user
+   public async deleteUser(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         await userService.deleteUser();
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Delete user successfully'
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Delete user: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at Delete user',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const userController: UserController = new UserController();
