@@ -3,7 +3,7 @@
 import { IEmbeddingProvider } from "@embeddings/interfaces/embeddings.interface";
 
 
-class GenerateEmbeddingService {
+export class GenerateEmbeddingService {
 
    constructor(
       private embeddingProvider: IEmbeddingProvider // like Ollama embedding...

@@ -5,9 +5,15 @@ import { ObjectId } from "mongoose";
 
 // chunk type
 export type Chunk = {
-  content: string;
-  chunkIndex: number;
-  tokens: number;
+   content: string;
+   chunkIndex: number;
+   tokens: number;
+};
+
+// retrieved chunk type
+export type RetrievedChunk = {
+   content: string;
+   score: number;
 };
 
 // RAG interface
