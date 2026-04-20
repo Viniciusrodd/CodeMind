@@ -43,9 +43,9 @@
          "@app/*": ["src/app/*"],
 
          // infra
-         "@embeddings/*": ["src/app/embeddings/*"],         
-         "@ollama/*": ["src/app/ollama/*"],
-         "@storage/*": ["src/app/storage/*"],
+         "@embeddings/*": ["src/infra/embeddings/*"],         
+         "@ollama/*": ["src/infra/ollama/*"],
+         "@storage/*": ["src/infra/storage/*"],
 
          // modules
          "@ai/*": ["src/modules/ai/*"],

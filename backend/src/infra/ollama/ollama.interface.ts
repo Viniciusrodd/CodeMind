@@ -3,7 +3,6 @@
 export interface IOllamaRequest {
    model: string;
    prompt: string;
-   stream?: boolean;
 };
 
 // ollama response
