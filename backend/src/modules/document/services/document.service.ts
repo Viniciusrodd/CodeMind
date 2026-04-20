@@ -24,5 +24,11 @@ class DocumentService {
       return document;
    };
 
+   // get all documents
+   public async getAllDocuments(): Promise<IDocument[] | null> {
+      const documents: IDocument[] | null = await documentRepository.getAll();
+      return documents;
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();

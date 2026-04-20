@@ -43,5 +43,29 @@ class DocumentController {
       }
    };
 
+   // get all documents
+   public async getAllDocuments(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const documents: IDocument[] | null = await documentService.getAllDocuments();
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting all documents with success',
+            data: documents
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting all documents: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at getting all documents',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const documentController: DocumentController = new DocumentController();
