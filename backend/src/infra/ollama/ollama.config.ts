@@ -5,3 +5,9 @@ export const ollamaConfig = {
    generatePath: "/api/generate",
    defaultModel: "mistral"
 };
+
+// ollama embeddings config
+export const ollamaEmbeddingsConfig = {
+   path: 'http://localhost:11434/api/embeddings',
+   model: 'nomic-embed-text'
+};
