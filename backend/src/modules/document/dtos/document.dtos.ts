@@ -3,6 +3,14 @@
 import { ObjectId } from "mongoose";
 
 
+// create document
+export interface CreateDocumentDTO {
+   projectId: string | ObjectId,
+   name: string,
+   type: "code" | "doc",
+   content: string,
+};
+
 // get document
 export interface GetDocumentDTO {
    _id: string | ObjectId,
@@ -14,23 +22,10 @@ export interface GetDocumentDTO {
    updatedAt: Date
 };
 
-// create document
-export interface CreateDocumentDTO {
-   projectId: string | ObjectId,
-   name: string,
-   type: "code" | "doc",
-   content: string,
-};
-
 // update document
 export interface UpdateDocumentDTO {
    _id: string | ObjectId,
    name?: string,
    type?: "code" | "doc",
    content?: string
-};
-
-// delete document
-export interface DeleteDocumentDTO {
-   _id: string | ObjectId
 };

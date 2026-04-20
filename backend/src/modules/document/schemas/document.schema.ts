@@ -18,5 +18,5 @@ const documentSchema: Schema = new Schema<IDocument>({
 
 
 // model
-const DocumentModel: Model<IDocument> = model<IDocument>('Document', documentSchema, 'Document');
-export { DocumentModel };
+const documentModel: Model<IDocument> = model<IDocument>('Document', documentSchema, 'Document');
+export { documentModel };

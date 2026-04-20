@@ -19,7 +19,7 @@ class ProjectRepository implements IProjectRepository {
       return projectModel.create(data);
    };
 
-   // get project
+   // get all projects
    public async getAll(): Promise<IProjectDocument[] | null> {
       return projectModel.find({});
    };
