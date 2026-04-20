@@ -30,5 +30,13 @@ class DocumentService {
       return documents;
    };
 
+   // get document by id
+   public async getDocumentById(id: string | ObjectId): Promise<IDocument | null> {
+      if(!id) throw new Error('A identificação do documento é obrigatória');
+
+      const document: IDocument | null = await documentRepository.getById(id);
+      return document;
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();

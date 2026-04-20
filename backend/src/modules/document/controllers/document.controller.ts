@@ -67,5 +67,29 @@ class DocumentController {
       }
    };
 
+   // get document by id
+   public async getDocumentById(
+      req: Request<{id: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const document: IDocument | null = await documentService.getDocumentById(req.params.id);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting document with success',
+            data: document
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting document: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at getting document',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const documentController: DocumentController = new DocumentController();
