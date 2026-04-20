@@ -10,20 +10,18 @@ dotenv.config({});
 import { getErrorMessage } from '@utils/errorHandler.util';
 
 // import interfaces
-import { IOllamaRequest, IOllamaResponse } from '@ollama/ollama.interface';
 import { ollamaConfig } from '@ollama/ollama.config';
 
 
 class OllamaClient {
 
-   public async request(data: IOllamaRequest): Promise<IOllamaResponse> {
-      if(!data.prompt) throw new Error('Prompt for AI model request is necessary');
-      if(!data.model) throw new Error('Model is a mandatory field');
+   public async request(prompt: string): Promise<string> {
+      if(!prompt) throw new Error('Prompt for AI model request is necessary');
 
       try{
-         const response = await axios.post(ollamaConfig.baseUrl + process.env.OLLAMA_GENERATE_PATH as string, {
-            'model': data.model,
-            'prompt': data.prompt,
+         const response = await axios.post(ollamaConfig.baseUrl + ollamaConfig.generatePath, {
+            'model': ollamaConfig.defaultModel,
+            'prompt': prompt,
             'stream': false
          });
 
