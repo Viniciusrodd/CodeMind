@@ -48,8 +48,10 @@ class ProjectService {
 
    // delete project
    public async deleteProject(id: string | ObjectId): Promise<void> {
+      if(!id) throw new Error('A identificação do projeto é obrigatória');
+      
       const result = await projectRepository.delete(id);
-
+      
       if(!result.acknowledged || result.deletedCount === 0){
          throw new Error('Erro ao deletar projeto')
       };

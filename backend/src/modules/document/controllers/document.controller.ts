@@ -115,5 +115,28 @@ class DocumentController {
       }
    };
 
+   // delete document
+   public async deleteDocument(
+      req: Request<{id: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         await documentService.deleteDocument(req.params.id);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Delete document with success',
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at delete document: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at delete document',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const documentController: DocumentController = new DocumentController();

@@ -46,5 +46,16 @@ class DocumentService {
       return document;
    };
 
+   // delete document
+   public async deleteDocument(id: string | ObjectId): Promise<void> {
+      if(!id) throw new Error('A identificação do documento é obrigatória');
+
+      const result = await documentRepository.delete(id);
+
+      if(!result.acknowledged || result.deletedCount === 0){
+         throw new Error('Erro ao deletar documento')
+      };
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();
