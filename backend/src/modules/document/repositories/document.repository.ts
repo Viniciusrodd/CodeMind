@@ -6,7 +6,7 @@ import { ObjectId, DeleteResult } from "mongoose";
 import { documentModel } from "@document/schemas/document.schema";
 
 // import DTOs
-import { CreateDocumentDTO, GetDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
+import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
 
 // import interfaces
 import { IDocument, IDocumentRepository } from "@document/interfaces/document.interface";

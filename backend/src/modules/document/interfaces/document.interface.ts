@@ -3,7 +3,7 @@
 import { ObjectId, DeleteResult } from "mongoose";
 
 // import DTOs
-import { CreateDocumentDTO, GetDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
+import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
 
 
 // RAG document interface
