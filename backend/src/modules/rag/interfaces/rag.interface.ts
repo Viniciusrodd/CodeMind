@@ -3,6 +3,13 @@
 import { ObjectId } from "mongoose";
 
 
+// chunk type
+export type Chunk = {
+  content: string;
+  chunkIndex: number;
+  tokens: number;
+};
+
 // RAG interface
 export interface IDocumentChunk {
    _id: string | ObjectId,
