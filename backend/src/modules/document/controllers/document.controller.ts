@@ -91,5 +91,29 @@ class DocumentController {
       }
    };
 
+   // update document
+   public async updateDocument(
+      req: Request<{id: string | ObjectId}, {}, UpdateDocumentDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const document: IDocument | null = await documentService.updateDocument(req.params.id, req.body);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Update document with successfully',
+            data: document
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at update document: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at update document',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const documentController: DocumentController = new DocumentController();

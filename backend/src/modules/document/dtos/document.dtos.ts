@@ -13,7 +13,6 @@ export interface CreateDocumentDTO {
 
 // update document
 export interface UpdateDocumentDTO {
-   _id: string | ObjectId,
    name?: string,
    type?: "code" | "doc",
    content?: string
