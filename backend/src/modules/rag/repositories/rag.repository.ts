@@ -10,7 +10,7 @@ import { CreateDocumentChunkDTO } from "@rag/dtos/rag.dtos";
 import { documentChunkModel } from "@rag/schemas/rag.schema";
 
 
-class RagRepository implements IDocumentChunkRepository {
+class ChunkRepository implements IDocumentChunkRepository {
 
    public async create(data: CreateDocumentChunkDTO): Promise<IDocumentChunk> {
       return documentChunkModel.create(data);
@@ -44,4 +44,4 @@ class RagRepository implements IDocumentChunkRepository {
    };
 
 };
-export const ragRepository: RagRepository = new RagRepository();
+export const chunkRepository: ChunkRepository = new ChunkRepository();

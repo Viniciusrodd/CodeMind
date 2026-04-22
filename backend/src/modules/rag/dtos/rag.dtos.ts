@@ -15,3 +15,11 @@ export interface CreateDocumentChunkDTO {
       tokens: number,
    }
 };
+
+// relevant infos from document for break in chunks
+export interface DocumentInfosDTO {
+   documentId: string;
+   projectId: string;
+   content: string;
+   type: string;
+}
