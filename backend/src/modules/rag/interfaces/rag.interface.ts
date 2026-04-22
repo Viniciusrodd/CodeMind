@@ -2,6 +2,9 @@
 // imports
 import { ObjectId } from "mongoose";
 
+// import DTOS
+import { CreateDocumentChunkDTO } from "@rag/dtos/rag.dtos";
+
 
 // chunk type
 export type Chunk = {
@@ -28,4 +31,18 @@ export interface IDocumentChunk {
       chunkIndex: number;
       tokens: number;
    }
+};
+
+// vector search params
+export interface IVectorSearchParams {
+   projectId: string;
+   embedding: number[];
+   topK: number;
+}
+
+// document chunk repository
+export interface IDocumentChunkRepository {
+   create(data: CreateDocumentChunkDTO): Promise<IDocumentChunk>;
+
+   vectorSearch(params: IVectorSearchParams): Promise<RetrievedChunk[]>;
 };

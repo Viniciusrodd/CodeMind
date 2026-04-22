@@ -1,6 +1,6 @@
 
 // import interfaces
-import { RetrievedChunk } from "@rag/interfaces/rag.interface";
+import { RetrievedChunk, IDocumentChunkRepository } from "@rag/interfaces/rag.interface";
 
 // import services
 import { GenerateEmbeddingService } from "@rag/services/generateEmbedding.service";
@@ -10,7 +10,7 @@ export class RetrieveContextService {
 
    constructor(
       private generateEmbeddingService: GenerateEmbeddingService,
-      private chunkRepository: any
+      private chunkRepository: IDocumentChunkRepository
    ){}
 
    public async execute(projectId: string, input: string): Promise<RetrievedChunk[]> {
