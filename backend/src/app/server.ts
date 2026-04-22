@@ -13,6 +13,9 @@ import { routes } from "@app/routes";
 import dotenv from 'dotenv';
 dotenv.config({});
 
+// import database configs
+import { setupVectorIndex } from "@database/setupVectorIndex";
+
 
 class Server {
 
@@ -23,6 +26,7 @@ class Server {
       this.securityMiddlewares(app);
       this.dataMiddlewaresConfig(app);
       this.routerConfig(app);
+      await setupVectorIndex.create();
    };
 
 

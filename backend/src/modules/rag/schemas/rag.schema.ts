@@ -21,5 +21,5 @@ const documentChunkSchema = new Schema({
 
 
 // model
-const DocumentChunkModel: Model<IDocumentChunk> = model<IDocumentChunk>('DocumentChunk', documentChunkSchema, 'DocumentChunk');
-export { DocumentChunkModel };
+const documentChunkModel: Model<IDocumentChunk> = model<IDocumentChunk>('DocumentChunk', documentChunkSchema, 'DocumentChunk');
+export { documentChunkModel };
