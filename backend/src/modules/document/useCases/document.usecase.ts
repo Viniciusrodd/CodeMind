@@ -43,16 +43,19 @@ class DocumentUseCase {
 
       // 1. update document
       const updatedDocument: IDocument | null = await documentRepository.update(id, data);
+      if(!updatedDocument){
+         throw new Error('Documento não encontrado');
+      }
 
       // 2. if content changes -> update document chunks
-      if(data.content){
+      if(data.content !== undefined){
          await documentChunkUseCase.delete(id);
 
          await documentChunkUseCase.create({
-            documentId: updatedDocument!._id,
-            projectId: updatedDocument!.projectId,
-            content: updatedDocument!.content,
-            type: updatedDocument!.type
+            documentId: updatedDocument._id,
+            projectId: updatedDocument.projectId,
+            content: updatedDocument.content,
+            type: updatedDocument.type
          });
       }
 
