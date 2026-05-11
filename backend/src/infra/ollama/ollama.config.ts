@@ -8,6 +8,6 @@ export const ollamaConfig = {
 
 // ollama embeddings config
 export const ollamaEmbeddingsConfig = {
-   path: 'http://localhost:11434/api/embeddings',
+   path: 'http://localhost:11434/api/embed',
    model: 'nomic-embed-text'
 };
