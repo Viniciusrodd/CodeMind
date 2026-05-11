@@ -32,4 +32,3 @@ export class DocumentChunkService {
    };
 
 };
-export const documentChunkService: DocumentChunkService = new DocumentChunkService();
