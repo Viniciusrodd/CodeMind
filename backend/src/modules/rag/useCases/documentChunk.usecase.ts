@@ -1,4 +1,7 @@
 
+// imports
+import { ObjectId } from "mongoose";
+
 // import services
 import { documentChunkService } from "@rag/services/chunkDocument.service";
 import { generateEmbeddingService } from "@rag/services/generateEmbedding.service";
@@ -15,6 +18,7 @@ import { DocumentInfosDTO } from "@rag/dtos/rag.dtos";
 
 class DocumentChunkUseCase {
 
+   // create
    public async create(document: DocumentInfosDTO): Promise<void> {
       // 1. break in chunks
       const chunks: Chunk[] = documentChunkService.execute(document.content);
@@ -35,6 +39,11 @@ class DocumentChunkUseCase {
             }
          });
       }
+   };
+
+   // delete
+   public async delete(id: string | ObjectId): Promise<void> {
+      await chunkRepository.delete(id);
    };
 
 };

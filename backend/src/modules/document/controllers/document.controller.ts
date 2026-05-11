@@ -124,7 +124,7 @@ class DocumentController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         await documentService.deleteDocument(req.params.id);
+         await documentUseCase.delete(req.params.id);
 
          return res.status(200).send({
             success: true,
