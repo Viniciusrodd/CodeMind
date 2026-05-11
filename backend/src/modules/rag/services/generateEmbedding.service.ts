@@ -1,18 +1,15 @@
 
-// import interfaces
-import { IEmbeddingProvider } from "@embeddings/interfaces/embeddings.interface";
+// import providers
+import { ollamaEmbeddingsProvider } from "@embeddings/providers/ollamaEmbeddings.provider";
 
 
-export class GenerateEmbeddingService {
-
-   constructor(
-      private embeddingProvider: IEmbeddingProvider // like Ollama embedding...
-   ){};
+class GenerateEmbeddingService {
 
    async execute(text: string): Promise<number[]> {
       if(!text) throw new Error("Text is required for embedding");
 
-      return this.embeddingProvider.generate(text);
+      return await ollamaEmbeddingsProvider.generate(text);
    };
 
 };
+export const generateEmbeddingService: GenerateEmbeddingService = new GenerateEmbeddingService();

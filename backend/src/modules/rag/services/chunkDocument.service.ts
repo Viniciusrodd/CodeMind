@@ -9,7 +9,7 @@ future evolution:
 - token real (tiktoken)
 */
 
-export class DocumentChunkService {
+class DocumentChunkService {
 
    public execute(content: string): Chunk[] {
       if(!content) throw new Error("Content is required");
@@ -32,3 +32,4 @@ export class DocumentChunkService {
    };
 
 };
+export const documentChunkService: DocumentChunkService = new DocumentChunkService();

@@ -1,26 +1,24 @@
 
 // import interfaces
-import { RetrievedChunk, IDocumentChunkRepository } from "@rag/interfaces/rag.interface";
+import { RetrievedChunk } from "@rag/interfaces/rag.interface";
+
+// import repositories
+import { chunkRepository } from "@rag/repositories/chunk.repository";
 
 // import services
-import { GenerateEmbeddingService } from "@rag/services/generateEmbedding.service";
+import { generateEmbeddingService } from "@rag/services/generateEmbedding.service";
 
 
-export class RetrieveContextService {
-
-   constructor(
-      private generateEmbeddingService: GenerateEmbeddingService,
-      private chunkRepository: IDocumentChunkRepository
-   ){}
+class RetrieveContextService {
 
    public async execute(projectId: string, input: string): Promise<RetrievedChunk[]> {
       if(!input) throw new Error("Input is required");
 
       // 1. embedding input
-      const embedding = await this.generateEmbeddingService.execute(input);
+      const embedding = await generateEmbeddingService.execute(input);
 
       // 2. vector search
-      const chunks = await this.chunkRepository.vectorSearch({
+      const chunks = await chunkRepository.vectorSearch({
          projectId,
          embedding,
          topK: 5
@@ -31,3 +29,4 @@ export class RetrieveContextService {
    };
 
 };
+export const retrieveContextService: RetrieveContextService = new RetrieveContextService();
