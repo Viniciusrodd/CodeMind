@@ -7,6 +7,9 @@ import { ObjectId } from "mongoose";
 import { iApiResponse } from "@typesGlobal/apiResponse.interface";
 import { IDocument } from "@document/interfaces/document.interface";
 
+// import use cases
+import { documentUseCase } from "@document/useCases/document.usecase";
+
 // import services
 import { documentService } from "@document/services/document.service";
 
@@ -25,7 +28,7 @@ class DocumentController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const document: IDocument = await documentService.createDocument(req.body);
+         const document: IDocument = await documentUseCase.create(req.body);
 
          return res.status(200).send({
             success: true,

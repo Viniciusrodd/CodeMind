@@ -15,7 +15,7 @@ import { DocumentInfosDTO } from "@rag/dtos/rag.dtos";
 
 class DocumentChunkUseCase {
 
-   public async create(document: DocumentInfosDTO) {
+   public async create(document: DocumentInfosDTO): Promise<void> {
       // 1. break in chunks
       const chunks: Chunk[] = documentChunkService.execute(document.content);
 

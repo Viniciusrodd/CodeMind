@@ -14,16 +14,6 @@ import { IDocument } from "@document/interfaces/document.interface";
 
 class DocumentService {
 
-   // create document
-   public async createDocument(data: CreateDocumentDTO): Promise<IDocument> {
-      if(!data.projectId || !data.name || !data.type || !data.content){
-         throw new Error('Todos os campos são obrigatórios');
-      }
-
-      const document: IDocument = await documentRepository.create(data);
-      return document;
-   };
-
    // get all documents
    public async getAllDocuments(): Promise<IDocument[] | null> {
       const documents: IDocument[] | null = await documentRepository.getAll();

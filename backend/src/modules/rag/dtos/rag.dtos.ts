@@ -18,8 +18,8 @@ export interface CreateDocumentChunkDTO {
 
 // relevant infos from document for break in chunks
 export interface DocumentInfosDTO {
-   documentId: string;
-   projectId: string;
+   documentId: string | ObjectId;
+   projectId: string | ObjectId;
    content: string;
    type: string;
 }
