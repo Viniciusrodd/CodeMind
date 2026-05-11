@@ -100,7 +100,7 @@ class DocumentController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const document: IDocument | null = await documentService.updateDocument(req.params.id, req.body);
+         const document: IDocument | null = await documentUseCase.update(req.params.id, req.body);
 
          return res.status(200).send({
             success: true,

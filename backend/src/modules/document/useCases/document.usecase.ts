@@ -9,7 +9,7 @@ import { documentRepository } from "@document/repositories/document.repository";
 import { documentChunkUseCase } from "@rag/useCases/documentChunk.usecase";
 
 // import DTOs
-import { CreateDocumentDTO } from "@document/dtos/document.dtos";
+import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
 
 // import interfaces
 import { IDocument } from "@document/interfaces/document.interface";
@@ -35,6 +35,28 @@ class DocumentUseCase {
       });
 
       return document;
+   };
+
+   // update
+   public async update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null> {
+      if(!id) throw new Error('A identificação do documento é obrigatória');
+
+      // 1. update document
+      const updatedDocument: IDocument | null = await documentRepository.update(id, data);
+
+      // 2. if content changes -> update document chunks
+      if(data.content){
+         await documentChunkUseCase.delete(id);
+
+         await documentChunkUseCase.create({
+            documentId: updatedDocument!._id,
+            projectId: updatedDocument!.projectId,
+            content: updatedDocument!.content,
+            type: updatedDocument!.type
+         });
+      }
+
+      return updatedDocument;
    };
 
    // delete

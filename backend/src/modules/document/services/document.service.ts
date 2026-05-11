@@ -28,13 +28,5 @@ class DocumentService {
       return document;
    };
 
-   // update document
-   public async updateDocument(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null> {
-      if(!id) throw new Error('A identificação do documento é obrigatória');
-
-      const document: IDocument | null = await documentRepository.update(id, data);
-      return document;
-   };
-
 };
 export const documentService: DocumentService = new DocumentService();
