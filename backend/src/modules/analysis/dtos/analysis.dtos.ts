@@ -8,7 +8,7 @@ import { IContext } from "@project/interfaces/project.interface";
 
 
 // build analysis prompt
-interface BuildAnalysisPromptDTO {
+export interface BuildAnalysisPromptDTO {
    projectContext: IContext;
    code: string;
    userContext?: string;
