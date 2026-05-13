@@ -5,7 +5,7 @@ import { RetrievedChunk } from "@rag/interfaces/rag.interface";
 
 class CleanContextService {
 
-   public execute(chunks: RetrievedChunk[]): String {
+   public execute(chunks: RetrievedChunk[]): string {
       if(chunks.length == 0) throw new Error("Chunks is required");
 
       return chunks

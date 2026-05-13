@@ -19,7 +19,7 @@ export const handleValidation = (
    if(errors.isEmpty()) return next();
 
    // with errors:
-   const extractedErrors: Array<String> = [];
+   const extractedErrors: Array<string> = [];
    errors.array().map((err) => extractedErrors.push(err.msg));
    
    return res.status(422).json({
