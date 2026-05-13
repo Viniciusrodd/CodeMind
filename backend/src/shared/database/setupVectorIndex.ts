@@ -20,7 +20,7 @@ class SetupVectorIndex {
                      {
                         type: 'vector',
                         path: 'embedding',
-                        numDimensions: 4096, // ollama mistral 7b embeddings length
+                        numDimensions: 768,
                         similarity: 'cosine'
                      }
                   ]

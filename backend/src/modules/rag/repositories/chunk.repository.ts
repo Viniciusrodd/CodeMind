@@ -27,29 +27,32 @@ class ChunkRepository implements IDocumentChunkRepository {
 
    // vector search
    public async vectorSearch(params: IVectorSearchParams): Promise<RetrievedChunk[]> {
-      const result = await documentChunkModel.aggregate([
-         {
-            $vectorSearch: {
-               index: "embedding_index",
-               queryVector: params.embedding,
-               path: "embedding",
-               numCandidates: 100,
-               limit: params.topK,
-               filter: {
-                  projectId: params.projectId
+      try{
+         const result = await documentChunkModel.aggregate([
+            {
+               $vectorSearch: {
+                  index: "vector_index",
+                  queryVector: params.embedding,
+                  path: "embedding",
+                  numCandidates: 100,
+                  limit: params.topK
+               }
+            },
+            {
+               $project: {
+                  _id: 1,
+                  content: 1,
+                  score: { $meta: "vectorSearchScore" }
                }
             }
-         },
-         {
-            $project: {
-               _id: 1,
-               content: 1,
-               score: { $meta: "vectorSearchScore" }
-            }
-         }
-      ]);
-
-      return result; 
+         ]);
+   
+         return result; 
+      }
+      catch(error){
+         console.error('❌ Vector Search Error:', error);
+         throw error;
+      }
    };
 
 };

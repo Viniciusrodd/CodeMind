@@ -6,7 +6,7 @@ import { RetrievedChunk } from "@rag/interfaces/rag.interface";
 class CleanContextService {
 
    public execute(chunks: RetrievedChunk[]): string {
-      if(chunks.length == 0) throw new Error("Chunks não podem ser vazios");
+      if(!chunks || chunks.length === 0) return '';
 
       return chunks
          .map((chunk, index) => `[CONTEXT ${index + 1}] ${chunk.content}`)
