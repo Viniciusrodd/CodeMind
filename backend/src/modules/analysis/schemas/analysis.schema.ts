@@ -28,5 +28,5 @@ const analysisSchema: Schema = new Schema<IAnalysis>({
 
 
 // model
-const AnalysisModel: Model<IAnalysis> = model<IAnalysis>('Analysis', analysisSchema, 'Analysis');
-export { AnalysisModel };
+const analysisModel: Model<IAnalysis> = model<IAnalysis>('Analysis', analysisSchema, 'Analysis');
+export { analysisModel };

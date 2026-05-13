@@ -1,6 +1,9 @@
 
 // imports
-import { ObjectId } from "mongoose";
+import { ObjectId, DeleteResult } from "mongoose";
+
+// import DTOs
+import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
 
 
 // input interface
@@ -31,4 +34,11 @@ export interface IAnalysis {
    ragContext: IChunksUsed[],
    output: IOutput,
    createdAt: Date
+};
+
+// analysis repository
+export interface IAnalysisRepository {
+   create(data: CreateAnalysisDTO): Promise<IAnalysis>,
+   getById(id: string | ObjectId): Promise<IAnalysis | null>,
+   delete(id: string | ObjectId): Promise<DeleteResult>
 };

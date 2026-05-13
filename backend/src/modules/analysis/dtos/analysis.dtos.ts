@@ -15,17 +15,11 @@ export interface BuildAnalysisPromptDTO {
    ragContext: string;
 };
 
-// get analysis
-export interface GetAnalysisDTO { 
-   _id: string | ObjectId,
+// create analysis
+export interface CreateAnalysisDTO {
    projectId: string | ObjectId,
    input: IInput,
    ragContext: IChunksUsed[],
    output: IOutput,
    createdAt: Date
-};
-
-// delete analysis
-export interface DeleteAnalysisDTO {
-   _id: string | ObjectId
 };
