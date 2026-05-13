@@ -94,5 +94,28 @@ class AnalysisController {
       }
    };
 
+   // delete analyse
+   public async deleteAnalyse(
+      req: Request<{id: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         await analysisService.deleteAnalyse(req.params.id);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Delete analyse with success',
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at delete analyse: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at delete analyse',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const analysisController: AnalysisController = new AnalysisController();

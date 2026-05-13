@@ -4,13 +4,9 @@ import { ObjectId } from "mongoose";
 
 // import repository
 import { analysisRepository } from "@analysis/repositories/analysis.repository";
-import { projectRepository } from "@project/repositories/project.repository";
 
 // import interfaces
 import { IAnalysis } from "@analysis/interfaces/analysis.interface";
-
-// import DTOs
-import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
 
 
 class AnalysisService {
@@ -25,6 +21,15 @@ class AnalysisService {
    public async getAnalyseByProjectId(projectId: string | ObjectId): Promise<IAnalysis[] | null> {
       const analysis = await analysisRepository.getByProjectId(projectId);
       return analysis;
+   };
+
+   // delete analyse
+   public async deleteAnalyse(id: string | ObjectId): Promise<void> {
+      const result = await analysisRepository.delete(id);
+
+      if(!result.acknowledged || result.deletedCount === 0){
+         throw new Error('Erro ao deletar análise');
+      };
    };
 
 };
