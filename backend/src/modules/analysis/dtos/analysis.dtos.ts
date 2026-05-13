@@ -4,7 +4,16 @@ import { ObjectId } from "mongoose";
 
 // import interface
 import { IInput, IChunksUsed, IOutput } from "@analysis/interfaces/analysis.interface";
+import { IContext } from "@project/interfaces/project.interface";
 
+
+// build analysis prompt
+interface BuildAnalysisPromptDTO {
+   projectContext: IContext;
+   code: string;
+   userContext?: string;
+   ragContext: string;
+};
 
 // get analysis
 export interface GetAnalysisDTO { 
