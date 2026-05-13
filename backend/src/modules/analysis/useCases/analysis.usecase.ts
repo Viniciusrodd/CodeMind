@@ -9,7 +9,7 @@ import { ollamaProvider } from "@ai/providers/ollama.provider";
 // import services
 import { retrieveContextService } from "@rag/services/retrieveContext.service";
 import { cleanContextService } from "@rag/services/cleanContext.service";
-import { buildAnalysisPromptService } from "@analysis/services/BuildAnalysisPrompt.service";
+import { buildAnalysisPromptService } from "@analysis/services/buildAnalysisPrompt.service";
 
 // import interfaces
 import { IAnalysis } from "@analysis/interfaces/analysis.interface";
