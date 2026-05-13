@@ -33,7 +33,7 @@ documentRoutes.get(
 // get document by id
 documentRoutes.get<{ id: string }>(
    '/document/:id',
-   documentValidations.getDocumentById(),
+   documentValidations.getById(),
    handleValidation,
    documentController.getDocumentById
 );

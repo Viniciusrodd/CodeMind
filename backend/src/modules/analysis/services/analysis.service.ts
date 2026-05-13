@@ -27,7 +27,7 @@ class AnalysisService {
    public async deleteAnalyse(id: string | ObjectId): Promise<void> {
       const result = await analysisRepository.delete(id);
 
-      if(!result.acknowledged || result.deletedCount === 0){
+      if(result.deletedCount === 0){
          throw new Error('Erro ao deletar análise');
       };
    };

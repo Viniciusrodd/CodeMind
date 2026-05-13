@@ -16,10 +16,6 @@ class ProjectService {
 
    // create project
    public async createProject(data: CreateProjectDTO): Promise<IProjectDocument> {
-      if(!data.name || !data.context){
-         throw new Error('Campos de nome e contexto são obrigatórios');
-      }
-
       const project: IProjectDocument = await projectRepository.create(data);
       return project;
    };
@@ -32,29 +28,21 @@ class ProjectService {
 
    // get project by id
    public async getProjectById(id: string | ObjectId): Promise<IProjectDocument | null> {
-      if(!id) throw new Error('A identificação do projeto é obrigatória');
-      
       const project: IProjectDocument | null = await projectRepository.getById(id);
       return project;
    };
 
    // update project
    public async updateProject(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null> {
-      if(!id) throw new Error('A identificação do projeto é obrigatória');
-
       const project: IProjectDocument | null = await projectRepository.update(id, data);
       return project;
    };
 
    // delete project
    public async deleteProject(id: string | ObjectId): Promise<void> {
-      if(!id) throw new Error('A identificação do projeto é obrigatória');
-      
       const result = await projectRepository.delete(id);
       
-      if(!result.acknowledged || result.deletedCount === 0){
-         throw new Error('Erro ao deletar projeto');
-      };
+      if(result.deletedCount === 0) throw new Error('Erro ao deletar projeto');
    };
 
 };

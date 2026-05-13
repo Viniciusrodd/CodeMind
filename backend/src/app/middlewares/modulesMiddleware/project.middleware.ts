@@ -1,6 +1,6 @@
 
 // imports
-import { body, ValidationChain } from 'express-validator';
+import { body, ValidationChain, param } from 'express-validator';
 
 
 class ProjectValidations {
@@ -60,9 +60,21 @@ class ProjectValidations {
       ]
    };
 
+   // get project by id
+   public getById(): ValidationChain[] {
+   return [
+      param('id')
+         .notEmpty().withMessage('A identificação é obrigatória')
+         .isMongoId().withMessage('A identificação é obrigatória')
+      ];
+   };
+
    // project update
    public update(): ValidationChain[] {
       return [
+         param('id')
+            .isMongoId().withMessage('A identificação é obrigatória'),
+
          // invalid name
          body('name')
             .optional()
@@ -113,6 +125,15 @@ class ProjectValidations {
             .optional()
             .isString().withMessage('Ambiente apenas em caracteres'),
       ]
+   };
+
+   // delete project
+   public delete(): ValidationChain[] {
+      return [
+         param('id')
+            .notEmpty().withMessage('A identificação é obrigatória')
+            .isMongoId().withMessage('A identificação é obrigatória')
+      ];
    };
 
 };

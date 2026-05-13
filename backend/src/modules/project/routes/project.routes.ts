@@ -1,7 +1,6 @@
 
 // imports
 import { Router } from "express";
-import { ObjectId } from "mongoose";
 
 // import controllers
 import { projectController } from "@project/controllers/project.controller";
@@ -32,8 +31,10 @@ projectRoutes.get(
 );
 
 // get project by id
-projectRoutes.get<{ id: string | ObjectId }>(
+projectRoutes.get<{ id: string }>(
    '/project/:id',
+   projectValidations.getById(),
+   handleValidation,
    projectController.getProjectById
 );
 
@@ -48,5 +49,7 @@ projectRoutes.put<{ id: string }>(
 // delete project
 projectRoutes.delete<{ id: string }>(
    '/project/:id',
+   projectValidations.delete(),
+   handleValidation,
    projectController.deleteProject
 );

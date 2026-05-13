@@ -66,11 +66,11 @@ class DocumentValidations {
    };
 
    // get document by id
-   public getDocumentById(): ValidationChain[] {
+   public getById(): ValidationChain[] {
       return [
          param('id')
-            .notEmpty().withMessage('Documento é obrigatório')
-            .isMongoId().withMessage('Documento inválido')
+            .notEmpty().withMessage('A identificação é obrigatória')
+            .isMongoId().withMessage('A identificação é obrigatória')
       ];
    };
 
