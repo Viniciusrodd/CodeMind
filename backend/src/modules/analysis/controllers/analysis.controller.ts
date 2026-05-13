@@ -70,5 +70,29 @@ class AnalysisController {
       }
    };
 
+   // get analysis by project id
+   public async getAnalyseByProjectId(
+      req: Request<{projectId: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const analysis: IAnalysis[] | null = await analysisService.getAnalyseByProjectId(req.params.projectId);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting analysis with success',
+            data: analysis
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting analysis: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at get analysis',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
 };
 export const analysisController: AnalysisController = new AnalysisController();

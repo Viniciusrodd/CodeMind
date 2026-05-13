@@ -18,9 +18,13 @@ class AnalysisService {
    // get analyse by id
    public async getAnalyseById(id: string | ObjectId): Promise<IAnalysis | null> {
       const analyse = await analysisRepository.getById(id);
-      if(!analyse) throw new Error('Análise não encontrada');
-
       return analyse;
+   };
+
+   // get analysis by project id
+   public async getAnalyseByProjectId(projectId: string | ObjectId): Promise<IAnalysis[] | null> {
+      const analysis = await analysisRepository.getByProjectId(projectId);
+      return analysis;
    };
 
 };
