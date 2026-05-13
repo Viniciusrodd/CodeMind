@@ -20,10 +20,7 @@ export interface IChunksUsed {
 
 // output interface
 export interface IOutput {
-   explanation: string,
-   problemsFound: string,
-   suggestions: string,
-   bestPractices: string
+   structuredAnalysis: string;
 };
 
 // analysis interface

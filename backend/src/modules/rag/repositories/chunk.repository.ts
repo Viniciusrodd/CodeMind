@@ -44,6 +44,7 @@ class ChunkRepository implements IDocumentChunkRepository {
          },
          {
             $project: {
+               _id: 1,
                content: 1,
                score: { $meta: "vectorSearchScore" }
             }

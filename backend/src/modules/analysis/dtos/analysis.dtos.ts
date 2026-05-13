@@ -12,7 +12,7 @@ export interface BuildAnalysisPromptDTO {
    projectContext: IContext;
    code: string;
    userContext?: string;
-   ragContext: string;
+   ragContext: String;
 };
 
 // create analysis
@@ -20,6 +20,5 @@ export interface CreateAnalysisDTO {
    projectId: string | ObjectId,
    input: IInput,
    ragContext: IChunksUsed[],
-   output: IOutput,
-   createdAt: Date
+   output: IOutput
 };

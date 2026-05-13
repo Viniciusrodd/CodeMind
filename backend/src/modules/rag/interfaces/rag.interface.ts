@@ -15,6 +15,7 @@ export type Chunk = {
 
 // retrieved chunk type
 export type RetrievedChunk = {
+   _id: string | ObjectId;
    content: string;
    score: number;
 };
@@ -35,7 +36,7 @@ export interface IDocumentChunk {
 
 // vector search params
 export interface IVectorSearchParams {
-   projectId: string;
+   projectId: string | ObjectId;
    embedding: number[];
    topK: number;
 }

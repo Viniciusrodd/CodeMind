@@ -1,4 +1,7 @@
 
+// imports
+import { ObjectId } from "mongoose";
+
 // import interfaces
 import { RetrievedChunk } from "@rag/interfaces/rag.interface";
 
@@ -11,7 +14,7 @@ import { generateEmbeddingService } from "@rag/services/generateEmbedding.servic
 
 class RetrieveContextService {
 
-   public async execute(projectId: string, input: string): Promise<RetrievedChunk[]> {
+   public async execute(projectId: string | ObjectId, input: string): Promise<RetrievedChunk[]> {
       if(!input) throw new Error("Input is required");
 
       // 1. embedding input

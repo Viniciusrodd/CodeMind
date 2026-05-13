@@ -5,7 +5,7 @@ import { BuildAnalysisPromptDTO } from "@analysis/dtos/analysis.dtos";
 
 class BuildAnalysisPromptService {
 
-   public execute(data: BuildAnalysisPromptDTO): String {
+   public execute(data: BuildAnalysisPromptDTO): string {
       return `
          Você é um especialista em análise técnica de código.
 
