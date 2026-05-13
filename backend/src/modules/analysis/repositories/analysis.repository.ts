@@ -22,6 +22,11 @@ class AnalysisRepository implements IAnalysisRepository {
       return analysisModel.findById(id);
    };
 
+   // get analyse by project id
+   public async getByProjectId(projectId: string | ObjectId): Promise<IAnalysis[] | null> {
+      return analysisModel.find({ projectId }).sort({ createdAt: -1 });
+   };
+
    // delete analyse
    public async delete(id: string | ObjectId): Promise<DeleteResult> {
       return analysisModel.deleteOne({ _id: id });
