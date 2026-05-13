@@ -19,10 +19,6 @@ class DocumentUseCase {
 
    // create
    public async create(data: CreateDocumentDTO): Promise<IDocument> {
-      if(!data.projectId || !data.name || !data.type || !data.content){
-         throw new Error('Todos os campos são obrigatórios');
-      }
-
       // 1. document save
       const document: IDocument = await documentRepository.create(data);
 
@@ -39,13 +35,13 @@ class DocumentUseCase {
 
    // update
    public async update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null> {
-      if(!id) throw new Error('A identificação do documento é obrigatória');
+      // check document existence
+      const document = await documentRepository.getById(id);
+      if(!document) throw new Error('Documento não encontrado');
 
       // 1. update document
       const updatedDocument: IDocument | null = await documentRepository.update(id, data);
-      if(!updatedDocument){
-         throw new Error('Documento não encontrado');
-      }
+      if(!updatedDocument) throw new Error('Documento não encontrado');
 
       // 2. if content changes -> update document chunks
       if(data.content !== undefined){
@@ -64,7 +60,9 @@ class DocumentUseCase {
 
    // delete
    public async delete(id: string | ObjectId): Promise<void> {
-      if(!id) throw new Error('A identificação do documento é obrigatória');
+      // check document existence
+      const document = await documentRepository.getById(id);
+      if(!document) throw new Error('Documento não encontrado');
 
       // 1. document chunks delete
       await documentChunkUseCase.delete(id);
@@ -72,9 +70,7 @@ class DocumentUseCase {
       // 2. document delete
       const result = await documentRepository.delete(id);
       
-      if(!result.acknowledged || result.deletedCount === 0){
-         throw new Error('Erro ao deletar documento')
-      };
+      if(result.deletedCount === 0) throw new Error('Erro ao deletar documento');
    }
 
 };

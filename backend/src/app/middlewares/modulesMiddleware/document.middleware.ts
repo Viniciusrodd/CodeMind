@@ -10,8 +10,8 @@ class DocumentValidations {
       return [
          // project id
          body('projectId')
-            .notEmpty().withMessage('Projeto é obrigatório')
-            .isMongoId().withMessage('Projeto inválido'),
+            .notEmpty().withMessage('A identificação é obrigatória')
+            .isMongoId().withMessage('A identificação é obrigatória'),
 
          // name
          body('name')
@@ -37,7 +37,7 @@ class DocumentValidations {
    public update(): ValidationChain[] {
       return [
          param('id')
-            .isMongoId().withMessage('Documento inválido'),
+            .isMongoId().withMessage('A identificação é obrigatória'),
 
          body('name')
             .optional()
@@ -60,8 +60,8 @@ class DocumentValidations {
    public delete(): ValidationChain[] {
       return [
          param('id')
-            .notEmpty().withMessage('Documento é obrigatório')
-            .isMongoId().withMessage('Documento inválido')
+            .notEmpty().withMessage('A identificação é obrigatória')
+            .isMongoId().withMessage('A identificação é obrigatória')
       ];
    };
 
