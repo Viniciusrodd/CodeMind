@@ -22,7 +22,7 @@ class UserValidations {
       return [
          // invalid name
          body('name')
-            .notEmpty().withMessage('Nome não pode ser vazio')
+            .notEmpty().withMessage('Nome é obrigatório')
             .isString().withMessage('Nome apenas em caracteres')
             .isLength({ min: 4, max: 120 }).withMessage('Nome deve ser entre 4 e 120 caracteres')
             .trim(),

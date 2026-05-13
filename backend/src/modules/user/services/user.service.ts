@@ -13,8 +13,6 @@ class UserService {
 
    // create user
    public async createUser(data: UserDTOs): Promise<IUserDocument> {
-      if(!data.name) throw new Error('Nome de usuário é obrigatório');
-
       const existingUser = await userRepository.count();
       if(existingUser > 0) throw new Error('Apenas 1 usuário é permitido na aplicação');
 
@@ -32,8 +30,6 @@ class UserService {
 
    // update user
    public async updateUser(data: UserDTOs): Promise<IUserDocument | null> {
-      if(!data.name) throw new Error('Nome de usuário é obrigatório');
-
       const user = await userRepository.update(data);
       if(!user) throw new Error('Erro ao atualizar usuário');
 
@@ -44,9 +40,7 @@ class UserService {
    public async deleteUser(): Promise<void> {
       const result = await userRepository.delete();
 
-      if(result.deletedCount === 0){
-         throw new Error('Erro ao deletar usuário')
-      };
+      if(result.deletedCount === 0) throw new Error('Erro ao deletar usuário');
    };
 
 };
