@@ -11,7 +11,7 @@ const analysisSchema: Schema = new Schema<IAnalysis>({
    projectId: { type: String, required: true },
    input: {
       code: { type: String, required: true},
-      context: { type: String, required: true }
+      context: { type: String, required: false }
    },
    ragContext: [{
       chunkId: { type: String, required: true },

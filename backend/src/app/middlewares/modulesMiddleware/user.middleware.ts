@@ -8,7 +8,6 @@ class UserValidations {
    // user creation
    public creation(): ValidationChain[] {
       return [
-         // invalid name
          body('name')
             .notEmpty().withMessage('Nome é obrigatório')
             .isString().withMessage('Nome apenas em caracteres')
@@ -20,7 +19,6 @@ class UserValidations {
    // user update
    public update(): ValidationChain[] {
       return [
-         // invalid name
          body('name')
             .notEmpty().withMessage('Nome é obrigatório')
             .isString().withMessage('Nome apenas em caracteres')
