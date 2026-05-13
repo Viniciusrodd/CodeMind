@@ -5,9 +5,6 @@ import { ObjectId } from "mongoose";
 // import repository
 import { documentRepository } from "@document/repositories/document.repository";
 
-// import DTOs
-import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
-
 // import interfaces
 import { IDocument } from "@document/interfaces/document.interface";
 

@@ -1,0 +1,50 @@
+
+// imports
+import { Request, Response } from "express";
+import { ObjectId } from "mongoose";
+
+// import interfaces
+import { iApiResponse } from "@typesGlobal/apiResponse.interface";
+import { IAnalysis } from "@analysis/interfaces/analysis.interface";
+
+// import use cases
+import { analysisUseCase } from "@analysis/useCases/analysis.usecase";
+
+// import services
+import { analysisService } from "@analysis/services/analysis.service";
+
+// import DTOs
+import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
+
+// import utils
+import { getErrorMessage } from "@utils/errorHandler.util";
+
+
+class AnalysisController {
+
+   // create analysis
+   public async createAnalysis(
+      req: Request<{}, {}, CreateAnalysisDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const analysis: IAnalysis = await analysisUseCase.create(req.body);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Analysis successfully created',
+            data: analysis
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at analysis creation: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at analysis creation',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
+};
+export const analysisController: AnalysisController = new AnalysisController();

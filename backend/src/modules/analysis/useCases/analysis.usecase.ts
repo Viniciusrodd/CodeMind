@@ -24,7 +24,7 @@ class AnalysisUseCase {
    public async create(data: CreateAnalysisDTO): Promise<IAnalysis> {
       // 1. project validation
       const project = await projectRepository.getById(data.projectId);
-      if(!project) throw new Error('Project not found'); 
+      if(!project) throw new Error('Projeto não encontrado'); 
 
       // 2. vector search generation
       const chunks = await retrieveContextService.execute(
