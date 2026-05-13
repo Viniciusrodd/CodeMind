@@ -18,6 +18,12 @@ export interface BuildAnalysisPromptDTO {
 // create analysis
 export interface CreateAnalysisDTO {
    projectId: string | ObjectId,
+   input: IInput
+};
+
+// create analysis repository
+export interface CreateAnalysisRepositoryDTO {
+   projectId: string | ObjectId,
    input: IInput,
    ragContext: IChunksUsed[],
    output: IOutput

@@ -1,0 +1,49 @@
+
+// imports
+import { Router } from "express";
+
+// import controllers
+import { analysisController } from "@analysis/controllers/analysis.controller";
+
+// import middlewares
+import { handleValidation } from "@app/middlewares/handleValidation.middleware";
+import { analysisValidations } from "@app/middlewares/modulesMiddleware/analysis.middleware";
+
+// export router
+export const analysisRoutes: Router = Router();
+
+
+//// analysis routes - 5225
+
+
+// create analyse
+analysisRoutes.post(
+   '/analyse',
+   analysisValidations.creation(),
+   handleValidation,
+   analysisController.createAnalysis
+);
+
+// get analyse by id
+analysisRoutes.get<{ id: string }>(
+   '/analyse/:id',
+   analysisValidations.getById(),
+   handleValidation,
+   analysisController.getAnalyseById
+);
+
+// get analyse by project id
+analysisRoutes.get<{ projectId: string }>(
+   '/analyse/:projectId',
+   analysisValidations.getByProjectId(),
+   handleValidation,
+   analysisController.getAnalyseByProjectId
+);
+
+// delete analyse
+analysisRoutes.get<{ id: string }>(
+   '/analyse/:id',
+   analysisValidations.delete(),
+   handleValidation,
+   analysisController.deleteAnalyse
+);

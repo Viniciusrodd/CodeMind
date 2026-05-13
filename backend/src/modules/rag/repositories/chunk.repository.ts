@@ -34,12 +34,10 @@ class ChunkRepository implements IDocumentChunkRepository {
                queryVector: params.embedding,
                path: "embedding",
                numCandidates: 100,
-               limit: params.topK
-            }
-         },
-         {
-            $match: {
-               projectId: params.projectId
+               limit: params.topK,
+               filter: {
+                  projectId: params.projectId
+               }
             }
          },
          {

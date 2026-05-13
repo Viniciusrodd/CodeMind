@@ -6,6 +6,7 @@ import { Router } from "express";
 import { userRoutes } from "@user/routes/user.routes";
 import { projectRoutes } from "@project/routes/project.routes";
 import { documentRoutes } from "@document/routes/document.routes";
+import { analysisRoutes } from "@analysis/routes/analysis.routes";
 
 
 // export router
@@ -15,4 +16,5 @@ export const routes: Router = Router();
 // use routes
 routes.use('/users', userRoutes);
 routes.use('/projects', projectRoutes);
-routes.use('/documents', documentRoutes)
+routes.use('/documents', documentRoutes);
+routes.use('/analysis', analysisRoutes);

@@ -1,6 +1,6 @@
 
 // import DTOs
-import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
+import { CreateAnalysisRepositoryDTO } from "@analysis/dtos/analysis.dtos";
 
 // import interfaces
 import { IAnalysis, IAnalysisRepository } from "@analysis/interfaces/analysis.interface";
@@ -13,7 +13,7 @@ import { DeleteResult, ObjectId } from "mongoose";
 class AnalysisRepository implements IAnalysisRepository {
 
    // create analysis
-   public async create(data: CreateAnalysisDTO): Promise<IAnalysis> {
+   public async create(data: CreateAnalysisRepositoryDTO): Promise<IAnalysis> {
       return analysisModel.create(data);
    };
 
