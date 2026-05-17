@@ -2,33 +2,42 @@
 // import interfaces
 import { Chunk } from "@rag/interfaces/rag.interface";
 
-/*
-future evolution:
-- AST (code)
-- Markdown-aware (docs)
-- token real (tiktoken)
-*/
+// import utils
+import { traverseCode } from "@utils/traverse.util";
+
 
 class DocumentChunkService {
 
    public execute(content: string): Chunk[] {
       if(!content) throw new Error("Content is required");
 
-      const maxChunkSize = 500; // chars (for now)
-      const chunks: Chunk[] = [];
+      try{
+         const chunks = traverseCode(content);
 
-      let index = 0;
-      for(let i = 0; i < content.length; i += maxChunkSize){
-         const slice = content.slice(i, i + maxChunkSize);
+         if(!chunks.length){
+            return [{
+               content,
+               metadata: {
+                  chunkIndex: 0,
+                  tokens: content.length,
+                  type: 'fallback'
+               }
+            }];
+         }
 
-         chunks.push({
-            content: slice,
-            chunkIndex: index++,
-            tokens: slice.length // approximation
-         });
+         return chunks;
       }
-
-      return chunks;
+      catch{
+         // AST failed
+         return [{
+            content,
+            metadata: {
+               chunkIndex: 0,
+               tokens: content.length,
+               type: 'fallback'
+            }
+         }];
+      }
    };
 
 };

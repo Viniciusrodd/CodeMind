@@ -6,17 +6,16 @@ import * as t from "@babel/types";
 
 // import interfaces
 import { Chunk } from "@rag/interfaces/rag.interface";
-import { ITraverseParams } from "@typesGlobal/utils.interface";
 
 
-export const traverseCode = (data: ITraverseParams): Chunk[] => {
+export const traverseCode = (content: string): Chunk[] => {
    
    // properties
    const chunks: Chunk[] = [];
    let chunkIndex = 0;
 
    // AST setup
-   const AST = parse(data.content, {
+   const AST = parse(content, {
       sourceType: 'module',
       plugins: [
          'typescript',
@@ -32,7 +31,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
       ClassDeclaration(path) {
          const node = path.node;
 
-         const chunkContent = data.content.slice(
+         const chunkContent = content.slice(
             node.start!,
             node.end!
          );
@@ -43,8 +42,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'class',
-               name: node.id?.name!,
-               language: data.language!
+               name: node.id?.name!
             }
          });
       },
@@ -59,7 +57,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
             parentName = parentClass?.node.id?.name;
          }
 
-         const chunkContent = data.content.slice(
+         const chunkContent = content.slice(
             node.start!,
             node.end!
          );
@@ -74,8 +72,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                tokens: chunkContent.length,
                type: 'method',
                name: methodName!,
-               parent: parentName!,
-               language: data.language!
+               parent: parentName!
             }
          });
       },
@@ -84,7 +81,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
       FunctionDeclaration(path) {
          const node = path.node;
 
-         const chunkContent = data.content.slice(
+         const chunkContent = content.slice(
             node.start!,
             node.end!
          );
@@ -95,8 +92,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'function',
-               name: node.id?.name!,
-               language: data.language!
+               name: node.id?.name!
             }
          });
       },
@@ -106,7 +102,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
          const node = path.node;
 
          if(t.isArrowFunctionExpression(node.init) || t.isFunctionExpression(node.init)){
-            const chunkContent = data.content.slice(
+            const chunkContent = content.slice(
                node.start!,
                node.end!
             );
@@ -117,8 +113,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                   chunkIndex: chunkIndex++,
                   tokens: chunkContent.length,
                   type: 'function',
-                  name: t.isIdentifier(node.id) ? node.id.name : 'anonymous',
-                  language: data.language!
+                  name: t.isIdentifier(node.id) ? node.id.name : 'anonymous'
                }
             });
          }
@@ -128,7 +123,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
       TSInterfaceDeclaration(path) {
          const node = path.node;
 
-         const chunkContent = data.content.slice(
+         const chunkContent = content.slice(
             node.start!,
             node.end!
          );
@@ -139,8 +134,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'interface',
-               name: node.id.name!,
-               language: data.language!
+               name: node.id.name!
             }
          });
       },
@@ -149,7 +143,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
       TSTypeAliasDeclaration(path) {
          const node = path.node;
 
-         const chunkContent = data.content.slice(
+         const chunkContent = content.slice(
             node.start!,
             node.end!
          );
@@ -160,8 +154,7 @@ export const traverseCode = (data: ITraverseParams): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'type',
-               name: node.id.name!,
-               language: data.language!
+               name: node.id.name!
             }
          });
       }

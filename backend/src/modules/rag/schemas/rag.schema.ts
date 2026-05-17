@@ -18,7 +18,6 @@ const documentChunkSchema = new Schema({
       type: { type: String, required: true },
       name: { type: String, required: false },
       parent: { type: String, required: false },
-      language: { type: String, required: false },
    }
 });
 

@@ -24,7 +24,6 @@ export type Chunk = {
       type: ChunkType;
       name?: string;
       parent?: string;
-      language?: string;
    }
 };
 
@@ -43,9 +42,11 @@ export interface IDocumentChunk {
    content: string,
    embedding: number[],
    metadata: {
-      type: string;
       chunkIndex: number;
       tokens: number;
+      type: ChunkType;
+      name?: string;
+      parent?: string;
    }
 };
 
