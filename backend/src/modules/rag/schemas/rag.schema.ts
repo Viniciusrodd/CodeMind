@@ -13,9 +13,12 @@ const documentChunkSchema = new Schema({
    content: { type: String, required: true },
    embedding: { type: [Number], required: true },
    metadata: {
-      type: { type: String, required: true },
       chunkIndex: { type: Number, required: true },
-      tokens: { type: Number, required: true }
+      tokens: { type: Number, required: true },
+      type: { type: String, required: true },
+      name: { type: String, required: false },
+      parent: { type: String, required: false },
+      language: { type: String, required: false },
    }
 });
 

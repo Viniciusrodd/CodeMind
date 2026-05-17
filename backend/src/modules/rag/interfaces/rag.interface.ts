@@ -7,10 +7,25 @@ import { CreateDocumentChunkDTO } from "@rag/dtos/rag.dtos";
 
 
 // chunk type
+export type ChunkType =
+   | 'class'
+   | 'method'
+   | 'function'
+   | 'interface'
+   | 'type'
+   | 'fallback';
+
+// chunk metadata
 export type Chunk = {
    content: string;
-   chunkIndex: number;
-   tokens: number;
+   metadata: {
+      chunkIndex: number;
+      tokens: number;
+      type: ChunkType;
+      name?: string;
+      parent?: string;
+      language?: string;
+   }
 };
 
 // retrieved chunk type

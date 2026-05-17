@@ -10,7 +10,7 @@ import { generateEmbeddingService } from "@rag/services/generateEmbedding.servic
 import { chunkRepository } from "@rag/repositories/chunk.repository";
 
 // import interfaces
-import type { Chunk } from "@rag/interfaces/rag.interface";
+import { Chunk } from "@rag/interfaces/rag.interface";
 
 // import DTOs
 import { DocumentInfosDTO } from "@rag/dtos/rag.dtos";
