@@ -15,7 +15,8 @@ const documentChunkSchema = new Schema({
    metadata: {
       chunkIndex: { type: Number, required: true },
       tokens: { type: Number, required: true },
-      type: { type: String, required: true },
+      chunkType: { type: String, required: true },
+      documentType: { type: String, required: true },
       name: { type: String, required: false },
       parent: { type: String, required: false },
    }

@@ -35,7 +35,8 @@ class DocumentChunkUseCase {
             metadata: {
                chunkIndex: chunk.metadata.chunkIndex,
                tokens: chunk.metadata.tokens,
-               type: chunk.metadata.type,
+               documentType: document.documentType,
+               chunkType: chunk.metadata.chunkType,
                name: chunk.metadata.name ? chunk.metadata.name : '',
                parent: chunk.metadata.parent ? chunk.metadata.parent : '',
             }

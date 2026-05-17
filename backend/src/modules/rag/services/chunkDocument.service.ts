@@ -20,21 +20,25 @@ class DocumentChunkService {
                metadata: {
                   chunkIndex: 0,
                   tokens: content.length,
-                  type: 'fallback'
+                  documentType: 'fallback',
+                  chunkType: 'fallback'
                }
             }];
          }
 
          return chunks;
       }
-      catch{
+      catch(error){
+         console.error('❌ Document chunk service - traverse fail: ', error);
+
          // AST failed
          return [{
             content,
             metadata: {
                chunkIndex: 0,
                tokens: content.length,
-               type: 'fallback'
+               documentType: 'fallback',
+               chunkType: 'fallback'
             }
          }];
       }

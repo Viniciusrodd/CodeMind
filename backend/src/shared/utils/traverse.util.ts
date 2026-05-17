@@ -15,7 +15,7 @@ export const traverseCode = (content: string): Chunk[] => {
    let chunkIndex = 0;
 
    // AST setup
-   const AST = parse(content, {
+   const ast = parse(content, {
       sourceType: 'module',
       plugins: [
          'typescript',
@@ -26,26 +26,7 @@ export const traverseCode = (content: string): Chunk[] => {
    });
 
 
-   traverse(AST, {
-      // class declaration
-      ClassDeclaration(path) {
-         const node = path.node;
-
-         const chunkContent = content.slice(
-            node.start!,
-            node.end!
-         );
-
-         chunks.push({
-            content: chunkContent,
-            metadata: {
-               chunkIndex: chunkIndex++,
-               tokens: chunkContent.length,
-               type: 'class',
-               name: node.id ? node.id.name : ''
-            }
-         });
-      },
+   traverse(ast, {
 
       // class methods
       ClassMethod(path) {
@@ -70,7 +51,8 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               type: 'method',
+               documentType: 'code',
+               chunkType: 'method',
                name: methodName,
                parent: parentName
             }
@@ -91,7 +73,8 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               type: 'function',
+               documentType: 'code',
+               chunkType: 'function',
                name: node.id ? node.id.name : ''
             }
          });
@@ -112,7 +95,8 @@ export const traverseCode = (content: string): Chunk[] => {
                metadata: {
                   chunkIndex: chunkIndex++,
                   tokens: chunkContent.length,
-                  type: 'function',
+                  documentType: 'code',
+                  chunkType: 'function',
                   name: t.isIdentifier(node.id) ? node.id.name : 'anonymous'
                }
             });
@@ -133,7 +117,8 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               type: 'interface',
+               documentType: 'code',
+               chunkType: 'interface',
                name: node.id ? node.id.name : ''
             }
          });
@@ -153,11 +138,13 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               type: 'type',
+               documentType: 'code',
+               chunkType: 'type',
                name: node.id ? node.id.name : ''
             }
          });
       }
+
    });
 
    return chunks;

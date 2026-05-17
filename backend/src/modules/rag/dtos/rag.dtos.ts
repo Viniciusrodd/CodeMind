@@ -15,7 +15,8 @@ export interface CreateDocumentChunkDTO {
    metadata: {
       chunkIndex: number;
       tokens: number;
-      type: ChunkType;
+      documentType: "code" | "doc" | "fallback";
+      chunkType: ChunkType;
       name?: string;
       parent?: string;
    }
@@ -26,5 +27,6 @@ export interface DocumentInfosDTO {
    documentId: string | ObjectId;
    projectId: string | ObjectId;
    content: string;
-   type: ChunkType;
+   documentType: "code" | "doc" | "fallback";
+   chunkType: ChunkType;
 }
