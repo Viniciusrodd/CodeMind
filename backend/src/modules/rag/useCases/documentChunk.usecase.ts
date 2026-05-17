@@ -33,9 +33,11 @@ class DocumentChunkUseCase {
             content: chunk.content,
             embedding,
             metadata: {
-               type: document.type,
-               chunkIndex: chunk.chunkIndex,
-               tokens: chunk.tokens
+               chunkIndex: chunk.metadata.chunkIndex,
+               tokens: chunk.metadata.tokens,
+               type: chunk.metadata.type,
+               name: chunk.metadata.name ? chunk.metadata.name : '',
+               parent: chunk.metadata.parent ? chunk.metadata.parent : '',
             }
          });
       }

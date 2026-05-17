@@ -42,7 +42,7 @@ export const traverseCode = (content: string): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'class',
-               name: node.id?.name!
+               name: node.id ? node.id.name : ''
             }
          });
       },
@@ -50,11 +50,11 @@ export const traverseCode = (content: string): Chunk[] => {
       // class methods
       ClassMethod(path) {
          const node = path.node;
-         let parentName: string | undefined;
+         let parentName: string = '';
 
          const parentClass = path.findParent(parent => parent.isClassDeclaration());
          if(parentClass?.node && t.isClassDeclaration(parentClass.node)){
-            parentName = parentClass?.node.id?.name;
+            parentName = parentClass && parentClass.node.id ? parentClass.node.id.name : '';
          }
 
          const chunkContent = content.slice(
@@ -71,8 +71,8 @@ export const traverseCode = (content: string): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'method',
-               name: methodName!,
-               parent: parentName!
+               name: methodName,
+               parent: parentName
             }
          });
       },
@@ -92,7 +92,7 @@ export const traverseCode = (content: string): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'function',
-               name: node.id?.name!
+               name: node.id ? node.id.name : ''
             }
          });
       },
@@ -134,7 +134,7 @@ export const traverseCode = (content: string): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'interface',
-               name: node.id.name!
+               name: node.id ? node.id.name : ''
             }
          });
       },
@@ -154,7 +154,7 @@ export const traverseCode = (content: string): Chunk[] => {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
                type: 'type',
-               name: node.id.name!
+               name: node.id ? node.id.name : ''
             }
          });
       }
