@@ -3,6 +3,7 @@
 import { parse } from "@babel/parser";
 import traverse from '@babel/traverse';
 import * as t from "@babel/types";
+import { encode } from "gpt-tokenizer";
 
 // import interfaces
 import { Chunk } from "@rag/interfaces/rag.interface";
@@ -50,7 +51,7 @@ export const traverseCode = (content: string): Chunk[] => {
             content: chunkContent,
             metadata: {
                chunkIndex: chunkIndex++,
-               tokens: chunkContent.length,
+               tokens: encode(chunkContent).length,
                chunkType: 'method',
                name: methodName,
                parent: parentName
@@ -71,7 +72,7 @@ export const traverseCode = (content: string): Chunk[] => {
             content: chunkContent,
             metadata: {
                chunkIndex: chunkIndex++,
-               tokens: chunkContent.length,
+               tokens: encode(chunkContent).length,
                chunkType: 'function',
                name: node.id ? node.id.name : ''
             }
@@ -92,7 +93,7 @@ export const traverseCode = (content: string): Chunk[] => {
                content: chunkContent,
                metadata: {
                   chunkIndex: chunkIndex++,
-                  tokens: chunkContent.length,
+                  tokens: encode(chunkContent).length,
                   chunkType: 'function',
                   name: t.isIdentifier(node.id) ? node.id.name : 'anonymous'
                }
@@ -113,7 +114,7 @@ export const traverseCode = (content: string): Chunk[] => {
             content: chunkContent,
             metadata: {
                chunkIndex: chunkIndex++,
-               tokens: chunkContent.length,
+               tokens: encode(chunkContent).length,
                chunkType: 'interface',
                name: node.id ? node.id.name : ''
             }
@@ -133,7 +134,7 @@ export const traverseCode = (content: string): Chunk[] => {
             content: chunkContent,
             metadata: {
                chunkIndex: chunkIndex++,
-               tokens: chunkContent.length,
+               tokens: encode(chunkContent).length,
                chunkType: 'type',
                name: node.id ? node.id.name : ''
             }
