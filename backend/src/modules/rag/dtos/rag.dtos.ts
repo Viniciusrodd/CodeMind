@@ -28,5 +28,5 @@ export interface DocumentInfosDTO {
    projectId: string | ObjectId;
    content: string;
    documentType: "code" | "doc" | "fallback";
-   chunkType: ChunkType;
+   chunkType?: ChunkType;
 }

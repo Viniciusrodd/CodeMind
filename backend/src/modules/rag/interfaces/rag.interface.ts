@@ -21,7 +21,7 @@ export type Chunk = {
    metadata: {
       chunkIndex: number;
       tokens: number;
-      documentType: "code" | "doc" | "fallback";
+      documentType?: "code" | "doc" | "fallback";
       chunkType: ChunkType;
       name?: string;
       parent?: string;
@@ -45,7 +45,7 @@ export interface IDocumentChunk {
    metadata: {
       chunkIndex: number;
       tokens: number;
-      documentType: "code" | "doc" | "fallback";
+      documentType?: "code" | "doc" | "fallback";
       chunkType: ChunkType;
       name?: string;
       parent?: string;

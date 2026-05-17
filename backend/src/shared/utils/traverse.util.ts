@@ -51,7 +51,6 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               documentType: 'code',
                chunkType: 'method',
                name: methodName,
                parent: parentName
@@ -73,7 +72,6 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               documentType: 'code',
                chunkType: 'function',
                name: node.id ? node.id.name : ''
             }
@@ -95,7 +93,6 @@ export const traverseCode = (content: string): Chunk[] => {
                metadata: {
                   chunkIndex: chunkIndex++,
                   tokens: chunkContent.length,
-                  documentType: 'code',
                   chunkType: 'function',
                   name: t.isIdentifier(node.id) ? node.id.name : 'anonymous'
                }
@@ -117,7 +114,6 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               documentType: 'code',
                chunkType: 'interface',
                name: node.id ? node.id.name : ''
             }
@@ -138,7 +134,6 @@ export const traverseCode = (content: string): Chunk[] => {
             metadata: {
                chunkIndex: chunkIndex++,
                tokens: chunkContent.length,
-               documentType: 'code',
                chunkType: 'type',
                name: node.id ? node.id.name : ''
             }

@@ -27,7 +27,7 @@ class DocumentUseCase {
          documentId: document._id,
          projectId: document.projectId,
          content: document.content,
-         type: document.type
+         documentType: document.type
       });
 
       return document;
@@ -51,7 +51,7 @@ class DocumentUseCase {
             documentId: updatedDocument._id,
             projectId: updatedDocument.projectId,
             content: updatedDocument.content,
-            type: updatedDocument.type
+            documentType: updatedDocument.type
          });
       }
 
