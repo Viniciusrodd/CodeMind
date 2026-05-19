@@ -20,7 +20,7 @@ class OllamaClient {
 
       try{
          const response = await axios.post(ollamaConfig.baseUrl + ollamaConfig.generatePath, {
-            'model': ollamaConfig.defaultModel,
+            'model': ollamaConfig.models.qwen,
             'prompt': prompt,
             'stream': false
          });
@@ -28,13 +28,13 @@ class OllamaClient {
          const result = typeof response.data === 'string'
             ? response.data
             : response.data.response;
-         if(!result) throw new Error('Empty response from AI model');
+         if(!result) throw new Error(`Empty response from AI model(${ ollamaConfig.models.qwen })`);
 
          return result.trim();
       }
       catch(error){
-         console.error('[AIService] Error while requesting local AI model:', getErrorMessage(error));
-         throw new Error('Failed to process AI model request');
+         console.error(`[AIService] Error while requesting local AI model(${ ollamaConfig.models.qwen }): `, getErrorMessage(error));
+         throw new Error(`[AIService] Error while requesting local AI model(${ ollamaConfig.models.qwen })`);
       }
    };
 

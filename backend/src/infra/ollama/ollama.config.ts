@@ -3,7 +3,10 @@
 export const ollamaConfig = {
    baseUrl: "http://localhost:11434",
    generatePath: "/api/generate",
-   defaultModel: "mistral"
+   models: {
+      mistral: 'mistral',
+      qwen: 'qwen2.5-coder:3b'
+   } 
 };
 
 // ollama embeddings config

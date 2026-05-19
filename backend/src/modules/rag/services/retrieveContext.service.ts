@@ -24,7 +24,7 @@ class RetrieveContextService {
       const chunks = await chunkRepository.vectorSearch({
          projectId,
          embedding,
-         topK: 5
+         topK: 3
       });
 
       // 3. retorn context
