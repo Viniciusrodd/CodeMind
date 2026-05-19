@@ -5,7 +5,7 @@ export const ollamaConfig = {
    generatePath: "/api/generate",
    models: {
       mistral: 'mistral',
-      qwen: 'qwen2.5-coder:3b'
+      qwen: 'qwen2.5-coder:7b'
    } 
 };
 

@@ -51,6 +51,7 @@ class BuildAnalysisPromptService {
          5. Estruture a resposta em tópicos
          6. Seja técnico mas didático
          7. Não invente informações inexistentes
+         8. Responda de forma objetiva
 
 
          FORMATO DA RESPOSTA:
@@ -62,6 +63,14 @@ class BuildAnalysisPromptService {
          ## Sugestões
 
          ## Boas práticas
+
+         LIMITE:
+         
+         ## Explicação: máximo 5 linhas
+         ## Problemas encontrados: máximo 5 itens
+         ## Sugestões: máximo 5 itens
+         ## Sugestões: máximo 5 itens
+         ## Não repita informações entre seções.
       `;
    };
 

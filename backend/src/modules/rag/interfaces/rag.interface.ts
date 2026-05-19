@@ -33,6 +33,11 @@ export type RetrievedChunk = {
    _id: string | ObjectId;
    content: string;
    score: number;
+   metadata?: {
+      name?: string;
+      parent?: string;
+      chunkType: ChunkType;
+   }
 };
 
 // RAG interface

@@ -27,8 +27,30 @@ class RetrieveContextService {
          topK: 3
       });
 
+      // clean chunks
+      const bestScore = chunks[0]?.score || 0;
+      const cleanChunks = chunks.filter(chunk =>
+         chunk.score >= 0.70 && chunk.score >= bestScore * 0.95 // min / máx
+      ).map(chunk => ({
+         _id: chunk._id,
+         score: chunk.score,
+         content: `
+            [TYPE]
+            ${chunk.metadata ? chunk.metadata.chunkType : 'fallback'}
+
+            [NAME]
+            ${chunk.metadata ? chunk.metadata.name : 'unknown'}
+
+            [PARENT]
+            ${chunk.metadata ? chunk.metadata.parent : 'none'}
+
+            [CODE]
+            ${chunk.content}
+         `
+      }));
+
       // 3. retorn context
-      return chunks;
+      return cleanChunks;
    };
 
 };
