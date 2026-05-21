@@ -57,6 +57,13 @@ select:focus{
    }
 }
 
+button{
+   cursor: pointer;
+   transition: ease-in-out transform 0.1s;
+}
+button:hover{
+   transform: scale(1.02);
+}
 
 /* tooltip */
 
