@@ -3,6 +3,7 @@
 :root{
    --color1: #0e1116;
    --color2: #8981fe;
+   --color2b: #4a56f9;
    --color3: #ed254e;
    --color4: #a2faa3;
    --color5: #fffaff;
@@ -33,6 +34,29 @@ input:focus{
 select:focus{
    outline: none;
 }
+
+.title-container{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 48px;
+   width: 16vw;
+   
+   & .codemind-title{
+      color: var(--color2b);
+      font-size: 40px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: -1px 1px 0px white;
+      margin: 0px;
+   }
+
+   & .img-title{
+      height: 100%;
+      width: 50px;
+   }
+}
+
 
 /* tooltip */
 
