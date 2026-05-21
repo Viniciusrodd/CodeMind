@@ -1,6 +1,6 @@
 
 // import css
-import styles from '../styles/pages/register.module.css';
+import styles from '@styles/pages/Register.module.css';
 
 
 const Register = () => {
