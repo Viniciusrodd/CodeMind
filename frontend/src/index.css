@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+:root{
+   --color1: #0e1116;
+   --color2: #8981fe;
+   --color3: #ed254e;
+   --color4: #a2faa3;
+   --color5: #fffaff;
+}
+
+/* general */
+
+*{
+   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+   margin: 0;
+   color: azure;
+   text-align: center;
+   transition: ease-in-out transform 0.2s;
+}
+
+html, body{
+   margin: 0;
+   padding: 0;
+   height: 100%;
+}
+
+/* specific tags */
+
+input:focus{
+   outline: none;
+}
+
+select:focus{
+   outline: none;
+}
+
+/* tooltip */
+
+.tooltip_btt{
+   background-color: transparent;
+   border: none;
+   transition: ease-in-out transform 0.2s;
+}
+.tooltip_btt:hover{
+   transform: scale(1.05);
+}
+
+.tooltip {
+   position: relative;
+   display: inline-block;
+   cursor: pointer;
+}
+
+.tooltip::after {
+   content: attr(data-tooltip);
+   position: absolute;
+   bottom: 120%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: var(--color1);
+   border: 2px solid var(--color5);
+   color: #fff;
+   padding: 6px 15px;
+   border-radius: 6px;
+   font-size: 13px;
+   white-space: nowrap;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.3s ease;
+}
+
+.tooltip:hover::after {
+   opacity: 1;
+}

@@ -3,14 +3,15 @@
 import './App.css'
 
 
+
 function App() {
 
    return (
-      <div>
+      <div className='app'>
          <p>app</p>
       </div>
    );
-   
+
 };
 
 
