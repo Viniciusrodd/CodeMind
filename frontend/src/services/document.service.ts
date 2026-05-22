@@ -36,6 +36,48 @@ class DocumentService {
          throw new Error('Erro inesperado', { cause: error });
       }
    };
-   
+
+   // get all documents
+   public async getAllDocuments(): Promise<IDocument[] | null> {
+      try{
+         const res = await axios.get<iApiResponse<IDocument[] | null>>(documentRoute);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar documentos',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
+   // get document by id
+   public async getDocumentById(
+      id: string
+   ): Promise<IDocument | null> {
+      try{
+         const res = await axios.get<iApiResponse<IDocument | null>>(`${documentRoute}/${id}`);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar documento',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();
