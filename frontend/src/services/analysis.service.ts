@@ -37,5 +37,49 @@ class AnalysisService {
       }
    };
 
+   // get analyse by id
+   public async getAnalyseById(
+      id: string
+   ): Promise<IAnalysis | null> {
+      try{
+         const res = await axios.get<iApiResponse<IAnalysis | null>>(`${analysisRoute}/${id}`);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar análise',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
+   // get analysis by project id
+   public async getAnalysisByProjectId(
+      projectId: string
+   ): Promise<IAnalysis[] | null> {
+      try{
+         const res = await axios.get<iApiResponse<IAnalysis[] | null>>(`${analysisRoute}/${projectId}`);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar análises',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const analysisService: AnalysisService = new AnalysisService();

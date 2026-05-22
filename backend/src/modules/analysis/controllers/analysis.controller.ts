@@ -71,7 +71,7 @@ class AnalysisController {
    };
 
    // get analysis by project id
-   public async getAnalyseByProjectId(
+   public async getAnalysisByProjectId(
       req: Request<{projectId: string | ObjectId}, {}, {}>,
       res: Response<iApiResponse>
    ): Promise<Response> {

@@ -37,7 +37,7 @@ analysisRoutes.get<{ projectId: string }>(
    '/:projectId',
    analysisValidations.getByProjectId(),
    handleValidation,
-   analysisController.getAnalyseByProjectId
+   analysisController.getAnalysisByProjectId
 );
 
 // delete analyse
