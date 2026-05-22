@@ -79,5 +79,50 @@ class DocumentService {
       }
    };
 
+   // update document
+   public async updateDocument(
+      id: string,
+      data: UpdateDocumentDTO
+   ): Promise<IDocument | null> {
+      try{
+         const res = await axios.put<iApiResponse<IDocument | null>>(`${documentRoute}/${id}`, data);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao atualizar documento',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
+   // delete document
+   public async deleteDocument(
+      id: string
+   ): Promise<iApiResponse> {
+      try{
+         const res = await axios.delete<iApiResponse>(`${documentRoute}/${id}`);
+         return res.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao deletar documento',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();
