@@ -1,0 +1,7 @@
+
+// api response
+export interface iApiResponse<T = unknown>{
+   success: boolean; 
+   message: string; 
+   data?: T;
+};
