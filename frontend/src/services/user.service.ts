@@ -79,5 +79,25 @@ class UserService {
       }
    };
 
+   // delete user
+   public async deleteUser(): Promise<iApiResponse> {
+      try{
+         const res = await axios.delete<iApiResponse>(userRoute);
+         return res.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao deletar usuário',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const userService: UserService = new UserService();
