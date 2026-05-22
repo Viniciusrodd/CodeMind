@@ -19,3 +19,13 @@ export interface IContextUpdate {
    purpose?: string,
    environment?: string
 };
+
+// project interface
+export interface IProjectDocument {
+   _id: string,
+   name: string,
+   description: string,
+   context: IContext,
+   createdAt: Date,
+   updatedAt: Date
+};
