@@ -79,5 +79,28 @@ class ProjectService {
       }
    };
 
+   // update project
+   public async updateProject(
+      id: string,
+      data: UpdateProjectDTO
+   ): Promise<IProjectDocument | null> {
+      try{
+         const res = await axios.put<iApiResponse<IProjectDocument | null>>(`${projectRoute}/${id}`, data);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao atualizar projeto',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const projectService: ProjectService = new ProjectService();
