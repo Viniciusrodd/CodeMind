@@ -57,5 +57,27 @@ class UserService {
       }
    };
 
+   // update user
+   public async updateUser(
+      data: UserDTOs
+   ): Promise<IUserDocument> {
+      try{
+         const res = await axios.put<iApiResponse<IUserDocument>>(userRoute, data);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao atualizar usuário',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const userService: UserService = new UserService();
