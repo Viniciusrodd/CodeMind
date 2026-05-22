@@ -35,7 +35,27 @@ class ProjectService {
 
          throw new Error('Erro inesperado', { cause: error });
       }
-   }
+   };
+
+   // get all projects
+   public async getAllProject(): Promise<IProjectDocument[] | null> {
+      try{
+         const res = await axios.get<iApiResponse<IProjectDocument[] | null>>(projectRoute);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar projetos',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
 
 };
 export const projectService: ProjectService = new ProjectService();
