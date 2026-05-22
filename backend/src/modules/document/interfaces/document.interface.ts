@@ -6,7 +6,7 @@ import { ObjectId, DeleteResult } from "mongoose";
 import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
 
 
-// RAG document interface
+// document interface
 export interface IDocument {
    _id: string | ObjectId,
    projectId: string | ObjectId,
