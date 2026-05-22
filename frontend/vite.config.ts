@@ -27,6 +27,12 @@ export default defineConfig({
          // styles
          '@styles': path.resolve(__dirname, 'src/styles'),
 
+         // DTOs
+         "@DTOs": path.resolve(__dirname, 'src/shared/DTOs'),
+
+         // interfaces
+         "@interfaces": path.resolve(__dirname, 'src/shared/interfaces'),
+
          // root
          '@root': path.resolve(__dirname, 'src'),
       }

@@ -1,10 +1,7 @@
 
-// imports
-import { ObjectId } from "mongoose";
-
 // import interface
-import { IInput, IChunksUsed, IOutput } from "@analysis/interfaces/analysis.interface";
-import { IContext } from "@project/interfaces/project.interface";
+import type { IInput, IChunksUsed, IOutput } from "@interfaces/analysis.interface";
+import type { IContext } from "@interfaces/project.interface";
 
 
 // build analysis prompt
@@ -17,13 +14,13 @@ export interface BuildAnalysisPromptDTO {
 
 // create analysis
 export interface CreateAnalysisDTO {
-   projectId: string | ObjectId,
+   projectId: string,
    input: IInput
 };
 
 // create analysis repository
 export interface CreateAnalysisRepositoryDTO {
-   projectId: string | ObjectId,
+   projectId: string,
    input: IInput,
    ragContext: IChunksUsed[],
    output: IOutput

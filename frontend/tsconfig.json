@@ -24,6 +24,12 @@
          // styles
          "@styles/*": ["src/styles/*"],
 
+         // DTOs
+         "@DTOs/*": ["src/shared/DTOs/*"],
+
+         // interfaces
+         "@interfaces/*": ["src/shared/interfaces/*"],
+
          // root
          "@root/*": ["src/*"],
       }
