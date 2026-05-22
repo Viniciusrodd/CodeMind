@@ -37,5 +37,25 @@ class UserService {
       }
    };
 
+   // get user
+   public async getUser(): Promise<IUserDocument> {
+      try{
+         const res = await axios.get<iApiResponse<IUserDocument>>(userRoute);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar usuário',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const userService: UserService = new UserService();
