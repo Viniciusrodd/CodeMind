@@ -102,5 +102,27 @@ class ProjectService {
       }
    };
 
+   // delete project
+   public async deleteProject(
+      id: string,
+   ): Promise<iApiResponse> {
+      try{
+         const res = await axios.delete<iApiResponse>(`${projectRoute}/${id}`);
+         return res.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao deletar projeto',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const projectService: ProjectService = new ProjectService();
