@@ -15,3 +15,13 @@ export interface IChunksUsed {
 export interface IOutput {
    structuredAnalysis: string;
 };
+
+// analysis interface
+export interface IAnalysis {
+   _id: string,
+   projectId: string,
+   input: IInput,
+   ragContext: IChunksUsed[],
+   output: IOutput,
+   createdAt: Date
+};
