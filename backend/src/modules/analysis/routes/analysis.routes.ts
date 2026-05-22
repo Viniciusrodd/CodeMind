@@ -18,7 +18,7 @@ export const analysisRoutes: Router = Router();
 
 // create analyse
 analysisRoutes.post(
-   '/analyse',
+   '/',
    analysisValidations.creation(),
    handleValidation,
    analysisController.createAnalysis
@@ -26,7 +26,7 @@ analysisRoutes.post(
 
 // get analyse by id
 analysisRoutes.get<{ id: string }>(
-   '/analyse/:id',
+   '/:id',
    analysisValidations.getById(),
    handleValidation,
    analysisController.getAnalyseById
@@ -34,7 +34,7 @@ analysisRoutes.get<{ id: string }>(
 
 // get analyse by project id
 analysisRoutes.get<{ projectId: string }>(
-   '/analyse/:projectId',
+   '/:projectId',
    analysisValidations.getByProjectId(),
    handleValidation,
    analysisController.getAnalyseByProjectId
@@ -42,7 +42,7 @@ analysisRoutes.get<{ projectId: string }>(
 
 // delete analyse
 analysisRoutes.get<{ id: string }>(
-   '/analyse/:id',
+   '/:id',
    analysisValidations.delete(),
    handleValidation,
    analysisController.deleteAnalyse

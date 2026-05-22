@@ -18,7 +18,7 @@ export const documentRoutes: Router = Router();
 
 // create document
 documentRoutes.post(
-   '/document',
+   '/',
    documentValidations.creation(),
    handleValidation,
    documentController.createDocument
@@ -26,13 +26,13 @@ documentRoutes.post(
 
 // get all documents
 documentRoutes.get(
-   '/documents',
+   '/',
    documentController.getAllDocuments
 );
 
 // get document by id
 documentRoutes.get<{ id: string }>(
-   '/document/:id',
+   '/:id',
    documentValidations.getById(),
    handleValidation,
    documentController.getDocumentById
@@ -40,7 +40,7 @@ documentRoutes.get<{ id: string }>(
 
 // udpate document
 documentRoutes.put<{ id: string }>(
-   '/document/:id',
+   '/:id',
    documentValidations.update(),
    handleValidation,
    documentController.updateDocument
@@ -48,7 +48,7 @@ documentRoutes.put<{ id: string }>(
 
 // delete document
 documentRoutes.delete<{ id: string }>(
-   '/document/:id',
+   '/:id',
    documentValidations.delete(),
    handleValidation,
    documentController.deleteDocument

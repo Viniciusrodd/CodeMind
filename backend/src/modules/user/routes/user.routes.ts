@@ -18,7 +18,7 @@ export const userRoutes: Router = Router();
 
 // create user
 userRoutes.post(
-   '/user',
+   '/',
    userValidations.creation(),
    handleValidation,
    userController.createUser
@@ -26,13 +26,13 @@ userRoutes.post(
 
 // get user
 userRoutes.get(
-   '/user',
+   '/',
    userController.getUser
 );
 
 // update user
 userRoutes.put(
-   '/user',
+   '/',
    userValidations.creation(),
    handleValidation,
    userController.updateUser
@@ -40,6 +40,6 @@ userRoutes.put(
 
 // delete user
 userRoutes.delete(
-   '/user',
+   '/',
    userController.deleteUser
 );

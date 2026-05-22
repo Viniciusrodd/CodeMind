@@ -18,7 +18,7 @@ export const projectRoutes: Router = Router();
 
 // create project
 projectRoutes.post(
-   '/project',
+   '/',
    projectValidations.creation(),
    handleValidation,
    projectController.createProject
@@ -26,13 +26,13 @@ projectRoutes.post(
 
 // get all projects
 projectRoutes.get(
-   '/projects',
+   '/',
    projectController.getAllProjects
 );
 
 // get project by id
 projectRoutes.get<{ id: string }>(
-   '/project/:id',
+   '/:id',
    projectValidations.getById(),
    handleValidation,
    projectController.getProjectById
@@ -40,7 +40,7 @@ projectRoutes.get<{ id: string }>(
 
 // update project
 projectRoutes.put<{ id: string }>(
-   '/project/:id',
+   '/:id',
    projectValidations.update(),
    handleValidation,
    projectController.updateProject
@@ -48,7 +48,7 @@ projectRoutes.put<{ id: string }>(
 
 // delete project
 projectRoutes.delete<{ id: string }>(
-   '/project/:id',
+   '/:id',
    projectValidations.delete(),
    handleValidation,
    projectController.deleteProject
