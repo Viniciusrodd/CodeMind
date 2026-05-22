@@ -81,5 +81,27 @@ class AnalysisService {
       }
    };
 
+   // delete analyse
+   public async deleteAnalyse(
+      id: string
+   ): Promise<iApiResponse> {
+      try{
+         const res = await axios.delete<iApiResponse>(`${analysisRoute}/${id}`);
+         return res.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao delete análise',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const analysisService: AnalysisService = new AnalysisService();
