@@ -57,5 +57,27 @@ class ProjectService {
       }
    };
 
+   // get project by id
+   public async getProjectById(
+      id: string
+   ): Promise<IProjectDocument | null> {
+      try{
+         const res = await axios.get<iApiResponse<IProjectDocument | null>>(`${projectRoute}/${id}`);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar projeto',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
 };
 export const projectService: ProjectService = new ProjectService();
