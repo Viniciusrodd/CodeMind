@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import DTOs
 import { CreateDocumentDTO, UpdateDocumentDTO } from "@document/dtos/document.dtos";
@@ -19,9 +19,10 @@ export interface IDocument {
 
 // document repository
 export interface IDocumentRepository {
-   create(data: CreateDocumentDTO): Promise<IDocument>,
-   getAll(): Promise<IDocument[] | null>,
-   getById(id: string | ObjectId): Promise<IDocument | null>,
-   update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null>,
-   delete(id: string | ObjectId): Promise<DeleteResult>
+   create(data: CreateDocumentDTO): Promise<IDocument>;
+   getAll(): Promise<IDocument[] | null>;
+   getById(id: string | ObjectId): Promise<IDocument | null>;
+   update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null>;
+   delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteAll(session: ClientSession): Promise<DeleteResult>;
 };

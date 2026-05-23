@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import DTOs
 import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
@@ -35,7 +35,8 @@ export interface IAnalysis {
 
 // analysis repository
 export interface IAnalysisRepository {
-   create(data: CreateAnalysisDTO): Promise<IAnalysis>,
-   getById(id: string | ObjectId): Promise<IAnalysis | null>,
-   delete(id: string | ObjectId): Promise<DeleteResult>
+   create(data: CreateAnalysisDTO): Promise<IAnalysis>;
+   getById(id: string | ObjectId): Promise<IAnalysis | null>;
+   delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteAll(session: ClientSession): Promise<DeleteResult>;
 };

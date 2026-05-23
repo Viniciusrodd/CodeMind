@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId } from "mongoose";
+import { ObjectId, ClientSession, DeleteResult } from "mongoose";
 
 // import DTOS
 import { CreateDocumentChunkDTO } from "@rag/dtos/rag.dtos";
@@ -67,6 +67,7 @@ export interface IVectorSearchParams {
 // document chunk repository
 export interface IDocumentChunkRepository {
    create(data: CreateDocumentChunkDTO): Promise<IDocumentChunk>;
-
+   delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteAll(session: ClientSession): Promise<DeleteResult>;
    vectorSearch(params: IVectorSearchParams): Promise<RetrievedChunk[]>;
 };

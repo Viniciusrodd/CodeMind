@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import DTOs
 import { CreateProjectDTO, UpdateProjectDTO, } from "@project/dtos/project.dtos";
@@ -39,9 +39,10 @@ export interface IProjectDocument {
 
 // project repository
 export interface IProjectRepository {
-   create(data: CreateProjectDTO): Promise<IProjectDocument>,
-   getAll(): Promise<IProjectDocument[] | null>,
-   getById(id: string | ObjectId): Promise<IProjectDocument | null>,
-   update(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null>,
-   delete(id: string | ObjectId): Promise<DeleteResult>
+   create(data: CreateProjectDTO): Promise<IProjectDocument>;
+   getAll(): Promise<IProjectDocument[] | null>;
+   getById(id: string | ObjectId): Promise<IProjectDocument | null>;
+   update(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null>;
+   delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteAll(session: ClientSession): Promise<DeleteResult>;
 };
