@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import models
 import { documentModel } from "@document/schemas/document.schema";
@@ -44,8 +44,8 @@ class DocumentRepository implements IDocumentRepository {
    };
 
    // delete all
-   public async deleteAll(): Promise<DeleteResult> {
-      return documentModel.deleteMany({});
+   public async deleteAll(session: ClientSession): Promise<DeleteResult> {
+      return documentModel.deleteMany({}, { session });
    };
 
 };

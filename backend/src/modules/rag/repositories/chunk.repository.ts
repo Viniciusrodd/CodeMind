@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import interfaces
 import { IDocumentChunkRepository, RetrievedChunk, IVectorSearchParams } from "@rag/interfaces/rag.interface";
@@ -26,8 +26,8 @@ class ChunkRepository implements IDocumentChunkRepository {
    };
 
    // delete all
-   public async deleteAll(): Promise<DeleteResult> {
-      return documentChunkModel.deleteMany({});
+   public async deleteAll(session: ClientSession): Promise<DeleteResult> {
+      return documentChunkModel.deleteMany({}, { session });
    };
 
    // vector search

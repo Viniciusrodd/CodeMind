@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId, DeleteResult } from "mongoose";
+import { ObjectId, DeleteResult, ClientSession } from "mongoose";
 
 // import models
 import { projectModel } from "@project/schemas/project.schema";
@@ -44,8 +44,8 @@ class ProjectRepository implements IProjectRepository {
    };
 
    // delete all
-   public async deleteAll(): Promise<DeleteResult> {
-      return projectModel.deleteMany({});
+   public async deleteAll(session: ClientSession): Promise<DeleteResult> {
+      return projectModel.deleteMany({}, { session });
    };
 
 };

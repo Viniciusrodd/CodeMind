@@ -9,6 +9,9 @@ import { IUserDocument } from "@user/interfaces/user.interface";
 // import services
 import { userService } from "@user/services/user.service";
 
+// import usecase
+import { userUseCase } from "@user/useCases/user.usecase";
+
 // import DTOs
 import { UserDTOs } from "@user/dtos/user.dtos";
 
@@ -96,7 +99,7 @@ class UserController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         await userService.deleteUser();
+         await userUseCase.deleteUser();
 
          return res.status(200).send({
             success: true,

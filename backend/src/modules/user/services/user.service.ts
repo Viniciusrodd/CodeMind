@@ -36,12 +36,5 @@ class UserService {
       return user!;
    };
 
-   // delete user
-   public async deleteUser(): Promise<void> {
-      const result = await userRepository.delete();
-
-      if(result.deletedCount === 0) throw new Error('Erro ao deletar usuário');
-   };
-
 };
 export const userService: UserService = new UserService();

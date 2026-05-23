@@ -1,4 +1,7 @@
 
+// imports
+import { ClientSession } from "mongoose";
+
 // import DTOs
 import { CreateAnalysisRepositoryDTO } from "@analysis/dtos/analysis.dtos";
 
@@ -33,8 +36,8 @@ class AnalysisRepository implements IAnalysisRepository {
    };
 
    // delete all
-   public async deleteAll(): Promise<DeleteResult> {
-      return analysisModel.deleteMany({});
+   public async deleteAll(session: ClientSession): Promise<DeleteResult> {
+      return analysisModel.deleteMany({}, { session });
    };
 
 };
