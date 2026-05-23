@@ -9,7 +9,9 @@
    --color5: #fffaff;
 }
 
+
 /* general */
+
 
 *{
    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -25,7 +27,9 @@ html, body{
    height: 100%;
 }
 
+
 /* specific tags */
+
 
 input:focus{
    outline: none;
@@ -65,7 +69,16 @@ button:hover{
    transform: scale(1.02);
 }
 
+.advice{
+   font-size: 13px;
+   font-weight: 500;
+   font-style: italic;
+   margin-top: 20px;
+}
+
+
 /* tooltip */
+
 
 .tooltip_btt{
    background-color: transparent;
@@ -102,4 +115,32 @@ button:hover{
 
 .tooltip:hover::after {
    opacity: 1;
+}
+
+
+/* loading */
+
+
+.loading_msg{
+   font-size: 17px;
+   font-style: italic;
+}
+
+.loading_img{
+   height: 40px;
+   width: 40px;
+   animation: spin 1s linear infinite;
+}
+
+
+/* animations */
+
+
+@keyframes spin {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
 }

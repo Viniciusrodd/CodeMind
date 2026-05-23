@@ -1,7 +1,16 @@
 @charset "UTF-8";
 
+:root{
+   --color1: #0e1116;
+   --color2: #8981fe;
+   --color2b: #4a56f9;
+   --color3: #ed254e;
+   --color4: #a2faa3;
+   --color5: #fffaff;
+}
 
-.page-container{
+
+form.page-container{
    display: flex;
    flex-direction: column;
    justify-content: space-around;
@@ -27,7 +36,7 @@
       height: 55px;
       width: 90%;
       background-color: transparent;
-      border: 2px solid white;
+      border: 1px solid white;
       border-radius: 10px;
       padding: 0px;
       font-size: 16px;
