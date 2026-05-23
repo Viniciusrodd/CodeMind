@@ -43,5 +43,10 @@ class DocumentRepository implements IDocumentRepository {
       return documentModel.deleteOne({ _id: id });
    };
 
+   // delete all
+   public async deleteAll(): Promise<DeleteResult> {
+      return documentModel.deleteMany({});
+   };
+
 };
 export const documentRepository: DocumentRepository = new DocumentRepository();

@@ -43,5 +43,10 @@ class ProjectRepository implements IProjectRepository {
       return projectModel.deleteOne({ _id: id })
    };
 
+   // delete all
+   public async deleteAll(): Promise<DeleteResult> {
+      return projectModel.deleteMany({});
+   };
+
 };
 export const projectRepository: ProjectRepository = new ProjectRepository();

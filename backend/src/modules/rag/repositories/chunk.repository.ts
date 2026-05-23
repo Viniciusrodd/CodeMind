@@ -1,6 +1,6 @@
 
 // imports
-import { ObjectId } from "mongoose";
+import { ObjectId, DeleteResult } from "mongoose";
 
 // import interfaces
 import { IDocumentChunkRepository, RetrievedChunk, IVectorSearchParams } from "@rag/interfaces/rag.interface";
@@ -21,8 +21,13 @@ class ChunkRepository implements IDocumentChunkRepository {
    };
 
    // delete
-   public async delete(id: string | ObjectId): Promise<void> {
-      await documentChunkModel.deleteOne({ _id: id });
+   public async delete(id: string | ObjectId): Promise<DeleteResult> {
+      return documentChunkModel.deleteOne({ _id: id });
+   };
+
+   // delete all
+   public async deleteAll(): Promise<DeleteResult> {
+      return documentChunkModel.deleteMany({});
    };
 
    // vector search
