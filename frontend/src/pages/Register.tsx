@@ -152,9 +152,9 @@ const Register = () => {
 
    return (
       <form 
+         onSubmit={ handleForm }
          method='post'
          className={ styles['page-container'] }
-         onSubmit={ handleForm }
       >
          { /* modal */ }
          <Modal 
@@ -197,7 +197,7 @@ const Register = () => {
                <p className='loading_msg'>Carregando...</p>
             </>
          ) : (
-            <button type='button' className={ styles['btt-register'] }>
+            <button type='submit' className={ styles['btt-register'] }>
                ENVIAR
             </button>
          ) }
