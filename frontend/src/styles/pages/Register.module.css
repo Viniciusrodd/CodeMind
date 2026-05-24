@@ -19,7 +19,7 @@ form.page-container{
    width: 70vw;
 }
 
-.register-container{
+div.register-container{
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -45,7 +45,7 @@ form.page-container{
    }
 }
 
-.btt-register{
+button.btt-register{
    height: 45px;
    width: 110px;
    border: none;

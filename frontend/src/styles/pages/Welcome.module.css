@@ -9,4 +9,27 @@
    --color5: #fffaff;
 }
 
-.p{color: red;}
+div.page-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   height: 40vh;
+   width: 70vw;
+}
+
+p.welcome{
+   font-size: 40px;
+   font-weight: bold;
+   text-align: center;
+   width: 45vw;
+}
+
+button{
+   height: 50px;
+   width: 17vw;
+   border: none;
+   border-radius: 10px;
+   background-color: var(--color2b);
+   font-weight: bold;
+}
