@@ -1,6 +1,6 @@
 
 // context types
-type contextType = 'backend' | 'frontend' | 'fullstack'
+export type contextType = 'backend' | 'frontend' | 'fullstack'
 
 // context interface
 export interface IContext {

@@ -12,7 +12,7 @@
 div.page-container{
    display: flex;
    flex-direction: column;
-   justify-content: flex-start;
+   justify-content: center;
    align-items: center;
    height: 95vh;
    width: 90vw;
@@ -37,17 +37,17 @@ div.form-container{
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   border: 3px solid var(--color2);
+   border: 1px solid white;
    border-radius: 10px;
    height: 75vh;
-   width: 75vw;
+   width: 70vw;
    z-index: 1;
    position: relative;
 
    & h1{
-      font-size: 30px;
+      font-size: 35px;
       text-align: center;
-      text-shadow: -2px 1px 0px var(--color2b);
+      text-shadow: -1px 1px 0px var(--color2b);
       margin-bottom: 40px;
    }
 }
@@ -95,7 +95,7 @@ select{
    border-bottom: 1px solid white;
    background-color: var(--color1);
    cursor: pointer;
-   color: rgba(255, 255, 255, 0.462);
+   color: white;
    -webkit-text-align-last: left;
    text-align-last: left;
    font-size: 15px;

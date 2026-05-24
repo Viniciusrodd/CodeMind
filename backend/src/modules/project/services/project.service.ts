@@ -17,6 +17,8 @@ class ProjectService {
    // create project
    public async createProject(data: CreateProjectDTO): Promise<IProjectDocument> {
       const project: IProjectDocument = await projectRepository.create(data);
+      if(!project) throw new Error("Erro ao criar projeto");
+
       return project;
    };
 
@@ -35,6 +37,8 @@ class ProjectService {
    // update project
    public async updateProject(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null> {
       const project: IProjectDocument | null = await projectRepository.update(id, data);
+      if(!project) throw new Error("Projeto não encontrado");
+
       return project;
    };
 

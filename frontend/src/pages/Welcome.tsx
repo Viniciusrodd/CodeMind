@@ -4,11 +4,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
-// import interfaces
-import type { iModalConfig } from '@interfaces/modal.interface';
-
 // import css
 import styles from '@styles/pages/Welcome.module.css';
+
+// import interfaces
+import type { iModalConfig } from '@interfaces/modal.interface';
 
 // import components
 import Title from '@components/Title';
