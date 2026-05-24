@@ -183,14 +183,11 @@ const Register = () => {
 
          { /* send */ }
          { loading ? (
-            <>
-               <img 
-                  src={ loading_img } 
-                  alt="loading_img"
-                  className='loading_img'    
-               />
-               <p className='loading_msg'>Carregando...</p>
-            </>
+            <img 
+               src={ loading_img } 
+               alt="loading_img"
+               className='loading_img'    
+            />
          ) : (
             <button type='submit' className={ styles['btt-register'] }>
                ENVIAR
