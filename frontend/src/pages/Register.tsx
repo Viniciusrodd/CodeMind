@@ -12,6 +12,7 @@ import type { UserDTOs } from '@DTOs/user.dtos';
 
 // import components
 import Modal from '@components/Modal';
+import Title from '@components/Title';
 
 // import services
 import { userService } from '@services/user.service';
@@ -23,7 +24,6 @@ import { loadingContext } from '@contexts/loading/loading.context';
 import styles from '@styles/pages/Register.module.css';
 
 // import images
-import codemind_img from '@images/codemind.png';
 import loading_img from '@images/loading.png';
 
 
@@ -167,12 +167,7 @@ const Register = () => {
          />
 
          { /* title */ }
-         <div className='title-container'>
-            <h1 className='codemind-title'>
-               CodeMind
-            </h1>
-            <img className='img-title' src={ codemind_img } alt="codemind.png" />
-         </div>
+         <Title />
 
          { /* register */ }
          <div className={ styles['register-container'] }>
