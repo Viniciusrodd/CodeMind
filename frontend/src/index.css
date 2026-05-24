@@ -4,6 +4,7 @@
    --color1: #0e1116;
    --color2: #8981fe;
    --color2b: #4a56f9;
+   --color2c: #7d74fe;
    --color3: #ed254e;
    --color4: #a2faa3;
    --color5: #fffaff;
@@ -36,6 +37,10 @@ input:focus{
 }
 
 select:focus{
+   outline: none;
+}
+
+textarea:focus{
    outline: none;
 }
 
@@ -130,6 +135,36 @@ button:hover{
    height: 40px;
    width: 40px;
    animation: spin 1s linear infinite;
+}
+
+
+/* scrolls */
+
+
+/* Chrome, Edge and Safari */
+form::-webkit-scrollbar {
+   height: 9px;
+   width: 9px;
+}
+form::-webkit-scrollbar-track {
+   border-radius: 5px;
+   background-color: transparent;
+}
+form::-webkit-scrollbar-track:hover {
+   background-color: transparent;
+}
+form::-webkit-scrollbar-track:active {
+   background-color: transparent;
+}
+form::-webkit-scrollbar-thumb {
+   border-radius: 5px;
+   background-color: var(--color2);
+}
+form::-webkit-scrollbar-thumb:hover {
+   background-color: var(--color2c);
+}
+form::-webkit-scrollbar-thumb:active {
+   background-color: var(--color2b);
 }
 
 

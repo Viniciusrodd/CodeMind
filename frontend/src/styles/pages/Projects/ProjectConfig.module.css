@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+:root{
+   --color1: #0e1116;
+   --color2: #8981fe;
+   --color2b: #4a56f9;
+   --color3: #ed254e;
+   --color4: #a2faa3;
+   --color5: #fffaff;
+}
+
+div.page-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   height: 95vh;
+   width: 90vw;
+}
+
+div.img{
+   height: 130px;
+   width: 130px;
+   border-radius: 100%;
+   z-index: 2;
+   position: relative;
+   margin-bottom: -65px;
+
+   & img{
+      height: 100%;
+      width: 100%;
+   }
+}
+
+div.form-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border: 3px solid var(--color2);
+   border-radius: 10px;
+   height: 75vh;
+   width: 75vw;
+   z-index: 1;
+   position: relative;
+
+   & h1{
+      font-size: 30px;
+      text-align: center;
+      text-shadow: -2px 1px 0px var(--color2b);
+      margin-bottom: 40px;
+   }
+}
+
+form{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 40px; /* Espaçamento entre elementos */
+   padding: 0px 50px;
+   height: 40vh;
+   width: 50vw;
+   overflow-y: auto;  /* vertical scroll */
+   overflow-x: hidden; /* hidden horizontal scroll */
+   border: 2px solid transparent;
+}
+form > * {
+   flex-shrink: 0; /* Impede que os elementos encolham */
+}
+
+input{
+   height: 35px;
+   width: 95%;
+   background-color: transparent;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   border-bottom: 1px solid white;
+   color: white;
+   font-size: 15px;
+   text-align: left;
+   padding: 0px 20px;
+}
+input::placeholder{
+   color: rgba(255, 255, 255, 0.462);
+}
+
+select{
+   height: 45px;
+   width: 100%;
+   border-top: none;
+   border-left: none;
+   border-right: none;
+   border-bottom: 1px solid white;
+   background-color: var(--color1);
+   cursor: pointer;
+   color: rgba(255, 255, 255, 0.462);
+   -webkit-text-align-last: left;
+   text-align-last: left;
+   font-size: 15px;
+   padding: 0px 15px;
+}
+
+button.btt{
+   height: 55px;
+   width: 15vw;
+   border: none;
+   border-radius: 10px;
+   background-color: var(--color2b);
+   font-weight: bold;
+   font-size: 14px;
+   z-index: 2;
+   position: relative;
+   margin-top: -28px;
+}
