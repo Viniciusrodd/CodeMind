@@ -158,11 +158,11 @@ const Welcome = () => {
 
          { /* send */ }
          { hasProject ? (
-            <button type='button' className='welcome_btt' onClick={ redirect }>
+            <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
                VISITAR MEUS PROJETOS
             </button>
          ) : (
-            <button type='button' className='welcome_btt' onClick={ redirect }>
+            <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
                CRIAR MEU PRIMEIRO PROJETO
             </button>
          ) }

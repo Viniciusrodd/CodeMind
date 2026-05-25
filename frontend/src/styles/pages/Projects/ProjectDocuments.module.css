@@ -30,11 +30,36 @@ div.page-container{
 .logo-container{
    height: 17vh;
    width: 10vw;
-   margin: 15px 0px 15px 0px;
+   margin: 30px 0px;
 
    & img{
       height: 100%;
       width: 100%;
+   }
+}
+
+.logo-container-added{
+   height: 15vh;
+   width: 22vw;
+   margin: 40px 0px;
+   overflow-y: auto;  /* vertical scroll */
+   overflow-x: hidden; /* hidden horizontal scroll */
+
+   & img{
+      height: 40px;
+      width: 40px;
+   }
+
+   & p{
+      text-align: left;
+      font-size: 15px;
+   }
+
+   & .title{
+      font-style: normal;
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 8px;
    }
 }
 
@@ -78,7 +103,7 @@ div.buttons{
 div.infos{
    height: 10vh;
    width: 25vw;
-   margin-top: 70px;
+   margin-top: 80px;
 
    & p{
       font-size: 17px;

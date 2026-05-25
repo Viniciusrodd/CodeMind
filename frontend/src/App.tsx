@@ -20,7 +20,7 @@ function App() {
                <Route path='/' element={ <Register /> } />
                <Route path='/welcome' element={ <Welcome /> } />
                <Route path='/project/config' element={ <ProjectConfig /> } />
-               <Route path='/project/config/documents' element={ <ProjectDocuments /> } />
+               <Route path='/project/config/documents/:projectId' element={ <ProjectDocuments /> } />
             </Routes>
          </BrowserRouter>
       </div>
