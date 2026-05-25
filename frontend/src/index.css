@@ -66,14 +66,11 @@ textarea:focus{
    }
 }
 
-button, label{
+button, label, span{
    cursor: pointer;
    transition: ease-in-out transform 0.1s;
 }
-button:hover{
-   transform: scale(1.02);
-}
-label:hover{
+button:hover, label:hover, span:hover{
    transform: scale(1.02);
 }
 

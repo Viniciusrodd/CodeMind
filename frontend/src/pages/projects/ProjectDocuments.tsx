@@ -168,23 +168,32 @@ const ProjectDocuments = () => {
          const newFiles = Array.from(e.target.files);
     
          setFiles(prev => {
-            if (prev) {
-            return [...prev, ...newFiles];
+            if(prev){
+               return [...prev, ...newFiles];
             }
+            
             return newFiles;
          });
          
          setFileAdded(true);
       }
    };
-   useEffect(() =>{
-      if(files !== null){
-         console.log('-------------------------')
-         console.log(files)
-         console.log('-------------------------')
-      }
 
-   }, [files, setFiles]);
+   // remove document
+   const removeDocument = (indexToRemove: number) => {
+      setFiles(prev => {
+         if(!prev) return null;
+
+         const newFiles = prev.filter((_, index) => index !== indexToRemove);
+
+         if(newFiles.length > 0){
+            return newFiles;
+         }else{
+            setFileAdded(false);
+            return null
+         }
+      });
+   };
 
 
    //// jsx
@@ -218,10 +227,15 @@ const ProjectDocuments = () => {
                   <div>
                      <img src={ check_img } alt="folder_img" />
                      <p className={ styles.title }>
-                        Documentos adicionados: .............. { files?.length }
+                        Documentos adicionados: { files?.length }
                      </p>
                      { files?.map((file, index) => (
-                        <p>{ index + 1 }. { file.name }</p>
+                        <div key={ index } className={ styles.line }>
+                           <p>{ index + 1 }. { file.name }</p>
+                           <span className="material-symbols-outlined" onClick={ () => removeDocument(index) }>
+                              delete
+                           </span>
+                        </div>
                      )) }
                   </div>
                ) : (
