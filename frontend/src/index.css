@@ -66,11 +66,14 @@ textarea:focus{
    }
 }
 
-button{
+button, label{
    cursor: pointer;
    transition: ease-in-out transform 0.1s;
 }
 button:hover{
+   transform: scale(1.02);
+}
+label:hover{
    transform: scale(1.02);
 }
 
@@ -142,28 +145,28 @@ button:hover{
 
 
 /* Chrome, Edge and Safari */
-form::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
    height: 9px;
    width: 9px;
 }
-form::-webkit-scrollbar-track {
+.scroll::-webkit-scrollbar-track {
    border-radius: 5px;
    background-color: transparent;
 }
-form::-webkit-scrollbar-track:hover {
+.scroll::-webkit-scrollbar-track:hover {
    background-color: transparent;
 }
-form::-webkit-scrollbar-track:active {
+.scroll::-webkit-scrollbar-track:active {
    background-color: transparent;
 }
-form::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
    border-radius: 5px;
    background-color: var(--color2);
 }
-form::-webkit-scrollbar-thumb:hover {
+.scroll::-webkit-scrollbar-thumb:hover {
    background-color: var(--color2c);
 }
-form::-webkit-scrollbar-thumb:active {
+.scroll::-webkit-scrollbar-thumb:active {
    background-color: var(--color2b);
 }
 

@@ -17,6 +17,7 @@ form.page-container{
    align-items: center;
    height: 40vh;
    width: 70vw;
+   overflow: visible;
 }
 
 div.register-container{

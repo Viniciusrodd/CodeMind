@@ -34,6 +34,7 @@ const ProjectConfig = () => {
    const navigate = useNavigate();
    const [ redirect, setRedirect ] = useState<boolean>(false);
    const [ isConfigurated, setIsConfigurated ] = useState<boolean>(false);
+   const [ projectId, setProjectId ] = useState<string>('');
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -99,7 +100,7 @@ const ProjectConfig = () => {
                btt_close: false, display: false
             });
 
-            navigate('/project/config/documents');       
+            navigate(`/project/config/documents/${projectId}`);       
          }, 4000);
 
          return () =>{
@@ -181,6 +182,8 @@ const ProjectConfig = () => {
             btt_event: false, btt_close: false, display: true
          });
 
+         setProjectId(response._id);
+
          setLoading(false);
          setIsConfigurated(true);
       }
@@ -231,6 +234,7 @@ const ProjectConfig = () => {
                method="post" 
                onSubmit={ handleForm } 
                id="project-form"
+               className='scroll'
             >
                <input 
                   type="text" name="name" title='Nome do projeto' 

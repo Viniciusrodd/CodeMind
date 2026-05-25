@@ -56,8 +56,8 @@ class ProjectValidations {
    public getById(): ValidationChain[] {
    return [
       param('id')
-         .notEmpty().withMessage('A identificação é obrigatória')
-         .isMongoId().withMessage('Identificação inválida')
+         .notEmpty().withMessage('Identificação de projeto inválida')
+         .isMongoId().withMessage('Identificação de projeto inválida')
       ];
    };
 
