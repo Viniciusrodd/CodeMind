@@ -48,7 +48,7 @@ class ProjectService {
             throw new Error(
                error.response?.data?.errorMessage ||
                error.response?.data?.message ||
-               'Erro ao pegar projetos',
+               'Erro ao encontrar projetos',
                { cause: error }
             );
          }

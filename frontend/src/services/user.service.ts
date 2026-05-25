@@ -48,7 +48,7 @@ class UserService {
             throw new Error(
                error.response?.data?.errorMessage ||
                error.response?.data?.message ||
-               'Erro ao pegar usuário',
+               'Erro ao encontrar usuário',
                { cause: error }
             );
          }

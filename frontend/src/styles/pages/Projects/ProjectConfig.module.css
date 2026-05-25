@@ -37,7 +37,7 @@ div.form-container{
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   border: 1px solid white;
+   border: 2px solid white;
    border-radius: 10px;
    height: 75vh;
    width: 70vw;
