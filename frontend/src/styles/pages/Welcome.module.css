@@ -25,7 +25,7 @@ p.welcome{
    width: 45vw;
 }
 
-button{
+button.welcome_btt{
    height: 50px;
    width: 17vw;
    border: none;
