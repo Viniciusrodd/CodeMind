@@ -126,7 +126,7 @@ const Register = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Registro feito com sucesso \n você será redirecionado...`, 
+            msg: `Registro feito com sucesso`, 
             btt_event: false, btt_close: false, display: true
          });
 

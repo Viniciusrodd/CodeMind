@@ -10,12 +10,16 @@ import styles from '@styles/pages/Projects/ProjectDocuments.module.css';
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
 
+// import DTOs
+import type { CreateDocumentDTO } from '@DTOs/document.dtos';
+
 // import components
 import Modal from '@components/Modal';
 
 // import services
 import { projectService } from '@services/project.service';
 import { userService } from '@services/user.service';
+import { documentService } from '@services/document.service';
 
 // import contexts
 import { loadingContext } from '@contexts/loading/loading.context';
@@ -31,6 +35,7 @@ const ProjectDocuments = () => {
    const navigate = useNavigate();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ welcomeRedirect, setWelcomeRedirect ] = useState<boolean>(false);
+   const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -40,6 +45,7 @@ const ProjectDocuments = () => {
    const { projectId } = useParams<string>();
    const [ files, setFiles ] = useState<File[] | null>(null);
    const [ fileAdded, setFileAdded ] = useState<boolean>(false);
+   const DOC_EXTENSIONS = ['txt', 'md', 'pdf', 'doc', 'docx'];
 
 
    //// functions
@@ -96,7 +102,23 @@ const ProjectDocuments = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, welcomeRedirect, navigate]);
+
+      if(projectRedirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });
+
+            navigate(`/project/${projectId}`);       
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [registerRedirect, welcomeRedirect, projectRedirect, navigate]);
 
    // check user/project existence
    useEffect(() => {
@@ -174,7 +196,7 @@ const ProjectDocuments = () => {
             
             return newFiles;
          });
-         
+
          setFileAdded(true);
       }
    };
@@ -193,6 +215,68 @@ const ProjectDocuments = () => {
             return null
          }
       });
+   };
+
+   // add document request
+   const addDocumentRequest = async (data: CreateDocumentDTO) => {
+      try{
+         const response = await documentService.createDocument(data);
+         if(!response) console.error('⚠️ Unexpected return from API:', response);
+      }
+      catch(error){
+         console.error('❌ Error at document creation: ', error);
+         throw error;
+      }
+   };
+
+   // add document
+   const addDocument = async () => {
+      if(!files?.length){
+         modal_config({
+            title: 'Não esquenta 😉', 
+            msg: `Você ainda poderá adicionar documentos a qualquer momento...`, 
+            btt_event: false, btt_close: false, display: true
+         });
+   
+         setProjectRedirect(true);
+         return;
+      }
+
+      setLoading(true);
+
+      try{
+         for(const file of files){
+            const extension = file.name.split('.').pop()?.toLowerCase();
+   
+            const data: CreateDocumentDTO = {
+               projectId: projectId!,
+               name: file.name,
+               type: DOC_EXTENSIONS.includes(extension || '') ? 'doc' : 'code',
+               content: await file.text()
+            };
+   
+            await addDocumentRequest(data);
+         }
+   
+         modal_config({
+            title: 'Sucesso ✔️',
+            msg: `${files.length} documento(s) adicionado(s) com sucesso`,
+            btt_event: false, btt_close: false, display: true
+         });
+   
+         setLoading(false);
+         setProjectRedirect(true);
+      }
+      catch(error){
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt_event: false, btt_close: 'Tentar novamente', display: true
+         });
+      }
+      finally{
+         setLoading(false);
+      }
    };
 
 
@@ -262,7 +346,7 @@ const ProjectDocuments = () => {
                <p>ADICIONAR DOCUMENTO</p>
             </label>
 
-            <button type='button' className={ styles.next }>
+            <button type='button' className={ styles.next } onClick={ addDocument }>
                SEGUIR EM FRENTE
             </button>
          </div>
@@ -271,7 +355,7 @@ const ProjectDocuments = () => {
          <div className={ styles.infos }>
             <h3>Exemplos:</h3>
             <p>1. Arquivos de código (.js, .ts, .tsx, etc.)</p>
-            <p>2. Documentação (README, especificações)</p>
+            <p>2. Documentação (README, .pdf, .txt, etc.)</p>
          </div>
       </div>
    );

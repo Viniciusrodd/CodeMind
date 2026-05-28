@@ -178,7 +178,7 @@ const ProjectConfig = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Projeto configurado com sucesso \n você será redirecionado...`, 
+            msg: `Projeto configurado com sucesso`, 
             btt_event: false, btt_close: false, display: true
          });
 
