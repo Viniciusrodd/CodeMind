@@ -35,6 +35,7 @@ const Welcome = () => {
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const [ name, setName ] = useState<string>('');
    const [ hasProject, setHasProject ] = useState<boolean>(false);
+   const [ projectId, setProjectId ] = useState<string>('');
    const { loading, setLoading } = useContext(loadingContext);
 
 
@@ -101,7 +102,10 @@ const Welcome = () => {
                   return;
                }
 
-               if(response.length > 0) setHasProject(true);
+               if(response.length > 0){
+                  setHasProject(true);
+                  setProjectId(response[0]._id);
+               };
 
                setLoading(false);
             }
@@ -118,7 +122,7 @@ const Welcome = () => {
    // redirect
    const redirect = () => {
       if(hasProject){
-         navigate('/projects');
+         navigate(`/project/${projectId}`);
       }else{
          navigate('/project/config');
       }
