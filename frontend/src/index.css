@@ -19,7 +19,6 @@
    margin: 0;
    color: azure;
    text-align: center;
-   transition: ease-in-out transform 0.2s;
 }
 
 html, body{
@@ -68,7 +67,7 @@ textarea:focus{
 
 button, label, span{
    cursor: pointer;
-   transition: ease-in-out transform 0.1s;
+   transition: transform 0.1s ease-in-out;
 }
 button:hover, label:hover, span:hover{
    transform: scale(1.02);
@@ -88,7 +87,7 @@ button:hover, label:hover, span:hover{
 .tooltip_btt{
    background-color: transparent;
    border: none;
-   transition: ease-in-out transform 0.2s;
+   transition: transform 0.2s ease-in-out;
 }
 .tooltip_btt:hover{
    transform: scale(1.05);

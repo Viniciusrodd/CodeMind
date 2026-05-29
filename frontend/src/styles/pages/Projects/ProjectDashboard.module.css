@@ -9,6 +9,151 @@
    --color5: #fffaff;
 }
 
-.p{
-   color: red;
+div.page-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   height: 85vh;
+   width: 100vw;
+}
+
+div.dashboard{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 75vh;
+   width: 95vw;
+
+   & div.sidebar{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 70vh;
+      width: 15vw;
+
+      & h2{
+         width: 70%;
+      }
+
+      & hr{
+         margin: 30px 0px;
+         width: 70%;
+      }
+
+      & div.project-list, div.project-options{
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: center;
+         height: 50%;
+         width: 100%;
+         gap: 15px;
+         overflow-y: auto;  /* vertical scroll */
+         overflow-x: hidden; /* hidden horizontal scroll */
+      }
+
+      & p.project-options{
+         text-align: left;
+      }
+
+      & p{
+         font-size: 16px;
+         font-weight: bold;
+         cursor: pointer;
+         transition: transform 0.1s ease-in-out, text-decoration 0.1s ease-in-out;
+      }
+      & p:hover{
+         transform: scale(1.02);
+         text-decoration: underline;
+      }
+
+      & button{
+         height: 45px;
+         width: 70%;
+         border: none;
+         border-radius: 10px;
+         font-size: 13px;
+         font-weight: bold;
+         background-color: white;
+         color: var(--color1);
+      }
+   }
+
+   & div.project{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 75vh;
+      width: 65vw; /* 95vw(dashboard) - 30vw(two sidebars) */
+
+      & h1.title{
+         color: var(--color2b);
+         font-size: 40px;
+         font-weight: bold;
+         text-align: center;
+         text-shadow: -1px 1px 0px white;
+      }
+
+      & div.desc{
+         height: 25%;
+         width: 75%;
+         margin-top: 20px;
+         padding: 0px 40px;
+         overflow-y: auto;  /* vertical scroll */
+         overflow-x: hidden; /* hidden horizontal scroll */
+
+         p{
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+         }
+      }
+
+      & div.logo{
+         height: 16vh;
+         width: 8vw;
+         margin: 60px 0px;
+
+         & img{
+            height: 100%;
+            width: 100%;
+         }
+      }
+
+      & button{
+         height: 50px;
+         width: 25%;
+         border: none;
+         border-radius: 10px;
+         font-size: 14px;
+         font-weight: bold;
+         background-color: var(--color2b);
+         color: white;
+      }
+   }
+}
+
+div.footer{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 10vh; /*85(page-container) - 65(dashboard)*/
+   width: 95vw;
+
+   span{
+      font-size: 40px;
+   }
+
+   .exit{
+      color: red;
+      margin-left: 6%;
+   }
+
+   .settings{
+      color: white;
+      margin-right: 6%;
+   }
 }
