@@ -149,7 +149,7 @@ const ProjectDocuments = () => {
             setLoading(false);
             setRegisterRedirect(true);
          }
-      }
+      };
 
       // project
       const checkProject = async () => {
@@ -178,7 +178,7 @@ const ProjectDocuments = () => {
             setLoading(false);
             setWelcomeRedirect(true);
          }
-      }
+      };
 
       checkUser();
       checkProject();
