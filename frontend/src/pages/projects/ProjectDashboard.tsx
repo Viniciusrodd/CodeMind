@@ -126,9 +126,10 @@ const ProjectDashboard = () => {
          catch(error){
             console.error('❌ Error at get user: ', error);
 
+            const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ error }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -160,9 +161,10 @@ const ProjectDashboard = () => {
          catch(error){
             console.error('❌ Error at get project: ', error);
 
+            const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ error }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
                btt_event: false, btt_close: false, display: true
             });
 

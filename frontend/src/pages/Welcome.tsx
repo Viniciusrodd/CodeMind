@@ -28,6 +28,7 @@ import loading_img from '@images/loading.png';
 const Welcome = () => {
    //// variables
    const navigate = useNavigate();
+   const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -60,6 +61,25 @@ const Welcome = () => {
       setLoading(false);
    };
 
+   // redirect
+   useEffect(() => {
+      if(registerRedirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });
+
+            navigate('/');       
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [registerRedirect, navigate]);
+
    // get user name
    useEffect(() => {
       const getUser = async () => {
@@ -80,7 +100,16 @@ const Welcome = () => {
          }
          catch(error){
             console.error('❌ Error at get user: ', error);
+
+            const errorMessage = error instanceof Error ? error.message : error as string;
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               btt_event: false, btt_close: false, display: true
+            });
+
             setLoading(false);
+            setRegisterRedirect(true);
          }
       };
 

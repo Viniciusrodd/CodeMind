@@ -136,9 +136,10 @@ const Register = () => {
       catch(error){
          console.error('❌ Error at register: ', error);
 
+         const errorMessage = error instanceof Error ? error.message : error as string;
          modal_config({
             title: 'Erro ❌', 
-            msg: `${ error }`, 
+            msg: `${ errorMessage }`, 
             btt_event: false, btt_close: 'Tentar novamente', display: true
          });
 
