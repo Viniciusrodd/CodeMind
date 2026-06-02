@@ -166,21 +166,6 @@ const Register = () => {
             onClose={ closeModal }
          />
 
-         { /* title */ }
-         <Title />
-
-         { /* register */ }
-         <div className={ styles['register-container'] }>
-            <p>Olá, como devemos te chamar ?</p>
-            <input 
-               type="text" name="name" title='name' 
-               placeholder='Insira seu nome aqui...' 
-               autoComplete='off'
-               value={ name }
-               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value) }  
-            />
-         </div>
-
          { /* send */ }
          { loading ? (
             <img 
@@ -189,15 +174,33 @@ const Register = () => {
                className='loading_img'    
             />
          ) : (
+            <>
+            { /* title */ }
+            <Title />
+
+            { /* register */ }
+            <div className={ styles['register-container'] }>
+               <p>Olá, como devemos te chamar ?</p>
+               <input 
+                  type="text" name="name" title='name' 
+                  placeholder='Insira seu nome aqui...' 
+                  autoComplete='off'
+                  value={ name }
+                  onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value) }  
+               />
+            </div>
+
             <button type='submit' className={ styles['btt-register'] }>
                ENVIAR
             </button>
+         
+            { /* footer */ }
+            <p className='advice'>
+               *Este sistema funciona localmente, portanto é permitido apenas 1 usuário por máquina
+            </p>
+            </>
          ) }
 
-         { /* footer */ }
-         <p className='advice'>
-            *Este sistema funciona localmente, portanto é permitido apenas 1 usuário por máquina
-         </p>
       </form>
    );
 };

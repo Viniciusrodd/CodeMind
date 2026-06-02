@@ -144,9 +144,6 @@ const Welcome = () => {
             onClose={ closeModal }
          />
 
-         {/* title */}
-         <Title />
-
          { /* welcome */ }
          { loading ? (
             <img 
@@ -155,21 +152,27 @@ const Welcome = () => {
                className='loading_img'    
             />
          ) : (
+            <>
+            {/* title */}
+            <Title />
+            
             <p className={ styles.welcome }>
                { name }, seu analisador de códigos já está no ar 🚀
             </p>
+            
+            { /* send */ }
+            { hasProject ? (
+               <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
+                  VISITAR MEUS PROJETOS
+               </button>
+            ) : (
+               <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
+                  CRIAR MEU PRIMEIRO PROJETO
+               </button>
+            ) }
+            </>
          ) }
 
-         { /* send */ }
-         { hasProject ? (
-            <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
-               VISITAR MEUS PROJETOS
-            </button>
-         ) : (
-            <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
-               CRIAR MEU PRIMEIRO PROJETO
-            </button>
-         ) }
       </div>
    );
 };
