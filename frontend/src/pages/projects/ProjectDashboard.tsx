@@ -256,7 +256,12 @@ const ProjectDashboard = () => {
                   <hr />
                
                   <div className={ styles['project-options'] }>
-                     <p className={ styles['project-options'] }>Informações do projeto</p>
+                     <p 
+                        className={ styles['project-options'] } 
+                        onClick={ () => navigate(`/project/informations/${actualProject._id}`) }
+                     >
+                        Informações do projeto
+                     </p>
                      <p className={ styles['project-options'] }>Documentos associados</p>
                      <p className={ styles['project-options'] }>Histórico de análises</p>
                   </div>
