@@ -312,7 +312,11 @@ const ProjectDocuments = () => {
                   { files?.map((file, index) => (
                      <div key={ index } className={ styles.line }>
                         <p>{ index + 1 }. { file.name }</p>
-                        <span className="material-symbols-outlined" onClick={ () => removeDocument(index) }>
+                        <span 
+                           className="material-symbols-outlined tooltip" 
+                           data-tooltip="Remover"
+                           onClick={ () => removeDocument(index) }
+                        >
                            delete
                         </span>
                      </div>

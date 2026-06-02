@@ -177,13 +177,6 @@ const ProjectDashboard = () => {
       checkProject();
    }, [projectId]);
 
-   // projects redirect
-   const projectRedirect = (id: string) => {
-      if(id === '') return;
-
-      navigate(`/project/${id}`);
-   };
-
 
    //// jsx
 
@@ -212,14 +205,14 @@ const ProjectDashboard = () => {
 
                   <div className={ `${styles['project-list']} scroll` }>
                      { projects && projects.map((project, index) => (
-                        <p key={ index } onClick={ () => projectRedirect(project._id) }>
+                        <p key={ index } onClick={ () => navigate(`/project/${project._id}`) }>
                            { project.name }
                         </p>
                      )) }
                   </div>
                
                   <hr />
-                  <button type='button'>
+                  <button type='button' onClick={ () => navigate('/project/config') }>
                      NOVO PROJETO
                   </button>
                   </>
@@ -277,10 +270,17 @@ const ProjectDashboard = () => {
          <div className={ styles.footer }>
             { loading === false && (
                <>
-               <span className={ `${styles.exit} material-symbols-outlined` }>
+               <span 
+                  className={ `${styles.exit} material-symbols-outlined tooltip` }
+                  data-tooltip="Sair"
+                  onClick={ () => navigate('/welcome') }
+               >
                   logout
                </span>
-               <span className={ `${styles.settings} material-symbols-outlined` }>
+               <span 
+                  className={ `${styles.settings} material-symbols-outlined tooltip` } 
+                  data-tooltip="Configuração do projeto"
+               >
                   settings
                </span>
                </>
