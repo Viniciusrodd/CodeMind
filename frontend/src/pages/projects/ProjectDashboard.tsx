@@ -203,34 +203,29 @@ const ProjectDashboard = () => {
 
             { /* projects sidebar */ }
             <div className={ styles.sidebar }>
-               <h2>Projetos</h2>
-               <hr />
+               { loading === false && (
+                  <>
+                  <h2>Projetos</h2>
+                  <hr />
 
-               <div className={ `${styles['project-list']} scroll` }>
-                  { projects && projects.map((project, index) => (
-                     <p key={ index } onClick={ () => projectRedirect(project._id) }>
-                        { project.name }
-                     </p>
-                  )) }
-               </div>
-               <hr />
-
-               <button type='button'>
-                  NOVO PROJETO
-               </button>
+                  <div className={ `${styles['project-list']} scroll` }>
+                     { projects && projects.map((project, index) => (
+                        <p key={ index } onClick={ () => projectRedirect(project._id) }>
+                           { project.name }
+                        </p>
+                     )) }
+                  </div>
+               
+                  <hr />
+                  <button type='button'>
+                     NOVO PROJETO
+                  </button>
+                  </>
+               ) }
             </div>
 
             { /* dashboard */ }
             <div className={ styles.project }>
-
-               <h1 className={ styles.title }>
-                  { actualProject.name }
-               </h1>
-
-               <div className={ `${styles.desc} scroll` }>
-                  <p>{ actualProject.description }</p>
-               </div>
-
                { loading ? (
                   <img 
                      src={ loading_img } 
@@ -238,39 +233,56 @@ const ProjectDashboard = () => {
                      className='loading_img'    
                   />
                ) : (
+                  <>
+                  <h1 className={ styles.title }>
+                     { actualProject.name }
+                  </h1>
+
+                  <div className={ `${styles.desc} scroll` }>
+                     <p>{ actualProject.description }</p>
+                  </div>
+
                   <div className={ styles.logo }>
                      <img src={ analysis_img } alt="analysis_img" />
                   </div>
-               ) }
 
-               <button type='button'>
-                  NOVA ANÁLISE DE CÓDIGO
-               </button>
+                  <button type='button'>
+                     NOVA ANÁLISE DE CÓDIGO
+                  </button>
+                  </>
+               ) }
             </div>
 
             { /* projects details sidebar */ }
             <div className={ styles.sidebar }>
-               <h2>Detalhes do projeto</h2>
-               <hr />
-
-               <div className={ styles['project-options'] }>
-                  <p className={ styles['project-options'] }>Informações do projeto</p>
-                  <p className={ styles['project-options'] }>Documentos associados</p>
-                  <p className={ styles['project-options'] }>Histórico de análises</p>
-               </div>
+               { loading === false && (
+                  <>
+                  <h2>Detalhes do projeto</h2>
+                  <hr />
+               
+                  <div className={ styles['project-options'] }>
+                     <p className={ styles['project-options'] }>Informações do projeto</p>
+                     <p className={ styles['project-options'] }>Documentos associados</p>
+                     <p className={ styles['project-options'] }>Histórico de análises</p>
+                  </div>
+                  </>
+               ) }
             </div>
 
          </div>
 
          { /* footer */ }
          <div className={ styles.footer }>
-            <span className={ `${styles.exit} material-symbols-outlined` }>
-               logout
-            </span>
-
-            <span className={ `${styles.settings} material-symbols-outlined` }>
-               settings
-            </span>
+            { loading === false && (
+               <>
+               <span className={ `${styles.exit} material-symbols-outlined` }>
+                  logout
+               </span>
+               <span className={ `${styles.settings} material-symbols-outlined` }>
+                  settings
+               </span>
+               </>
+            ) }
          </div>
       </div>
    );
