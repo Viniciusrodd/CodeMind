@@ -299,57 +299,59 @@ const ProjectDocuments = () => {
          <h1>Deseja adicionar algum documento relevante para o projeto ?</h1>
 
          { /* logo */ }
-         { loading ? (
-            <img 
-               src={ loading_img } 
-               alt="loading_img"
-               className='loading_img'    
-            />
-         ) : (
-            <div className={ fileAdded ? `${styles['logo-container-added']} scroll` : styles['logo-container'] }>
-               { fileAdded ? (
-                  <div>
-                     <img src={ check_img } alt="folder_img" />
-                     <p className={ styles.title }>
-                        Documentos adicionados: { files?.length }
-                     </p>
-                     { files?.map((file, index) => (
-                        <div key={ index } className={ styles.line }>
-                           <p>{ index + 1 }. { file.name }</p>
-                           <span className="material-symbols-outlined" onClick={ () => removeDocument(index) }>
-                              delete
-                           </span>
-                        </div>
-                     )) }
-                  </div>
-               ) : (
-                  <img src={ folder_img } alt="folder_img" />
-               ) }
-            </div>
-         ) }
+         <div className={ fileAdded ? `${styles['logo-container-added']} scroll` : styles['logo-container'] }>
+            { fileAdded ? (
+               <div>
+                  <img src={ check_img } alt="folder_img" />
+                  <p className={ styles.title }>
+                     Documentos adicionados: { files?.length }
+                  </p>
+                  { files?.map((file, index) => (
+                     <div key={ index } className={ styles.line }>
+                        <p>{ index + 1 }. { file.name }</p>
+                        <span className="material-symbols-outlined" onClick={ () => removeDocument(index) }>
+                           delete
+                        </span>
+                     </div>
+                  )) }
+               </div>
+            ) : (
+               <img src={ folder_img } alt="folder_img" />
+            ) }
+         </div>
 
          { /* buttons */ }
-         <div className={ styles.buttons }>
-            <input 
-               title='file' type="file" name="add_file" 
-               id='add_file' className={ styles.file_input }
-               accept="
-                  .txt, .md, .pdf, .docx, .doc, .js, .jsx, .ts, .tsx,
-                  .json, .yaml, .yml, .xml, .html, .css, .scss, .py,
-                  .java, .kt, .cs, .go, .rs, .php, .rb, .c, .cpp, .h,
-                  .sql, .sh, .bash, .env.example, README, Dockerfile, 
-                  docker-compose.yml
-               "
-               onChange={ uploadFile }
-            />
-            <label htmlFor="add_file" className={ styles.add }>
-               <p>ADICIONAR DOCUMENTO</p>
-            </label>
+         {
+            loading ? (
+               <img 
+                  src={ loading_img } 
+                  alt="loading_img"
+                  className='loading_img'    
+               />
+            ) : (
+               <div className={ styles.buttons }>
+                  <input 
+                     title='file' type="file" name="add_file" 
+                     id='add_file' className={ styles.file_input }
+                     accept="
+                        .txt, .md, .pdf, .docx, .doc, .js, .jsx, .ts, .tsx,
+                        .json, .yaml, .yml, .xml, .html, .css, .scss, .py,
+                        .java, .kt, .cs, .go, .rs, .php, .rb, .c, .cpp, .h,
+                        .sql, .sh, .bash, .env.example, README, Dockerfile, 
+                        docker-compose.yml
+                     "
+                     onChange={ uploadFile }
+                  />
+                  <label htmlFor="add_file" className={ styles.add }>
+                     <p>ADICIONAR DOCUMENTO</p>
+                  </label>
 
-            <button type='button' className={ styles.next } onClick={ addDocument }>
-               SEGUIR EM FRENTE
-            </button>
-         </div>
+                  <button type='button' className={ styles.next } onClick={ addDocument }>
+                     SEGUIR EM FRENTE
+                  </button>
+               </div>
+            )
+         }
 
          { /* infos */ }
          <div className={ styles.infos }>
