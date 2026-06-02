@@ -292,8 +292,8 @@ const ProjectConfig = () => {
                />
 
                <input 
-                  type="text" name="environment" title='Ambiente do projeto' 
-                  placeholder='Ambiente do projeto (ex: Desenvolvimento, Produção, etc...)' 
+                  type="text" name="environment" title='Ambiente de execução' 
+                  placeholder='Ambiente de execução (ex: Desenvolvimento, Produção, etc...)' 
                   autoComplete='off'
                   maxLength={ 3000 }
                   value={ environment }
