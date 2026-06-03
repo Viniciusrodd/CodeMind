@@ -43,6 +43,11 @@ class DocumentRepository implements IDocumentRepository {
       return documentModel.deleteOne({ _id: id });
    };
 
+   // delete by project id
+   public async deleteByProjectId(id: string | ObjectId): Promise<DeleteResult> {
+      return documentModel.deleteMany({ projectId: id });
+   };
+
    // delete all
    public async deleteAll(session: ClientSession): Promise<DeleteResult> {
       return documentModel.deleteMany({}, { session });

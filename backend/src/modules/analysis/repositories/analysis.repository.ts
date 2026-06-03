@@ -40,5 +40,10 @@ class AnalysisRepository implements IAnalysisRepository {
       return analysisModel.deleteMany({}, { session });
    };
 
+   // delete by project id
+   public async deleteByProjectId(id: string | ObjectId): Promise<DeleteResult> {
+      return analysisModel.deleteMany({ projectId: id });
+   };
+
 };
 export const analysisRepository: AnalysisRepository = new AnalysisRepository();

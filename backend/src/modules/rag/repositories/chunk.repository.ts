@@ -30,6 +30,11 @@ class ChunkRepository implements IDocumentChunkRepository {
       return documentChunkModel.deleteMany({}, { session });
    };
 
+   // delete by project id
+   public async deleteByProjectId(id: string | ObjectId): Promise<DeleteResult> {
+      return documentChunkModel.deleteMany({ projectId: id });
+   };
+
    // vector search
    public async vectorSearch(params: IVectorSearchParams): Promise<RetrievedChunk[]> {
       try{
