@@ -10,6 +10,9 @@ import { IProjectDocument } from "@project/interfaces/project.interface";
 // import services
 import { projectService } from "@project/services/project.service";
 
+// import useCases
+import { projectUseCase } from "@project/useCases/project.usecase";
+
 // import DTOs
 import { CreateProjectDTO, UpdateProjectDTO } from "@project/dtos/project.dtos";
 
@@ -121,7 +124,7 @@ class ProjectController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         await projectService.deleteProject(req.params.id);
+         await projectUseCase.deleteProject(req.params.id);
 
          return res.status(200).send({
             success: true,

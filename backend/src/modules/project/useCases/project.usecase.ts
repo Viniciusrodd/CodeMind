@@ -1,6 +1,7 @@
 
 // imports
 import mongoose from "mongoose";
+import { ObjectId } from "mongoose";
 
 // import repositories
 import { documentRepository } from "@document/repositories/document.repository";
@@ -12,7 +13,7 @@ import { projectRepository } from "@project/repositories/project.repository";
 class ProjectUseCase {
 
    // delete project
-   public async deleteProject(id: string): Promise<void> {
+   public async deleteProject(id: string | ObjectId): Promise<void> {
       const session = await mongoose.startSession();
       session.startTransaction();
 
