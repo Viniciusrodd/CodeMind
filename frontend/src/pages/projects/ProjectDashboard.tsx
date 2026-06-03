@@ -32,6 +32,7 @@ const ProjectDashboard = () => {
    const navigate = useNavigate();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ welcomeRedirect, setWelcomeRedirect ] = useState<boolean>(false);
+   const [ closeAdvice, setCloseAdvice ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -48,6 +49,7 @@ const ProjectDashboard = () => {
       context: { type: 'backend', languages: [''], frameworks: [''], purpose: '', environment: '' },
       createdAt: new Date(), updatedAt: new Date()
    }]);
+   const [ deleteProjectId, setDeleteProjectId ] = useState<string>('');
 
 
    //// functions
@@ -104,7 +106,21 @@ const ProjectDashboard = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, welcomeRedirect, navigate]);
+
+      if(closeAdvice){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });      
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [registerRedirect, welcomeRedirect, closeAdvice, navigate]);
 
    // check user/project existence
    useEffect(() => {
@@ -177,6 +193,64 @@ const ProjectDashboard = () => {
       checkProject();
    }, [projectId]);
 
+   // delete project advice
+   const deleteProjectAdvice = (id: string) => {
+      modal_config({
+         title: 'Espere ❕', 
+         msg: 'Tem certeza que deseja excluir o projeto ?', 
+         btt_event: 'Certeza', btt_close: 'Melhor não', display: true
+      });
+
+      setDeleteProjectId(id);
+   };
+
+   // delete project
+   const deleteProject = async () => {
+      setLoading(true);
+
+      try{
+         const response = await projectService.deleteProject(deleteProjectId);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
+
+         if(response.success){
+            setLoading(false);
+
+            if(projects.length > 1){
+               const projectsFiltered = projects.filter(project => project._id !== deleteProjectId);
+               setProjects(projectsFiltered);
+               setActualProject(projectsFiltered[0]);
+            }else{
+               setWelcomeRedirect(true);
+            }
+            
+            modal_config({
+               title: 'Sucesso ✔️', 
+               msg: 'Projeto deletado com sucesso', 
+               btt_event: false, btt_close: false, display: true
+            });
+            
+            setCloseAdvice(true);
+         }
+      }
+      catch(error){
+         console.error('❌ Error at delete project: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : error as string;
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: 'Tentar novamente', display: true
+         });
+
+         setLoading(false);
+      }
+   };
+
 
    //// jsx
 
@@ -190,6 +264,7 @@ const ProjectDashboard = () => {
             btt_event={ modal_btt }
             btt_close={ modal_btt_2 }
             display={ modal_display }
+            modalEvent={ deleteProject }
             onClose={ closeModal }
          />
 
@@ -205,9 +280,14 @@ const ProjectDashboard = () => {
 
                   <div className={ `${styles['project-list']} scroll` }>
                      { projects && projects.map((project, index) => (
-                        <p key={ index } onClick={ () => navigate(`/project/${project._id}`) }>
-                           { project.name }
-                        </p>
+                        <div key={ index }>
+                           <p onClick={ () => navigate(`/project/${project._id}`) }>
+                              { project.name }
+                           </p>
+                           <span className="material-symbols-outlined" onClick={ () => deleteProjectAdvice(project._id) }>
+                              delete
+                           </span>
+                        </div>
                      )) }
                   </div>
                

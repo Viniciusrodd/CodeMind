@@ -42,7 +42,35 @@ div.dashboard{
          width: 100%;
       }
 
-      & div.project-list, div.project-options{
+      & div.project-list{
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: center;
+         height: 50%;
+         width: 15vw;
+         gap: 15px;
+         overflow-y: auto;  /* vertical scroll */
+         overflow-x: hidden; /* hidden horizontal scroll */
+
+         & div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0px;
+            width: 100%;
+
+            & p{
+               text-align: left;
+            }
+
+            & span:hover{
+               color: red;
+            }
+         }
+      }
+
+      & div.project-options{
          display: flex;
          flex-direction: column;
          justify-content: flex-start;
@@ -50,8 +78,6 @@ div.dashboard{
          height: 50%;
          width: 100%;
          gap: 15px;
-         overflow-y: auto;  /* vertical scroll */
-         overflow-x: hidden; /* hidden horizontal scroll */
       }
 
       & p.project-options{

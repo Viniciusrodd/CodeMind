@@ -25,12 +25,16 @@ class ProjectService {
    // get all projects
    public async getAllProjects(): Promise<IProjectDocument[] | null> {
       const projects: IProjectDocument[] | null = await projectRepository.getAll();
+      if(projects?.length === 0) throw new Error("Projetos não encontrados");
+
       return projects;
    };
 
    // get project by id
    public async getProjectById(id: string | ObjectId): Promise<IProjectDocument | null> {
       const project: IProjectDocument | null = await projectRepository.getById(id);
+      if(!project) throw new Error("Projeto não encontrado");
+      
       return project;
    };
 
