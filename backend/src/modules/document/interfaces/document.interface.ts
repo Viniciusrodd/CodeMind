@@ -24,5 +24,6 @@ export interface IDocumentRepository {
    getById(id: string | ObjectId): Promise<IDocument | null>;
    update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null>;
    delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteByProjectId(id: string | ObjectId, session: ClientSession): Promise<DeleteResult>
    deleteAll(session: ClientSession): Promise<DeleteResult>;
 };

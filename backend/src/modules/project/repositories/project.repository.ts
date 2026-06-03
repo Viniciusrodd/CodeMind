@@ -39,8 +39,8 @@ class ProjectRepository implements IProjectRepository {
    };
 
    // delete project
-   public async delete(id: string | ObjectId): Promise<DeleteResult> {
-      return projectModel.deleteOne({ _id: id })
+   public async delete(id: string | ObjectId, session: ClientSession): Promise<DeleteResult> {
+      return projectModel.deleteOne({ _id: id }, { session })
    };
 
    // delete all

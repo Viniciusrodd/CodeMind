@@ -38,5 +38,6 @@ export interface IAnalysisRepository {
    create(data: CreateAnalysisDTO): Promise<IAnalysis>;
    getById(id: string | ObjectId): Promise<IAnalysis | null>;
    delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteByProjectId(id: string | ObjectId, session: ClientSession): Promise<DeleteResult>;
    deleteAll(session: ClientSession): Promise<DeleteResult>;
 };

@@ -35,14 +35,14 @@ class AnalysisRepository implements IAnalysisRepository {
       return analysisModel.deleteOne({ _id: id });
    };
 
+   // delete by project id
+   public async deleteByProjectId(id: string | ObjectId, session: ClientSession): Promise<DeleteResult> {
+      return analysisModel.deleteMany({ projectId: id }, { session });
+   };
+
    // delete all
    public async deleteAll(session: ClientSession): Promise<DeleteResult> {
       return analysisModel.deleteMany({}, { session });
-   };
-
-   // delete by project id
-   public async deleteByProjectId(id: string | ObjectId): Promise<DeleteResult> {
-      return analysisModel.deleteMany({ projectId: id });
    };
 
 };

@@ -44,8 +44,8 @@ class DocumentRepository implements IDocumentRepository {
    };
 
    // delete by project id
-   public async deleteByProjectId(id: string | ObjectId): Promise<DeleteResult> {
-      return documentModel.deleteMany({ projectId: id });
+   public async deleteByProjectId(id: string | ObjectId, session: ClientSession): Promise<DeleteResult> {
+      return documentModel.deleteMany({ projectId: id }, { session });
    };
 
    // delete all

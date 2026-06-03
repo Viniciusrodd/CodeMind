@@ -43,6 +43,6 @@ export interface IProjectRepository {
    getAll(): Promise<IProjectDocument[] | null>;
    getById(id: string | ObjectId): Promise<IProjectDocument | null>;
    update(id: string | ObjectId, data: UpdateProjectDTO): Promise<IProjectDocument | null>;
-   delete(id: string | ObjectId): Promise<DeleteResult>;
+   delete(id: string | ObjectId, session: ClientSession): Promise<DeleteResult>;
    deleteAll(session: ClientSession): Promise<DeleteResult>;
 };

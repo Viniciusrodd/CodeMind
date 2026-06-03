@@ -46,12 +46,5 @@ class ProjectService {
       return project;
    };
 
-   // delete project
-   public async deleteProject(id: string | ObjectId): Promise<void> {
-      const result = await projectRepository.delete(id);
-      
-      if(result.deletedCount === 0) throw new Error('Erro ao deletar projeto');
-   };
-
 };
 export const projectService: ProjectService = new ProjectService();

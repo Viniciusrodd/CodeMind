@@ -68,6 +68,7 @@ export interface IVectorSearchParams {
 export interface IDocumentChunkRepository {
    create(data: CreateDocumentChunkDTO): Promise<IDocumentChunk>;
    delete(id: string | ObjectId): Promise<DeleteResult>;
+   deleteByProjectId(id: string | ObjectId, session: ClientSession): Promise<DeleteResult>
    deleteAll(session: ClientSession): Promise<DeleteResult>;
    vectorSearch(params: IVectorSearchParams): Promise<RetrievedChunk[]>;
 };
