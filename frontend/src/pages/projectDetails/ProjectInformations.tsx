@@ -1,25 +1,91 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/projectDetails/projectInformations.module.css';
 
 // imports
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+
+// import images
+import loading_img from '@images/loading.png';
+
+// import interfaces
+import type { iModalConfig } from '@interfaces/modal.interface';
+import type { IProjectDocument } from '@interfaces/project.interface';
+
+// import components
+import Modal from '@components/Modal';
+
+// import services
+import { projectService } from '@services/project.service';
+
+// import contexts
+import { loadingContext } from '@contexts/loading/loading.context';
 
 
 const ProjectInformations = () => {
    //// variables
    const navigate = useNavigate();
    const { projectId } = useParams();
+   const [ redirect, setRedirect ] = useState<boolean>(false);
+   const [ modal_display, setModal_display ] = useState<boolean>(false);
+   const [ modal_title, setModal_title ] = useState<string>('');
+   const [ modal_msg, setModal_msg ] = useState<string>('');
+   const [ modal_btt, setmodal_btt ] = useState<boolean | string>(false);
+   const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
+   const { loading, setLoading } = useContext(loadingContext);
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const informationsOptions: string[] = [
       'Descrição', 'Tipo de aplicação', 'Linguagens', 
       'Frameworks/Bibliotecas', 'Propósito', 'Ambiente de execução'
    ];
+   const [ project, setProject ] = useState<IProjectDocument>({
+      _id: '', name: '', description: '',
+      context: { type: 'backend', languages: [''], frameworks: [''], purpose: '', environment: '' },
+      createdAt: new Date(), updatedAt: new Date()
+   });
 
 
    //// functions
 
+
+   // modal config
+   const modal_config = ({ title, msg, btt_event, btt_close, display }: iModalConfig) => {
+      setModal_title(title ?? '');
+      setModal_msg(msg ?? '');
+      setmodal_btt(btt_event ?? false);
+      setModal_btt_2(btt_close ?? false);
+      setModal_display(display ?? false);
+   };   
+
+   // close modal
+   const closeModal = () =>{
+      modal_config({
+         title: '', msg: '', btt_event: false, 
+         btt_close: false, display: false
+      });
+      setLoading(false);
+   };
+
+   // redirect
+   useEffect(() => {
+      if(redirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });
+
+            navigate(`/project/${projectId}`);       
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [navigate, redirect]);
 
    // go prev
    const goPrev = () => {
@@ -31,17 +97,69 @@ const ProjectInformations = () => {
       if(currentIndex < informationsOptions.length - 1) setCurrentIndex(prev => prev + 1);
    };
 
+   // project check
+   useEffect(() => {
+      const checkProject = async () => {
+         setLoading(true);
+
+         try{
+            const response = await projectService.getProjectById(projectId!);
+            
+            if(!response){
+               console.error('⚠️ Unexpected return from API:', response);
+               setLoading(false);
+
+               return;
+            }
+
+            setProject(response);
+
+            setLoading(false);
+         }
+         catch(error){
+            console.error('❌ Error at get project: ', error);
+
+            const errorMessage = error instanceof Error ? error.message : error as string;
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               btt_event: false, btt_close: false, display: true
+            });
+
+            setLoading(false);
+            setRedirect(true);
+         }
+      };
+
+      checkProject();
+   }, [projectId]);
+
 
    //// jsx
 
 
    return (
       <div className={ styles['page-container'] }>
+         { /* modal */ }
+         <Modal 
+            title={ modal_title }
+            msg={ modal_msg }
+            btt_event={ modal_btt }
+            btt_close={ modal_btt_2 }
+            display={ modal_display }
+            onClose={ closeModal }
+         />
          
-         { /* informations container */ }
-         <div className={ styles['informations-container'] }>
+         { loading ? (
+            <img 
+               src={ loading_img } 
+               alt="loading_img"
+               className='loading_img'    
+            />
+         ) : (
+            <div className={ styles['informations-container'] }>
             <h1 className={ styles.title }>
-               Projeto
+               { project.name }
             </h1>
 
             <div className={ styles.informations }>
@@ -58,48 +176,36 @@ const ProjectInformations = () => {
                </div>
 
                <div className={ `${styles.information} scroll` }>
-                  <p>
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation).
-
-                     O projeto consiste no desenvolvimento de uma aplicação web open-source voltada para análise 
-                     de código fonte utilizando inteligência artificial local, com apoio de técnicas de 
-                     RAG (Retrieval-Augmented Generation). aaa
-                  </p>
+                  { informationsOptions[currentIndex] === 'Descrição' && ( <p>{ project.description }</p> ) }
+                  { informationsOptions[currentIndex] === 'Tipo de aplicação' && ( <p>{ project.context.type }</p> ) }
+                  { informationsOptions[currentIndex] === 'Linguagens' && 
+                     project.context.languages.map((lang, index) => (
+                        <p className={ styles.list }>{index + 1}. { lang }</p>
+                     )) 
+                  }
+                  { informationsOptions[currentIndex] === 'Frameworks/Bibliotecas' && 
+                     project.context.frameworks.map((f, index) => (
+                        <p className={ styles.list }>{index + 1}. { f }</p>
+                     )) 
+                  }
+                  { informationsOptions[currentIndex] === 'Propósito' && ( <p>{ project.context.purpose }</p> ) }
+                  { informationsOptions[currentIndex] === 'Ambiente de execução' && ( <p>{ project.context.environment }</p> ) }                  
                </div>
             </div>
-         </div>
+            </div>
+         ) }
 
          { /* informations container */ }
-         <div className={ styles.footer }>
-            <span 
-               className='material-symbols-outlined tooltip' data-tooltip="Voltar" 
-               onClick={ () => navigate(`/project/${projectId}`) }
-            >
-               Undo
-            </span>
-         </div>
+         { loading === false && (
+            <div className={ styles.footer }>
+               <span 
+                  className='material-symbols-outlined tooltip' data-tooltip="Voltar" 
+                  onClick={ () => navigate(`/project/${projectId}`) }
+               >
+                  Undo
+               </span>
+            </div>
+         ) }
 
       </div>
    );
