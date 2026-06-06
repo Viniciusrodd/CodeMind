@@ -30,7 +30,7 @@ import loading_img from '@images/loading.png';
 import check_img from '@images/check.png';
 
 
-const ProjectDocuments = () => {
+const ProjectConfigDocuments = () => {
    //// variables
    const navigate = useNavigate();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
@@ -370,4 +370,4 @@ const ProjectDocuments = () => {
    );
 };
 
-export default ProjectDocuments;
+export default ProjectConfigDocuments;

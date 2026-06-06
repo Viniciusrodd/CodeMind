@@ -9,7 +9,7 @@ import './App.css'
 import Register from './pages/Register';
 import Welcome from '@pages/Welcome';
 import ProjectConfig from '@pages/projects/ProjectConfig';
-import ProjectDocuments from '@pages/projects/ProjectDocuments';
+import ProjectConfigDocuments from '@pages/projects/ProjectConfigDocuments';
 import ProjectDashboard from '@pages/projects/ProjectDashboard';
 import ProjectInformations from '@pages/projectDetails/ProjectInformations';
 
@@ -25,7 +25,7 @@ function App() {
 
                { /* project pages */ }
                <Route path='/project/config' element={ <ProjectConfig /> } />
-               <Route path='/project/config/documents/:projectId' element={ <ProjectDocuments /> } />
+               <Route path='/project/config/documents/:projectId' element={ <ProjectConfigDocuments /> } />
                <Route path='/project/dashboard' element={ <ProjectDashboard /> } />
 
                { /* project details pages */ }
