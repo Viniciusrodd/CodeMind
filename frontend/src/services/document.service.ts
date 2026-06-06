@@ -79,6 +79,28 @@ class DocumentService {
       }
    };
 
+   // get documents by project id
+   public async getDocumentsByProjectId(
+      projectId: string
+   ): Promise<IDocument[] | null> {
+      try{
+         const res = await axios.get<iApiResponse<IDocument[] | null>>(`${documentRoute}/project/${projectId}`);
+         return res.data.data!;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw new Error(
+               error.response?.data?.errorMessage ||
+               error.response?.data?.message ||
+               'Erro ao pegar documentos',
+               { cause: error }
+            );
+         }
+
+         throw new Error('Erro inesperado', { cause: error });
+      }
+   };
+
    // update document
    public async updateDocument(
       id: string,
