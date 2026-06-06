@@ -40,7 +40,7 @@ documentRoutes.get<{ id: string }>(
 
 // get documents by project id
 documentRoutes.get<{ projectId: string }>(
-   '/:projectId',
+   '/project/:projectId',
    documentValidations.getByProjectId(),
    handleValidation,
    documentController.getDocumentsByProjectId
