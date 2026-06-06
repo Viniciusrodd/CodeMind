@@ -29,6 +29,11 @@ class DocumentRepository implements IDocumentRepository {
       return documentModel.findById(id);
    };
 
+   // get document by project id
+   public async getByProjectId(id: string | ObjectId): Promise<IDocument[] | null> {
+      return documentModel.find({ projectId: id });
+   };
+
    // update document
    public async update(id: string | ObjectId, data: UpdateDocumentDTO): Promise<IDocument | null> {
       return documentModel.findByIdAndUpdate(

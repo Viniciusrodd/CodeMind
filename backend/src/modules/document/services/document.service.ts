@@ -23,5 +23,11 @@ class DocumentService {
       return document;
    };
 
+   // get documents by project id
+   public async getDocumentsByProjectId(id: string | ObjectId): Promise<IDocument[] | null> {
+      const documents: IDocument[] | null = await documentRepository.getByProjectId(id);
+      return documents;
+   };
+
 };
 export const documentService: DocumentService = new DocumentService();
