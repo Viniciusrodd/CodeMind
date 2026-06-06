@@ -71,5 +71,14 @@ class DocumentValidations {
       ];
    };
 
+   // get documents by project id
+   public getByProjectId(): ValidationChain[] {
+      return [
+         param('projectId')
+            .notEmpty().withMessage('A identificação é obrigatória')
+            .isMongoId().withMessage('Identificação inválida')
+      ];
+   };
+
 };
 export const documentValidations: DocumentValidations = new DocumentValidations();
