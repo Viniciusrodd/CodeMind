@@ -375,6 +375,7 @@ const ProjectDashboard = () => {
                <span 
                   className={ `${styles.settings} material-symbols-outlined tooltip` } 
                   data-tooltip="Editar projeto"
+                  onClick={ () => navigate(`/project/edit/${actualProject._id}`) }
                >
                   edit_square
                </span>
