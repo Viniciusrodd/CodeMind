@@ -150,6 +150,7 @@ const ProjectInformations = () => {
             onClose={ closeModal }
          />
          
+         { /* informations container */ }
          { loading ? (
             <img 
                src={ loading_img } 
@@ -158,44 +159,46 @@ const ProjectInformations = () => {
             />
          ) : (
             <div className={ styles['informations-container'] }>
-            <h1 className={ styles.title }>
-               { project.name }
-            </h1>
+               <h1 className={ styles.title }>
+                  { project.name }
+               </h1>
 
-            <div className={ styles.informations }>
-               <div className={ styles.header }>
-                  <span className='material-symbols-outlined tooltip' data-tooltip="Anterior" onClick={ goPrev }>
-                     arrow_circle_left
-                  </span>
-                  <h2>
-                     { informationsOptions[currentIndex] }
-                  </h2>
-                  <span className='material-symbols-outlined tooltip' data-tooltip="Próximo" onClick={ goNext }>
-                     arrow_circle_right
-                  </span>
-               </div>
+               <div className={ styles.informations }>
+                  { /* informations header */ }              
+                  <div className={ styles.header }>
+                     <span className='material-symbols-outlined tooltip' data-tooltip="Anterior" onClick={ goPrev }>
+                        arrow_circle_left
+                     </span>
+                     <h2>
+                        { informationsOptions[currentIndex] }
+                     </h2>
+                     <span className='material-symbols-outlined tooltip' data-tooltip="Próximo" onClick={ goNext }>
+                        arrow_circle_right
+                     </span>
+                  </div>
 
-               <div className={ `${styles.information} scroll` }>
-                  { informationsOptions[currentIndex] === 'Descrição' && ( <p>{ project.description }</p> ) }
-                  { informationsOptions[currentIndex] === 'Tipo de aplicação' && ( <p>{ project.context.type }</p> ) }
-                  { informationsOptions[currentIndex] === 'Linguagens' && 
-                     project.context.languages.map((lang, index) => (
-                        <p className={ styles.list }>{index + 1}. { lang }</p>
-                     )) 
-                  }
-                  { informationsOptions[currentIndex] === 'Frameworks/Bibliotecas' && 
-                     project.context.frameworks.map((f, index) => (
-                        <p className={ styles.list }>{index + 1}. { f }</p>
-                     )) 
-                  }
-                  { informationsOptions[currentIndex] === 'Propósito' && ( <p>{ project.context.purpose }</p> ) }
-                  { informationsOptions[currentIndex] === 'Ambiente de execução' && ( <p>{ project.context.environment }</p> ) }                  
+                  { /* informations scroll */ }
+                  <div className={ `${styles.information} scroll` }>
+                     { informationsOptions[currentIndex] === 'Descrição' && ( <p>{ project.description }</p> ) }
+                     { informationsOptions[currentIndex] === 'Tipo de aplicação' && ( <p>{ project.context.type }</p> ) }
+                     { informationsOptions[currentIndex] === 'Linguagens' && 
+                        project.context.languages.map((lang, index) => (
+                           <p className={ styles.list }>{index + 1}. { lang }</p>
+                        )) 
+                     }
+                     { informationsOptions[currentIndex] === 'Frameworks/Bibliotecas' && 
+                        project.context.frameworks.map((f, index) => (
+                           <p className={ styles.list }>{index + 1}. { f }</p>
+                        )) 
+                     }
+                     { informationsOptions[currentIndex] === 'Propósito' && ( <p>{ project.context.purpose }</p> ) }
+                     { informationsOptions[currentIndex] === 'Ambiente de execução' && ( <p>{ project.context.environment }</p> ) }                  
+                  </div>
                </div>
-            </div>
             </div>
          ) }
 
-         { /* informations container */ }
+         { /* footer */ }
          { loading === false && (
             <div className={ styles.footer }>
                <span 
