@@ -132,7 +132,7 @@ const ProjectConfig = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -175,7 +175,12 @@ const ProjectConfig = () => {
 
       try{
          const response = await projectService.createProject(data);
-         if(!response) console.error('⚠️ Unexpected return from API:', response);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
 
          modal_config({
             title: 'Sucesso ✔️', 

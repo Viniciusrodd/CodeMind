@@ -29,7 +29,7 @@ import { loadingContext } from '@contexts/loading/loading.context';
 const ProjectDocuments = () => {
    //// variables
    const navigate = useNavigate();
-   const { projectId } = useParams();
+   const { projectId } = useParams<string>();
    const [ redirect, setRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
@@ -117,7 +117,7 @@ const ProjectDocuments = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -149,7 +149,7 @@ const ProjectDocuments = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 

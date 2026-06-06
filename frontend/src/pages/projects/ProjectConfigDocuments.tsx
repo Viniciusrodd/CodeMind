@@ -110,7 +110,7 @@ const ProjectConfigDocuments = () => {
                btt_close: false, display: false
             });
 
-            navigate(`/project/${projectId}`);       
+            navigate(`/project/dashboard`);       
          }, 4000);
 
          return () =>{
@@ -143,7 +143,7 @@ const ProjectConfigDocuments = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -173,7 +173,7 @@ const ProjectConfigDocuments = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -223,7 +223,12 @@ const ProjectConfigDocuments = () => {
    const addDocumentRequest = async (data: CreateDocumentDTO) => {
       try{
          const response = await documentService.createDocument(data);
-         if(!response) console.error('⚠️ Unexpected return from API:', response);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
       }
       catch(error){
          console.error('❌ Error at document creation: ', error);

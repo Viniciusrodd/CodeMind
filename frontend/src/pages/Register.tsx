@@ -96,7 +96,7 @@ const Register = () => {
 
             modal_config({
                title: 'Espere ❕', 
-               msg: `Usuário já registrado, \n você será redirecionado...`, 
+               msg: `Usuário já registrado`, 
                btt_event: false, btt_close: false, display: true
             });
 
@@ -122,7 +122,12 @@ const Register = () => {
 
       try{
          const response = await userService.createUser(data);
-         if(!response) console.error('⚠️ Unexpected return from API:', response);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
 
          modal_config({
             title: 'Sucesso ✔️', 

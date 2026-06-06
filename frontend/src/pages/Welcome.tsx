@@ -103,7 +103,7 @@ const Welcome = () => {
             const errorMessage = error instanceof Error ? error.message : error as string;
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               msg: `${ errorMessage }`, 
                btt_event: false, btt_close: false, display: true
             });
 
