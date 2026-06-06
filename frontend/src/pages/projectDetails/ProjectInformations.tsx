@@ -77,7 +77,7 @@ const ProjectInformations = () => {
                btt_close: false, display: false
             });
 
-            navigate(`/project/${projectId}`);       
+            navigate(`/project/dashboard`);       
          }, 4000);
 
          return () =>{
@@ -200,7 +200,7 @@ const ProjectInformations = () => {
             <div className={ styles.footer }>
                <span 
                   className='material-symbols-outlined tooltip' data-tooltip="Voltar" 
-                  onClick={ () => navigate(`/project/${projectId}`) }
+                  onClick={ () => navigate(`/project/dashboard`) }
                >
                   Undo
                </span>

@@ -26,7 +26,7 @@ function App() {
                { /* project pages */ }
                <Route path='/project/config' element={ <ProjectConfig /> } />
                <Route path='/project/config/documents/:projectId' element={ <ProjectDocuments /> } />
-               <Route path='/project/:projectId' element={ <ProjectDashboard /> } />
+               <Route path='/project/dashboard' element={ <ProjectDashboard /> } />
 
                { /* project details pages */ }
                <Route path='/project/informations/:projectId' element={ <ProjectInformations /> } />

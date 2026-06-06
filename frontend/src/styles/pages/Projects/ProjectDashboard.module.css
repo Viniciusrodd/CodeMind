@@ -58,7 +58,7 @@ div.dashboard{
             justify-content: space-between;
             align-items: center;
             padding: 5px 0px;
-            width: 100%;
+            width: 95%;
 
             & p{
                text-align: left;

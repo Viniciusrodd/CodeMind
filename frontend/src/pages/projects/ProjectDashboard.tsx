@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // imports
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 
 // import css
@@ -28,7 +28,6 @@ import { loadingContext } from '@contexts/loading/loading.context';
 
 const ProjectDashboard = () => {
    //// variables
-   const { projectId } = useParams<string>();
    const navigate = useNavigate();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ welcomeRedirect, setWelcomeRedirect ] = useState<boolean>(false);
@@ -169,7 +168,7 @@ const ProjectDashboard = () => {
 
             setProjects(response);
 
-            const getActualProject = response.find(p => p._id == projectId);
+            const getActualProject = response[0];
             if(getActualProject) setActualProject(getActualProject);
 
             setLoading(false);
@@ -191,7 +190,7 @@ const ProjectDashboard = () => {
 
       checkUser();
       checkProject();
-   }, [projectId]);
+   }, []);
 
    // delete project advice
    const deleteProjectAdvice = (id: string) => {
@@ -251,6 +250,12 @@ const ProjectDashboard = () => {
       }
    };
 
+   // get specific project
+   const getSpecificProject = (id: string) => {
+      const getActualProject = projects.find(p => p._id == id);
+      if(getActualProject) setActualProject(getActualProject);
+   };
+
 
    //// jsx
 
@@ -281,7 +286,7 @@ const ProjectDashboard = () => {
                   <div className={ `${styles['project-list']} scroll` }>
                      { projects && projects.map((project, index) => (
                         <div key={ index }>
-                           <p onClick={ () => navigate(`/project/${project._id}`) }>
+                           <p onClick={ () => getSpecificProject(project._id) }>
                               { project.name }
                            </p>
                            <span className="material-symbols-outlined" onClick={ () => deleteProjectAdvice(project._id) }>
