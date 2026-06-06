@@ -94,6 +94,30 @@ class DocumentController {
       }
    };
 
+   // get documents by project id
+   public async getDocumentsByProjectId(
+      req: Request<{projectId: string | ObjectId}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const documents: IDocument[] | null = await documentService.getDocumentsByProjectId(req.params.projectId);
+
+         return res.status(200).send({
+            success: true,
+            message: '✔️ Getting documents by project with success',
+            data: documents
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at getting documents by project: ', error);
+         return res.status(500).send({
+            success: false,
+            message: '❌ Internal server error at getting documents by project',
+            errorMessage: getErrorMessage(error) 
+         });
+      }
+   };
+
    // update document
    public async updateDocument(
       req: Request<{id: string | ObjectId}, {}, UpdateDocumentDTO>,

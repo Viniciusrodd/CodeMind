@@ -38,6 +38,12 @@ documentRoutes.get<{ id: string }>(
    documentController.getDocumentById
 );
 
+// get documents by project id
+documentRoutes.get<{ projectId: string }>(
+   '/:projectId',
+   documentController.getDocumentsByProjectId
+);
+
 // udpate document
 documentRoutes.put<{ id: string }>(
    '/:id',
