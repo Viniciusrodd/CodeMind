@@ -374,9 +374,9 @@ const ProjectDashboard = () => {
                </span>
                <span 
                   className={ `${styles.settings} material-symbols-outlined tooltip` } 
-                  data-tooltip="Configuração do projeto"
+                  data-tooltip="Editar projeto"
                >
-                  settings
+                  edit_square
                </span>
                </>
             ) }

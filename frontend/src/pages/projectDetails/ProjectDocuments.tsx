@@ -9,6 +9,7 @@ import { useState, useEffect, useContext } from 'react';
 
 // import images
 import loading_img from '@images/loading.png';
+import add_img from '@images/add.png';
 
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
@@ -210,13 +211,16 @@ const ProjectDocuments = () => {
 
                   { /* informations scroll */ }
                   <div className={ `${projectInformationsStyles.information} scroll` }>
-                     <p className={ projectInformationsStyles.documents }>
-                        { 
-                           documents && documents.length > 0 
-                           ? documents[currentIndex].content
-                           : ''
-                        }
-                     </p>
+                     { documents && documents.length > 0 ? (
+                        <p className={ projectInformationsStyles.documents }>
+                           { documents[currentIndex].content }
+                        </p>
+                     ) : (
+                        <div className={ projectInformationsStyles['add-documents'] } onClick={ () => navigate(`/project/config/documents/${projectId}`) }>
+                           <img src={ add_img } alt="add_img" />
+                           <p>Adicionar documento</p>
+                        </div>
+                     ) }
                   </div>
                </div>
             </div>
