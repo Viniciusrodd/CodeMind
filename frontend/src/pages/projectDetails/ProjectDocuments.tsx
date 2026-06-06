@@ -19,6 +19,7 @@ import Modal from '@components/Modal';
 
 // import services
 import { documentService } from '@services/document.service';
+import { projectService } from '@services/project.service';
 
 // import contexts
 import { loadingContext } from '@contexts/loading/loading.context';
@@ -36,6 +37,8 @@ const ProjectDocuments = () => {
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const { loading, setLoading } = useContext(loadingContext);
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
+   const [ documents, setDocuments ] = useState<IDocument[]>();
+   const [ projectName, setProjectName ] = useState<string>();
 
 
    //// functions
@@ -78,7 +81,85 @@ const ProjectDocuments = () => {
       }
    }, [navigate, redirect]);
 
+   // go prev
+   const goPrev = () => {
+      if(currentIndex > 0) setCurrentIndex(prev => prev - 1);
+   };
 
+   // go next
+   const goNext = () => {
+      if(documents && currentIndex < documents.length - 1) setCurrentIndex(prev => prev + 1);
+   };
+
+   // project + documents check
+   useEffect(() => {
+      const checkProject = async () => {
+         setLoading(true);
+
+         try{
+            const response = await projectService.getProjectById(projectId!);
+            
+            if(!response){
+               console.error('⚠️ Unexpected return from API:', response);
+               setLoading(false);
+
+               return;
+            }
+
+            setProjectName(response.name);
+
+            setLoading(false);
+         }
+         catch(error){
+            console.error('❌ Error at get project: ', error);
+
+            const errorMessage = error instanceof Error ? error.message : error as string;
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               btt_event: false, btt_close: false, display: true
+            });
+
+            setLoading(false);
+            setRedirect(true);
+         }
+      };
+
+      const checkDocuments = async () => {
+         setLoading(true);
+
+         try{
+            const response = await documentService.getDocumentsByProjectId(projectId!);
+            
+            if(!response){
+               console.error('⚠️ Unexpected return from API:', response);
+               setLoading(false);
+
+               return;
+            }
+
+            setDocuments(response);
+
+            setLoading(false);
+         }
+         catch(error){
+            console.error('❌ Error at get documents by project id: ', error);
+
+            const errorMessage = error instanceof Error ? error.message : error as string;
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }, \n você será redirecionado...`, 
+               btt_event: false, btt_close: false, display: true
+            });
+
+            setLoading(false);
+            setRedirect(true);
+         }
+      };
+
+      checkProject();
+      checkDocuments();
+   }, [projectId]);
 
 
    //// jsx
@@ -106,83 +187,35 @@ const ProjectDocuments = () => {
          ) : (
             <div className={ projectInformationsStyles['informations-container'] }>
                <h1 className={ projectInformationsStyles.title }>
-                  project
+                  { projectName }
                </h1>
 
                <div className={ projectInformationsStyles.informations }>
                   { /* informations header */ }  
                   <div className={ projectInformationsStyles.header }>
-                     <span className='material-symbols-outlined tooltip' data-tooltip="Anterior">
+                     <span className='material-symbols-outlined tooltip' data-tooltip="Anterior" onClick={ goPrev }>
                         arrow_circle_left
                      </span>
                      <h2>
-                        documento.code
+                        { 
+                           documents && documents.length > 0 
+                           ? `"${documents[currentIndex].name}" - ${documents[currentIndex].type}` 
+                           : 'sem documentos' 
+                        }
                      </h2>
-                     <span className='material-symbols-outlined tooltip' data-tooltip="Próximo">
+                     <span className='material-symbols-outlined tooltip' data-tooltip="Próximo" onClick={ goNext }>
                         arrow_circle_right
                      </span>
                   </div>
 
                   { /* informations scroll */ }
                   <div className={ `${projectInformationsStyles.information} scroll` }>
-                     <p>
-                        {`
-                        class AuthenticationService {
-                        constructor(private userRepository: UserRepository) {}
-
-                        async login(email: string, password: string): Promise<AuthResponse> {
-                           try {
-                              const user = await this.userRepository.findByEmail(email);
-                              
-                              if (!user) {
-                              throw new Error('User not found');
-                              }
-                              
-                              const isValid = await bcrypt.compare(password, user.passwordHash);
-                              
-                              if (!isValid) {
-                              throw new Error('Invalid credentials');
-                              }
-                              
-                              const token = this.generateToken(user.id, user.role);
-                              
-                              return { 
-                              success: true, 
-                              token, 
-                              user: { 
-                                 id: user.id, 
-                                 email: user.email, 
-                                 role: user.role 
-                              } 
-                              };
-                           } catch (error) {
-                              console.error('Login failed:', error);
-                              return { success: false, error: error.message };
-                           }
+                     <p className={ projectInformationsStyles.documents }>
+                        { 
+                           documents && documents.length > 0 
+                           ? documents[currentIndex].content
+                           : ''
                         }
-
-                        private generateToken(userId: string, role: string): string {
-                           const payload = { 
-                              userId, 
-                              role, 
-                              exp: Math.floor(Date.now() / 1000) + 3600 
-                           };
-                           
-                           return jwt.sign(payload, process.env.JWT_SECRET);
-                        }
-
-                        async validateToken(token: string): Promise<UserPayload | null> {
-                           try {
-                              const decoded = jwt.verify(token, process.env.JWT_SECRET);
-                              return decoded as UserPayload;
-                           } catch (error) {
-                              return null;
-                           }
-                        }
-                        }
-
-                        export default AuthenticationService;
-                        `}
                      </p>
                   </div>
                </div>
@@ -194,6 +227,7 @@ const ProjectDocuments = () => {
             <div className={ projectInformationsStyles.footer }>
                <span 
                   className='material-symbols-outlined tooltip' data-tooltip="Voltar"
+                  onClick={ () => navigate(`/project/dashboard`) }
                >
                   Undo
                </span>

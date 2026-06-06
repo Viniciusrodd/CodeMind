@@ -183,12 +183,12 @@ const ProjectInformations = () => {
                      { informationsOptions[currentIndex] === 'Tipo de aplicação' && ( <p>{ project.context.type }</p> ) }
                      { informationsOptions[currentIndex] === 'Linguagens' && 
                         project.context.languages.map((lang, index) => (
-                           <p className={ styles.list }>{index + 1}. { lang }</p>
+                           <p className={ styles.list } key={ index }>{index + 1}. { lang }</p>
                         )) 
                      }
                      { informationsOptions[currentIndex] === 'Frameworks/Bibliotecas' && 
                         project.context.frameworks.map((f, index) => (
-                           <p className={ styles.list }>{index + 1}. { f }</p>
+                           <p className={ styles.list } key={ index }>{index + 1}. { f }</p>
                         )) 
                      }
                      { informationsOptions[currentIndex] === 'Propósito' && ( <p>{ project.context.purpose }</p> ) }

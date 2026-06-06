@@ -83,6 +83,11 @@ div.informations{
          width: 80%;
       }
 
+      & p.documents{
+         white-space: pre-wrap;
+         text-align: left;
+      }
+
       & p.list{
          margin-bottom: 10px;
       }
