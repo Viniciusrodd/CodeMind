@@ -36,7 +36,6 @@ const Welcome = () => {
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const [ name, setName ] = useState<string>('');
    const [ hasProject, setHasProject ] = useState<boolean>(false);
-   const [ projectId, setProjectId ] = useState<string>('');
    const { loading, setLoading } = useContext(loadingContext);
 
 
@@ -133,7 +132,6 @@ const Welcome = () => {
 
                if(response.length > 0){
                   setHasProject(true);
-                  setProjectId(response[0]._id);
                };
 
                setLoading(false);
@@ -147,15 +145,6 @@ const Welcome = () => {
          checkProjects();
       }
    }, [name, setName]);
-
-   // redirect
-   const redirect = () => {
-      if(hasProject){
-         navigate(`/project/${projectId}`);
-      }else{
-         navigate('/project/config');
-      }
-   };
 
 
    //// jsx
@@ -191,11 +180,11 @@ const Welcome = () => {
             
             { /* send */ }
             { hasProject ? (
-               <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
+               <button type='button' className={ styles.welcome_btt } onClick={ () => navigate('/project/dashboard') }>
                   VISITAR MEUS PROJETOS
                </button>
             ) : (
-               <button type='button' className={ styles.welcome_btt } onClick={ redirect }>
+               <button type='button' className={ styles.welcome_btt } onClick={ () => navigate('/project/config') }>
                   CRIAR MEU PRIMEIRO PROJETO
                </button>
             ) }
