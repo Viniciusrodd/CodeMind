@@ -13,6 +13,7 @@ import ProjectConfigDocuments from '@pages/projects/ProjectConfigDocuments';
 import ProjectDashboard from '@pages/projects/ProjectDashboard';
 import ProjectInformations from '@pages/projectDetails/ProjectInformations';
 import ProjectDocuments from '@pages/projectDetails/ProjectDocuments';
+import ProjectEdit from '@pages/projectDetails/ProjectEdit';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                { /* project details pages */ }
                <Route path='/project/informations/:projectId' element={ <ProjectInformations /> } />
                <Route path='/project/documents/:projectId' element={ <ProjectDocuments /> } />
+               <Route path='/project/edit/:projectId' element={ <ProjectEdit /> } />
             </Routes>
          </BrowserRouter>
       </div>
