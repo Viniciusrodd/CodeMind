@@ -9,6 +9,27 @@
    --color5: #fffaff;
 }
 
+div.informations{
+   height: 50vh;
+
+   & .delete-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 5vh;
+      width: 100%;
+      margin-top: 10px;
+      background-color: transparent;
+
+      & span{
+         font-size: 25px;
+      }
+      & span:hover{
+         color: red;
+      }
+   }
+}
+
 div.information{
    height: 30vh !important;
 }

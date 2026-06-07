@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
-import projectInformationsStyles from '@styles/pages/projectDetails/temp.module.css';
+import projectInformationsStyles from '@styles/pages/projectDetails/ProjectInformations.module.css';
 import projectDocumentsStyle from '@styles/pages/projectDetails/ProjectDocuments.module.css';
 
 // imports
@@ -192,7 +192,7 @@ const ProjectDocuments = () => {
                   { projectName }
                </h1>
 
-               <div className={ projectInformationsStyles.informations }>
+               <div className={ `${projectDocumentsStyle.informations} ${projectInformationsStyles.informations}` }>
                   { /* informations header */ }  
                   <div className={ projectInformationsStyles.header }>
                      <span className='material-symbols-outlined tooltip' data-tooltip="Anterior" onClick={ goPrev }>
@@ -222,6 +222,13 @@ const ProjectDocuments = () => {
                            <p>Adicionar documento</p>
                         </div>
                      ) }
+                  </div>
+
+                  { /* delete options */ }
+                  <div className={ projectDocumentsStyle['delete-container'] }>
+                     <span className="material-symbols-outlined tooltip" data-tooltip="Deletar documento">
+                        delete
+                     </span>
                   </div>
                </div>
             </div>
