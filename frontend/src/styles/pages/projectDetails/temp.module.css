@@ -17,7 +17,7 @@ div.page-container{
    align-items: center;
    height: 73vh;
    width: 100vw;
-   background-color: transparent;
+   background-color: gainsboro;
 }
 
 div.informations-container{
@@ -27,7 +27,7 @@ div.informations-container{
    align-items: center;
    height: 60vh;
    width: 60vw;
-   background-color: transparent;
+   background-color: grey;
 
    & h1.title{
       color: var(--color2b);
@@ -47,6 +47,7 @@ div.informations{
    width: 60vw;
    border: 2px solid white;
    border-radius: 10px;
+   background-color: #8981fe;
 
    & div.header{
       display: flex;
@@ -54,7 +55,7 @@ div.informations{
       align-items: center;
       height: 22%;
       width: 90%;
-      background-color: transparent;
+      background-color: rgb(255, 80, 80);
 
       & span{
          font-size: 35px;
@@ -75,7 +76,7 @@ div.informations{
       margin-top: 2%;
       overflow-y: auto;  /* vertical scroll */
       overflow-x: hidden; /* hidden horizontal scroll */
-      background-color: transparent;
+      background-color: red;
 
       & p{
          font-size: 16px;

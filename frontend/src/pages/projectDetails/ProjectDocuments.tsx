@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
-import projectInformationsStyles from '@styles/pages/projectDetails/ProjectInformations.module.css';
+import projectInformationsStyles from '@styles/pages/projectDetails/temp.module.css';
 import projectDocumentsStyle from '@styles/pages/projectDetails/ProjectDocuments.module.css';
 
 // imports
