@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
-import styles from '@styles/pages/projectDetails/projectInformations.module.css';
+import styles from '@styles/pages/projectDetails/ProjectInformations.module.css';
 
 // imports
 import { useParams, useNavigate } from 'react-router-dom';

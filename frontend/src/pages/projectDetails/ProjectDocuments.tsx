@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
-import projectInformationsStyles from '@styles/pages/projectDetails/projectInformations.module.css';
+import projectInformationsStyles from '@styles/pages/projectDetails/ProjectInformations.module.css';
+import projectDocumentsStyle from '@styles/pages/projectDetails/ProjectDocuments.module.css';
 
 // imports
 import { useParams, useNavigate } from 'react-router-dom';
@@ -210,7 +211,7 @@ const ProjectDocuments = () => {
                   </div>
 
                   { /* informations scroll */ }
-                  <div className={ `${projectInformationsStyles.information} scroll` }>
+                  <div className={ `${projectDocumentsStyle.information} ${projectInformationsStyles.information} scroll` }>
                      { documents && documents.length > 0 ? (
                         <p className={ projectInformationsStyles.documents }>
                            { documents[currentIndex].content }
