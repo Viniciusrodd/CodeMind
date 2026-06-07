@@ -32,6 +32,7 @@ const ProjectDocuments = () => {
    const navigate = useNavigate();
    const { projectId } = useParams<string>();
    const [ redirect, setRedirect ] = useState<boolean>(false);
+   const [ closeAdvice, setCloseAdvice ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -41,6 +42,7 @@ const ProjectDocuments = () => {
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const [ documents, setDocuments ] = useState<IDocument[]>();
    const [ projectName, setProjectName ] = useState<string>();
+   const [ deleteDocumentId, setDeleteDocumentId ] = useState<string>('');
 
 
    //// functions
@@ -81,7 +83,21 @@ const ProjectDocuments = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [navigate, redirect]);
+
+      if(closeAdvice){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });      
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [navigate, redirect, closeAdvice]);
 
    // go prev
    const goPrev = () => {
@@ -163,6 +179,62 @@ const ProjectDocuments = () => {
       checkDocuments();
    }, [projectId]);
 
+   // delete document advice
+   const deleteDocumentAdvice = (id: string) => {
+      modal_config({
+         title: 'Espere ❕', 
+         msg: 'Tem certeza que deseja excluir o documento ?', 
+         btt_event: 'Certeza', btt_close: 'Melhor não', display: true
+      });
+
+      setDeleteDocumentId(id);
+   };
+
+   // delete document
+   const deleteDocument = async () => {
+      setLoading(true);
+
+      try{
+         const response = await documentService.deleteDocument(deleteDocumentId);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
+
+         if(response.success){
+            setLoading(false);
+
+            if(documents && documents.length > 1){
+               const documentsFiltered = documents.filter(document => document._id !== deleteDocumentId);
+               setDocuments(documentsFiltered);
+               setCurrentIndex(0);
+            }
+
+            modal_config({
+               title: 'Sucesso ✔️', 
+               msg: 'Documento deletado com sucesso', 
+               btt_event: false, btt_close: false, display: true
+            });
+
+            setCloseAdvice(true);
+         }
+      }
+      catch(error){
+         console.error('❌ Error at delete document: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : error as string;
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: 'Tentar novamente', display: true
+         });
+
+         setLoading(false);
+      }
+   };
+
 
    //// jsx
 
@@ -176,6 +248,7 @@ const ProjectDocuments = () => {
             btt_event={ modal_btt }
             btt_close={ modal_btt_2 }
             display={ modal_display }
+            modalEvent={ deleteDocument }
             onClose={ closeModal }
          />
 
@@ -225,11 +298,17 @@ const ProjectDocuments = () => {
                   </div>
 
                   { /* delete options */ }
-                  <div className={ projectDocumentsStyle['delete-container'] }>
-                     <span className="material-symbols-outlined tooltip" data-tooltip="Deletar documento">
-                        delete
-                     </span>
-                  </div>
+                  { documents && documents.length > 0 && (
+                     <div className={ projectDocumentsStyle['delete-container'] }>
+                        <span 
+                           className="material-symbols-outlined tooltip" 
+                           data-tooltip="Deletar documento"
+                           onClick={ () => deleteDocumentAdvice(documents[currentIndex]._id) }   
+                        >
+                           delete
+                        </span>
+                     </div>
+                  ) }
                </div>
             </div>
          ) }
