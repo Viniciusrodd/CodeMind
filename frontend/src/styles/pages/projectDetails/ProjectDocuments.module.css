@@ -12,20 +12,22 @@
 div.informations{
    height: 50vh;
 
-   & .delete-container{
+   & .options-container{
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       height: 5vh;
-      width: 100%;
+      width: 10%;
       margin-top: 10px;
-      background-color: transparent;
 
       & span{
-         font-size: 25px;
+         font-size: 28px;
       }
-      & span:hover{
-         color: red;
+      & span.add:hover{
+         color: var(--color2);
+      }
+      & span.delete:hover{
+         color: var(--color3);
       }
    }
 }

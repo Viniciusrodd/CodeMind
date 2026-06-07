@@ -297,11 +297,19 @@ const ProjectDocuments = () => {
                      ) }
                   </div>
 
-                  { /* delete options */ }
+                  { /* add/delete options */ }
                   { documents && documents.length > 0 && (
-                     <div className={ projectDocumentsStyle['delete-container'] }>
+                     <div className={ projectDocumentsStyle['options-container'] }>
                         <span 
-                           className="material-symbols-outlined tooltip" 
+                           className={`material-symbols-outlined tooltip ${projectDocumentsStyle.add}`}
+                           data-tooltip="Adicionar documento" 
+                           onClick={ () => navigate(`/project/config/documents/${documents[currentIndex].projectId}`) } 
+                        >
+                           add
+                        </span>
+
+                        <span 
+                           className={`material-symbols-outlined tooltip ${projectDocumentsStyle.delete}`}
                            data-tooltip="Deletar documento"
                            onClick={ () => deleteDocumentAdvice(documents[currentIndex]._id) }   
                         >
