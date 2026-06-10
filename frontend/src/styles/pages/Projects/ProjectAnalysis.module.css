@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+:root{
+   --color1: #0e1116;
+   --color2: #8981fe;
+   --color2b: #4a56f9;
+   --color2c: #7d74fe;
+   --color3: #ed254e;
+   --color4: #a2faa3;
+   --color5: #fffaff;
+}
+
+div.page-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   height: 90vh;
+   width: 85vw;
+   background-color: transparent;
+}
+
+div.inputs-container{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   align-items: center;
+   height: 70vh;
+   width: 85vw;
+   background-color: transparent;
+}
+
+& div.input{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 36vh;
+   width: 42vw;
+   align-items: center;
+   background-color: transparent;
+
+   & h1{
+      font-size: 27px;
+   }
+   
+   & textarea{
+      height: 60%;
+      min-height: 60%;
+      max-height: 60%;
+      width: 80%;
+      min-width: 80%;
+      max-width: 80%;
+      padding: 15px 0px;
+      background-color: transparent;
+      border-radius: 10px;
+      border: 2px solid white;
+   }
+}
+
+div.filled-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 70vh;
+   width: 42vw;
+   background-color: red;
+}
+
+div.code-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   height: 70vh;
+   width: 42vw;
+   background-color: transparent;
+
+   & div.buttons-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 6.5vh;
+      width: 70%;
+      margin-top: 30px;
+      align-items: center;
+      background-color: transparent;
+
+      & p{
+         font-size: 20px;
+      }
+
+      & button{
+         height: 100%;
+         width: 45%;
+         border: none;
+         border-radius: 10px;
+         font-size: 14px;
+         font-weight: 700;
+         background-color: var(--color2b);
+         color: white;
+      }
+   }
+}
+
+div.line-division{
+   height: 100%;
+   width: 2px;
+   background-color: #161c25;
+}
+
+div.context-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   height: 70vh;
+   width: 42vw;
+   background-color: transparent;
+
+   & button{
+      height: 6.5vh;
+      width: 35%;
+      margin-top: 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: var(--color2b);
+      color: white;
+   }
+
+   & div.examples{
+      padding: 10px 30px;
+      margin-top: 30px;
+      background-color: transparent;
+
+      & h3{
+         font-size: 18px;
+         margin-bottom: 5px;
+      }
+
+      & p{
+         font-size: 14px;
+         font-weight: 600;
+         text-align: left;
+      }
+   }
+}

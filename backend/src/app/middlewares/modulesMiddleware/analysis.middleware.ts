@@ -15,7 +15,8 @@ class AnalysisValidations {
          body('input.code')
             .notEmpty().withMessage('Código é obrigatório')
             .isString().withMessage('Código deve ser texto')
-            .isLength({ min: 5 }).withMessage('Código muito pequeno'),
+            .isLength({ min: 5 }).withMessage('Código muito pequeno')
+            .isLength({ max: 5000 }).withMessage('Código muito grande'),
 
          body('input.context')
             .optional()
