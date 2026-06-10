@@ -14,6 +14,7 @@ import ProjectDashboard from '@pages/projects/ProjectDashboard';
 import ProjectInformations from '@pages/projectDetails/ProjectInformations';
 import ProjectDocuments from '@pages/projectDetails/ProjectDocuments';
 import ProjectEdit from '@pages/projectDetails/ProjectEdit';
+import ProjectAnalysis from '@pages/projects/ProjectAnalysis';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                <Route path='/project/config' element={ <ProjectConfig /> } />
                <Route path='/project/config/documents/:projectId' element={ <ProjectConfigDocuments /> } />
                <Route path='/project/dashboard' element={ <ProjectDashboard /> } />
+               <Route path='/project/analysis/:projectId' element={ <ProjectAnalysis /> } />
 
                { /* project details pages */ }
                <Route path='/project/informations/:projectId' element={ <ProjectInformations /> } />

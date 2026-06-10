@@ -326,7 +326,7 @@ const ProjectDashboard = () => {
                      <img src={ analysis_img } alt="analysis_img" />
                   </div>
 
-                  <button type='button'>
+                  <button type='button' onClick={ () => navigate(`/project/analysis/${actualProject._id}`) }>
                      NOVA ANÁLISE DE CÓDIGO
                   </button>
                   </>
