@@ -10,6 +10,9 @@ import styles from '@styles/pages/Projects/ProjectAnalysis.module.css';
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
 
+// import DTOs
+import type { CreateAnalysisDTO } from '@DTOs/analysis.dtos';
+
 // import components
 import Modal from '@components/Modal';
 import Title from '@components/Title';
@@ -17,6 +20,7 @@ import Title from '@components/Title';
 // import services
 import { projectService } from '@services/project.service';
 import { userService } from '@services/user.service';
+import { analysisService } from '@services/analysis.service';
 
 // import contexts
 import { loadingContext } from '@contexts/loading/loading.context';
@@ -182,6 +186,52 @@ const ProjectAnalysis = () => {
       }
    };
 
+   // analysis generation
+   const analysisGeneration = async () => {
+      setLoading(true);
+
+      // data setup
+      const data: CreateAnalysisDTO = {
+         projectId: projectId!,
+         input: {
+            code,
+            context
+         }
+      };
+
+      try{
+         const response = await analysisService.createAnalysis(data);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            setLoading(false);
+
+            return;
+         }
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Análise de projeto criada`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setLoading(false);
+         setProjectRedirect(true);
+      }
+      catch(error){
+         console.error('❌ Error at generate analysis: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : error as string;
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setLoading(false);
+         setProjectRedirect(true);
+      }
+   };
+
 
    //// jsx
 
@@ -238,6 +288,7 @@ const ProjectAnalysis = () => {
                         title='code'
                         placeholder='Código aqui...'
                         maxLength={ 5000 }
+                        value={ code }
                         onChange={ (e: React.ChangeEvent<HTMLTextAreaElement>) => setCode(e.target.value) }
                      >
                      </textarea>
@@ -297,6 +348,7 @@ const ProjectAnalysis = () => {
                         title='context'
                         placeholder='Contexto aqui...'
                         maxLength={ 5000 }
+                        value={ context }
                         onChange={ (e: React.ChangeEvent<HTMLTextAreaElement>) => setContext(e.target.value) }
                      >
                      </textarea>
@@ -327,7 +379,7 @@ const ProjectAnalysis = () => {
 
          {/* code + context filled */}
          { isAllFilled && loading === false && (
-            <button className={ styles['analysis-btt'] }>
+            <button className={ styles['analysis-btt'] } onClick={ analysisGeneration }>
                GERAR ANÁLISE
             </button>
          ) }
