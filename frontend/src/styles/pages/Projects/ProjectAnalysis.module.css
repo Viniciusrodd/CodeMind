@@ -23,7 +23,7 @@ div.page-container{
    width: 85vw;
    background-color: transparent;
 
-   & button{
+   & button.analysis-btt{
       height: 7vh;
       width: 13vw;
       border: none;
@@ -125,31 +125,16 @@ div.code-container{
    width: 42vw;
    background-color: transparent;
 
-   & div.buttons-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+   & button{
       height: 6.5vh;
-      width: 70%;
+      width: 35%;
       margin-top: 30px;
-      align-items: center;
-      background-color: transparent;
-
-      & p{
-         font-size: 20px;
-      }
-
-      & button{
-         height: 100%;
-         width: 45%;
-         border: none;
-         border-radius: 10px;
-         font-size: 14px;
-         font-weight: 700;
-         background-color: var(--color2b);
-         color: white;
-      }
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      background-color: var(--color2b);
+      color: white;
    }
 }
 

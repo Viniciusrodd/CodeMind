@@ -33,8 +33,8 @@ import check_img from '@images/check.png';
 const ProjectConfigDocuments = () => {
    //// variables
    const navigate = useNavigate();
+   const { projectId } = useParams<string>();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
-   const [ welcomeRedirect, setWelcomeRedirect ] = useState<boolean>(false);
    const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
@@ -42,7 +42,6 @@ const ProjectConfigDocuments = () => {
    const [ modal_btt, setmodal_btt ] = useState<boolean | string>(false);
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const { loading, setLoading } = useContext(loadingContext);
-   const { projectId } = useParams<string>();
    const [ files, setFiles ] = useState<File[] | null>(null);
    const [ fileAdded, setFileAdded ] = useState<boolean>(false);
    const DOC_EXTENSIONS = ['txt', 'md', 'pdf', 'doc', 'docx'];
@@ -87,22 +86,6 @@ const ProjectConfigDocuments = () => {
          };
       }
 
-      if(welcomeRedirect){
-         const clearMessage = setTimeout(() =>{
-            modal_config({
-               title: '', msg: '', btt_event: false, 
-               btt_close: false, display: false
-            });
-
-            navigate('/welcome');       
-         }, 4000);
-
-         return () =>{
-            setLoading(false);
-            clearTimeout(clearMessage);
-         };
-      }
-
       if(projectRedirect){
          const clearMessage = setTimeout(() =>{
             modal_config({
@@ -118,7 +101,7 @@ const ProjectConfigDocuments = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, welcomeRedirect, projectRedirect, navigate]);
+   }, [registerRedirect, projectRedirect, navigate]);
 
    // check user/project existence
    useEffect(() => {
@@ -178,7 +161,7 @@ const ProjectConfigDocuments = () => {
             });
 
             setLoading(false);
-            setWelcomeRedirect(true);
+            setProjectRedirect(true);
          }
       };
 
