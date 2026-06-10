@@ -10,6 +10,10 @@
    --color5: #fffaff;
 }
 
+h1{
+   font-size: 27px;
+}
+
 div.page-container{
    display: flex;
    flex-direction: column;
@@ -18,14 +22,25 @@ div.page-container{
    height: 90vh;
    width: 85vw;
    background-color: transparent;
+
+   & button{
+      height: 7vh;
+      width: 13vw;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      background-color: var(--color2b);
+      color: white;
+   }
 }
 
 div.inputs-container{
    display: flex;
    flex-direction: row;
-   justify-content: space-around;
-   align-items: center;
-   height: 70vh;
+   justify-content: space-between;
+   align-items: flex-start;
+   height: 65vh;
    width: 85vw;
    background-color: transparent;
 }
@@ -38,10 +53,6 @@ div.inputs-container{
    width: 42vw;
    align-items: center;
    background-color: transparent;
-
-   & h1{
-      font-size: 27px;
-   }
    
    & textarea{
       height: 60%;
@@ -55,6 +66,11 @@ div.inputs-container{
       border-radius: 10px;
       border: 2px solid white;
    }
+
+   & p{
+      font-size: 15px;
+      font-style: italic;
+   }
 }
 
 div.filled-container{
@@ -62,9 +78,42 @@ div.filled-container{
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   height: 70vh;
+   height: 50vh;
    width: 42vw;
-   background-color: red;
+   background-color: transparent;
+
+   & div.advice{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background-color: transparent;
+
+      & .img-container{
+         height: 40px;
+         width: 40px;
+         margin-top: 10px;
+
+         & img{
+            height: 100%;
+            width: 100%;
+         }
+      }
+   }
+
+   & button{
+      height: 7vh;
+      width: 30%;
+      margin-top: 30px;
+      border: none;
+      border-radius: 10px;
+      border: 2px solid white;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: transparent;
+      color: white;
+   }
 }
 
 div.code-container{
@@ -72,7 +121,7 @@ div.code-container{
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   height: 70vh;
+   height: 65vh;
    width: 42vw;
    background-color: transparent;
 
@@ -105,8 +154,9 @@ div.code-container{
 }
 
 div.line-division{
-   height: 100%;
+   height: 60%;
    width: 2px;
+   margin-top: 5%;
    background-color: #161c25;
 }
 
@@ -115,7 +165,7 @@ div.context-container{
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   height: 70vh;
+   height: 65vh;
    width: 42vw;
    background-color: transparent;
 
