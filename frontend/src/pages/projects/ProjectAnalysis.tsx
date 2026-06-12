@@ -9,6 +9,7 @@ import styles from '@styles/pages/Projects/ProjectAnalysis.module.css';
 
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
+import type { IAnalysisStatus } from '@interfaces/analysis.interface';
 
 // import DTOs
 import type { CreateAnalysisDTO } from '@DTOs/analysis.dtos';
@@ -36,6 +37,7 @@ const ProjectAnalysis = () => {
    const { projectId } = useParams<string>();
    const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
+   const [ analysisRedirect, setAnalysisRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
@@ -47,6 +49,13 @@ const ProjectAnalysis = () => {
    const isAllFilled = isCodeFilled && isContextFilled;
    const [ code, setCode ] = useState<string>('');
    const [ context, setContext ] = useState<string>('');
+   const [ inAnalysis, setInAnalysis ] = useState<boolean>(false);
+   const [ analysisId, setAnalysisId ] = useState<string>();
+   const [ analysisStatus, setAnalysisStatus ] = useState<IAnalysisStatus>({
+      status1: false,
+      status2: false,
+      status3: false
+   });
 
 
    //// functions
@@ -103,7 +112,24 @@ const ProjectAnalysis = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, projectRedirect, navigate]);
+
+      if(analysisRedirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt_event: false, 
+               btt_close: false, display: false
+            });
+
+            setInAnalysis(false);
+            navigate(`/analysis/result/${analysisId}`);       
+         }, 4000);
+
+         return () =>{
+            setLoading(false);
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [registerRedirect, projectRedirect, analysisRedirect, analysisId, navigate]);
 
    // check user/project existence
    useEffect(() => {
@@ -186,8 +212,53 @@ const ProjectAnalysis = () => {
       }
    };
 
+   // analysis status
+   useEffect(() => {
+      if(analysisStatus.status1){
+         const time = setTimeout(() => {
+            setAnalysisStatus(prev => ({
+               ...prev,
+               status1: false
+            }));
+         }, 2000);
+
+         return () => {
+            clearTimeout(time);
+         }
+      }
+      if(analysisStatus.status2){
+         const time = setTimeout(() => {
+            setAnalysisStatus(prev => ({
+               ...prev,
+               status2: false
+            }));
+         }, 4000);
+
+         return () => {
+            clearTimeout(time);
+         }
+      }
+      if(analysisStatus.status3){
+         const time = setTimeout(() => {
+            setAnalysisStatus(prev => ({
+               ...prev,
+               status3: false
+            }));
+         }, 6000);
+
+         return () => {
+            clearTimeout(time);
+         }
+      }
+   }, [analysisStatus, setAnalysisStatus]);
+
    // analysis generation
    const analysisGeneration = async () => {
+      // analysis loadings
+      setInAnalysis(true);
+      setAnalysisStatus({
+         status1: true, status2: true, status3: true
+      });
       setLoading(true);
 
       // data setup
@@ -208,14 +279,16 @@ const ProjectAnalysis = () => {
             return;
          }
 
+         setLoading(false);
+         setAnalysisId(response._id);
+         
          modal_config({
             title: 'Sucesso ✔️', 
             msg: `Análise de projeto criada`, 
             btt_event: false, btt_close: false, display: true
          });
-
-         setLoading(false);
-         setProjectRedirect(true);
+         
+         setAnalysisRedirect(true);
       }
       catch(error){
          console.error('❌ Error at generate analysis: ', error);
@@ -227,6 +300,7 @@ const ProjectAnalysis = () => {
             btt_event: false, btt_close: false, display: true
          });
 
+         setInAnalysis(false);
          setLoading(false);
          setProjectRedirect(true);
       }
@@ -251,7 +325,42 @@ const ProjectAnalysis = () => {
          {/* title */}
          <Title />
 
+         {/* in analysis */}
+         { inAnalysis && (
+            <div className={ styles['inAnalysis-container'] }>
+               <h1>Processamento da análise</h1>
+
+               <div className={ styles['inAnalysis-status'] }>
+                  <div className={ styles.status }>
+                     <h2>
+                        1. Identificando projeto ativo..................................................................
+                     </h2>
+                     { analysisStatus.status1 ? ( <img src={ loading_img } alt="loading_img" className='loading_img' /> ) : ( <img src={ check_img } alt="check_img" /> ) }
+                  </div>
+                  <div className={ styles.status }>
+                     <h2>
+                        2. Recuperando o contexto do projeto...................................................
+                     </h2>
+                     { analysisStatus.status2 ? ( <img src={ loading_img } alt="loading_img" className='loading_img' /> ) : ( <img src={ check_img } alt="check_img" /> ) }
+                  </div>
+                  <div className={ styles.status }>
+                     <h2>
+                        3. Combinando boas práticas com o contexto fornecido.....................
+                     </h2>
+                     { analysisStatus.status3 ? ( <img src={ loading_img } alt="loading_img" className='loading_img' /> ) : ( <img src={ check_img } alt="check_img" /> ) }
+                  </div>
+                  <div className={ styles.status }>
+                     <h2>
+                        4. Gerando a resposta final.......................................................................
+                     </h2>
+                     { loading ? ( <img src={ loading_img } alt="loading_img" className='loading_img' /> ) : ( <img src={ check_img } alt="check_img" /> ) }
+                  </div>
+               </div>
+            </div>
+         ) }
+
          {/* inputs container */}
+         { !inAnalysis && (
          <div className={ styles['inputs-container'] }>
 
             {/* code container */}
@@ -376,9 +485,10 @@ const ProjectAnalysis = () => {
                </div>
             ) }
          </div>
+         )}
 
          {/* code + context filled */}
-         { isAllFilled && loading === false && (
+         { isAllFilled && loading === false && !inAnalysis && (
             <button className={ styles['analysis-btt'] } onClick={ analysisGeneration }>
                GERAR ANÁLISE
             </button>

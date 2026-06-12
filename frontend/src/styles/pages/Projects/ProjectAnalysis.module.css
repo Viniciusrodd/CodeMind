@@ -35,6 +35,50 @@ div.page-container{
    }
 }
 
+div.inAnalysis-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   height: 60vh;
+   width: 60vw;
+   background-color: transparent;
+
+   & h1{
+      font-size: 35px;
+   }
+
+   & div.inAnalysis-status{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 30vh;
+      width: 100%;
+      margin-top: 20px;
+      background-color: transparent;
+
+      & div.status{
+         display: flex;
+         justify-content: flex-start;
+         align-items: center;
+         height: 25%;
+         width: 80%;
+         background-color: transparent;
+         border: 0px solid white;
+
+         & h2{
+            font-size: 22px;
+         }
+
+         & img{
+            height: 30px;
+            width: 30px;
+         }
+      }
+   }
+}
+
 div.inputs-container{
    display: flex;
    flex-direction: row;

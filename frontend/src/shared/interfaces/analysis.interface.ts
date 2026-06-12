@@ -25,3 +25,10 @@ export interface IAnalysis {
    output: IOutput,
    createdAt: Date
 };
+
+// analysis status interface
+export interface IAnalysisStatus {
+   status1: boolean,
+   status2: boolean,
+   status3: boolean,
+};
