@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+:root{
+   --color1: #0e1116;
+   --color2: #8981fe;
+   --color2b: #4a56f9;
+   --color2c: #7d74fe;
+   --color3: #ed254e;
+   --color4: #a2faa3;
+   --color5: #fffaff;
+}
+
+div.page-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   height: 85vh;
+   width: 85vw;
+   background-color: transparent;
+}
+
+h1.title{
+   font-size: 35px;
+}
+
+div.analysis-container{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   height: 68vh;
+   width: 85vw;
+   background-color: transparent;
+
+   & div.options{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 60px;
+      width: 45vw;
+      border-radius: 10px;
+      background-color: white;
+
+      & button{
+         height: 95%;
+         width: 24%;
+         border: none;
+         border-radius: 10px;
+         background-color: transparent;
+         color: black;
+         font-weight: bold;
+      }
+      & button:hover{
+         background-color: #4a56f94e;
+      }
+
+      & button.clicked{
+         color: white;
+         background-color: var(--color2b);
+      }
+   }
+
+   & div.data-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 38vh;
+      width: 60vw;
+      padding: 30px;
+      border: 2px solid white;
+      border-radius: 10px;
+      overflow-y: auto;  /* vertical scroll */
+      overflow-x: hidden; /* hidden horizontal scroll */
+
+      & p{
+         width: 70%;
+         font-size: 16px;
+         font-weight: bold;
+         white-space: pre-wrap;
+         text-align: left;
+         background-color: transparent;
+      }
+   }
+
+   & div.buttons{
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+      width: 28vw;
+
+      & button{
+         height: 100%;
+         width: 48%;
+         border: none;
+         border-radius: 10px;
+         background-color: var(--color2b);
+         color: white;
+         font-weight: bold;
+         font-size: 14px;
+      }
+   }
+}
+
+div.footer{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+   height: 8vh;
+   width: 85vw;
+   background-color: transparent;
+
+   & div.img-container{
+      height: 50px;
+      width: 50px;
+      margin-left: 13%;
+      border: 2px solid white;
+      border-radius: 100%;
+      background-color: white;
+      transition: transform 0.1s ease-in-out;
+      cursor: pointer;
+
+      & img{
+         height: 100%;
+         width: 100%;
+      }
+   }
+   & div.img-container:hover{
+      transform: scale(1.04);
+   }
+}
