@@ -103,70 +103,66 @@ const ProjectConfigDocuments = () => {
       }
    }, [registerRedirect, projectRedirect, navigate]);
 
-   // check user/project existence
+   // check user
+   const checkUser = async () => {
+      try{
+         const response = await userService.getUser();
+         if(!response) throw new Error('Usuário não encontrado');
+      }
+      catch(error){
+         console.error('❌ Error at get user: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : String(error);
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setRegisterRedirect(true);
+         throw error;
+      }
+   };
+
+   // check project
+   const checkProject = async () => {
+      try{
+         const response = await projectService.getProjectById(projectId as string);
+         if(!response) throw new Error('Projeto não encontrado');
+      }
+      catch(error){
+         console.error('❌ Error at get project: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : String(error);
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setProjectRedirect(true);
+         throw error;
+      }
+   };
+
+   // validate access
    useEffect(() => {
-      // user
-      const checkUser = async () => {
+      const validateAccess = async () => {
          setLoading(true);
 
          try{
-            const response = await userService.getUser();
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
-
-            setLoading(false);
+            await checkUser();
+            await checkProject();
          }
          catch(error){
-            console.error('❌ Error at get user: ', error);
-
-            const errorMessage = error instanceof Error ? error.message : error as string;
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ errorMessage }`, 
-               btt_event: false, btt_close: false, display: true
-            });
-
+            console.debug('Access validation interrupted - error already handled.', error);
+         }
+         finally{
             setLoading(false);
-            setRegisterRedirect(true);
          }
       };
 
-      // project
-      const checkProject = async () => {
-         setLoading(true);
-
-         try{
-            const response = await projectService.getProjectById(projectId as string);
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
-
-            setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at get project: ', error);
-
-            const errorMessage = error instanceof Error ? error.message : error as string;
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ errorMessage }`, 
-               btt_event: false, btt_close: false, display: true
-            });
-
-            setLoading(false);
-            setProjectRedirect(true);
-         }
-      };
-
-      checkUser();
-      checkProject();
+      validateAccess();
    }, []);
 
    // upload file

@@ -109,75 +109,71 @@ const ProjectDocuments = () => {
       if(documents && currentIndex < documents.length - 1) setCurrentIndex(prev => prev + 1);
    };
 
-   // project + documents check
+   // check project
+   const checkProject = async () => {
+      try{
+         const response = await projectService.getProjectById(projectId as string);
+         if(!response) throw new Error('Projeto não encontrado');
+
+         setProjectName(response.name);
+      }
+      catch(error){
+         console.error('❌ Error at get project: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : String(error);
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setRedirect(true);
+         throw error;
+      }
+   };
+
+   // check document
+   const checkDocuments = async () => {
+      try{
+         const response = await documentService.getDocumentsByProjectId(projectId!);
+         if(!response) throw new Error('Documento não encontrado');
+
+         setDocuments(response);
+      }
+      catch(error){
+         console.error('❌ Error at get documents by project id: ', error);
+
+         const errorMessage = error instanceof Error ? error.message : error as string;
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ errorMessage }`, 
+            btt_event: false, btt_close: false, display: true
+         });
+
+         setRedirect(true);
+         throw error;
+      }
+   };
+
+   // validate access
    useEffect(() => {
-      const checkProject = async () => {
+      const validateAccess = async () => {
          setLoading(true);
 
          try{
-            const response = await projectService.getProjectById(projectId!);
-            
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
-
-            setProjectName(response.name);
-
-            setLoading(false);
+            await checkProject();
+            await checkDocuments();
          }
          catch(error){
-            console.error('❌ Error at get project: ', error);
-
-            const errorMessage = error instanceof Error ? error.message : error as string;
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ errorMessage }`, 
-               btt_event: false, btt_close: false, display: true
-            });
-
+            console.debug('Access validation interrupted - error already handled.', error);
+         }
+         finally{
             setLoading(false);
-            setRedirect(true);
          }
       };
 
-      const checkDocuments = async () => {
-         setLoading(true);
-
-         try{
-            const response = await documentService.getDocumentsByProjectId(projectId!);
-            
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
-
-            setDocuments(response);
-
-            setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at get documents by project id: ', error);
-
-            const errorMessage = error instanceof Error ? error.message : error as string;
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ errorMessage }`, 
-               btt_event: false, btt_close: false, display: true
-            });
-
-            setLoading(false);
-            setRedirect(true);
-         }
-      };
-
-      checkProject();
-      checkDocuments();
-   }, [projectId]);
+      validateAccess();
+   }, []);
 
    // delete document advice
    const deleteDocumentAdvice = (id: string) => {

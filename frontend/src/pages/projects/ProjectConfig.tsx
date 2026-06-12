@@ -110,19 +110,14 @@ const ProjectConfig = () => {
       }
    }, [redirect, isConfigurated, navigate]);
 
-   // check user existence
+   // check user
    useEffect(() => {
       const checkUser = async () => {
          setLoading(true);
 
          try{
             const response = await userService.getUser();
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
+            if(!response) throw new Error('Usuário não encontrado');
 
             setLoading(false);
          }

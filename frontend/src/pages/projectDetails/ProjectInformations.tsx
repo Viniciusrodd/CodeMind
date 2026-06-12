@@ -104,13 +104,7 @@ const ProjectInformations = () => {
 
          try{
             const response = await projectService.getProjectById(projectId!);
-            
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
-
-               return;
-            }
+            if(!response) throw new Error('Projeto não encontrado');
 
             setProject(response);
 

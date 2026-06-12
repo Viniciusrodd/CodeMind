@@ -156,9 +156,7 @@ const ProjectAnalysis = () => {
    const checkProject = async () => {
       try{
          const response = await projectService.getProjectById(projectId as string);
-         if(!response){
-            throw new Error('Projeto não encontrado');
-         }
+         if(!response) throw new Error('Projeto não encontrado');
       }
       catch(error){
          console.error('❌ Error at get project: ', error);
@@ -175,7 +173,7 @@ const ProjectAnalysis = () => {
       }
    };
 
-   // validate user access
+   // validate access
    useEffect(() => {
       const validateAccess = async () => {
          setLoading(true);
