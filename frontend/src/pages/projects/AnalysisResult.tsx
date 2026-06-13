@@ -119,6 +119,19 @@ const AnalysisResult = () => {
       checkAnalysis();
    }, [analysisId]);
 
+   // copy text
+   const copyText = (text: string | string[]) => {
+      const textFormatted: string = Array.isArray(text) ? text.join(`\n \n`) : text;
+
+      navigator.clipboard.writeText(textFormatted);
+
+      modal_config({
+         title: 'Sucesso ✔️', 
+         msg: 'Texto copiado para área de transferência!', 
+         btt_event: false, btt_close: "Ok", display: true
+      });
+   };
+
 
    //// jsx
 
@@ -131,6 +144,7 @@ const AnalysisResult = () => {
             msg={ modal_msg }
             btt_event={ modal_btt }
             btt_close={ modal_btt_2 }
+            btt_close_class={ true }
             display={ modal_display }
             onClose={ closeModal }
          />
@@ -214,10 +228,18 @@ const AnalysisResult = () => {
                />
             ) : (
                <div className={ styles.buttons }>
-                  <button type='button' className={ styles['copy-btt'] }>
+                  <button type='button' className={ styles['copy-btt'] } 
+                     onClick={ () => copyText(
+                        analysisOptions === 'Explicação' ? analyse.output.explication :
+                        analysisOptions === 'Problemas encontrados' ? analyse.output.problemsFound :
+                        analysisOptions === 'Sugestões' ? analyse.output.suggestions :
+                        analysisOptions === 'Boas práticas' ? analyse.output.goodPractices : ''
+                     ) }
+                  >
                      COPIAR TEXTO
                   </button>
-                  <button type='button'>
+
+                  <button type='button' onClick={ () => navigate(`project/analysis/${ analyse.projectId }`) }>
                      INICIAR NOVA ANÁLISE
                   </button>
                </div>

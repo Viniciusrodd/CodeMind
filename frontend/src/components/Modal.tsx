@@ -9,7 +9,7 @@ import styles from '@styles/components/Modal.module.css';
 import type { iModal } from '@interfaces/modal.interface';
 
 
-const Modal: React.FC<iModal> = ({ title, msg, btt_event, btt_close, display, modalEvent, onClose }) => {
+const Modal: React.FC<iModal> = ({ title, msg, btt_event, btt_close, btt_close_class, display, modalEvent, onClose }) => {
    return (
       <div className={ display ? styles.modal : styles.hidden }>
          <div className={ styles.modal_content }>
@@ -28,7 +28,11 @@ const Modal: React.FC<iModal> = ({ title, msg, btt_event, btt_close, display, mo
             }
             {
                btt_close && (
-                  <button onClick={ onClose } type='button' className={ styles.close_modal_button }>
+                  <button 
+                     onClick={ onClose } 
+                     type='button' 
+                     className={ btt_close_class ? `${styles.green} ${styles.close_modal_button}` : `${styles.close_modal_button}` }
+                  >
                      { btt_close }
                   </button>
                )

@@ -106,6 +106,13 @@
    background-color: #b92929;
 }
 
+.green{
+   background-color: #4CAF50;
+}
+.green:hover{
+   background-color: #419a44;
+}
+
 
 /* Animação de Aparecer */
 @keyframes fadeIn {
