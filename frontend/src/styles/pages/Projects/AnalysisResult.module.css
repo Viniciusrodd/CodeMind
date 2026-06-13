@@ -40,7 +40,7 @@ div.analysis-container{
       height: 60px;
       width: 45vw;
       border-radius: 10px;
-      background-color: white;
+      background-color: #171d27;
 
       & button{
          height: 95%;
@@ -48,11 +48,11 @@ div.analysis-container{
          border: none;
          border-radius: 10px;
          background-color: transparent;
-         color: black;
+         color: white;
          font-weight: bold;
       }
       & button:hover{
-         background-color: #4a56f94e;
+         background-color: #545ffe22;
       }
 
       & button.clicked{
@@ -64,30 +64,36 @@ div.analysis-container{
    & div.data-container{
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       height: 38vh;
       width: 60vw;
       padding: 30px;
-      border: 2px solid white;
+      background-color: #171d27;
+      border: 0px solid white;
       border-radius: 10px;
       overflow-y: auto;  /* vertical scroll */
       overflow-x: hidden; /* hidden horizontal scroll */
 
       & p{
          width: 70%;
-         font-size: 16px;
-         font-weight: bold;
+         font-size: 17px;
+         font-weight: 500;
          white-space: pre-wrap;
-         text-align: left;
+         text-align: center;
          background-color: transparent;
+      }
+
+      & p.list{
+         text-align: left;
+         margin-bottom: 35px;
       }
    }
 
    & div.buttons{
       display: flex;
       justify-content: space-between;
-      height: 60px;
+      height: 58px;
       width: 28vw;
 
       & button{
@@ -99,6 +105,11 @@ div.analysis-container{
          color: white;
          font-weight: bold;
          font-size: 14px;
+      }
+
+      & button.copy-btt{
+         background-color: transparent;
+         border: 2px solid white;
       }
    }
 }
@@ -113,8 +124,8 @@ div.footer{
    background-color: transparent;
 
    & div.img-container{
-      height: 50px;
-      width: 50px;
+      height: 40px;
+      width: 40px;
       margin-left: 13%;
       border: 2px solid white;
       border-radius: 100%;
