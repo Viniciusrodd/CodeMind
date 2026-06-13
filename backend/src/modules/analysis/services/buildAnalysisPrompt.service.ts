@@ -53,16 +53,34 @@ class BuildAnalysisPromptService {
          7. Não invente informações inexistentes
          8. Responda de forma objetiva
 
+         FORMATO OBRIGATÓRIO DA RESPOSTA
 
-         FORMATO DA RESPOSTA:
+         Retorne APENAS um JSON válido.
 
-         ## Explicação
+         {
+            "explication": "...",
+            "problemsFound": [
+               "...",
+               "..."
+            ],
+            "suggestions": [
+               "...",
+               "..."
+            ],
+            "goodPractices": [
+               "...",
+               "..."
+            ]
+         }
 
-         ## Problemas encontrados
+         REGRAS:
 
-         ## Sugestões
-
-         ## Boas práticas
+         - Não use markdown.
+         - Não use blocos de código.
+         - Não use ${'```json'}.
+         - Não escreva texto antes ou depois do JSON.
+         - Todas as propriedades devem existir.
+         - Caso não encontre problemas, informe isso no campo correspondente.
 
          LIMITE:
          

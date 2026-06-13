@@ -12,7 +12,7 @@ import { cleanContextService } from "@rag/services/cleanContext.service";
 import { buildAnalysisPromptService } from "@analysis/services/buildAnalysisPrompt.service";
 
 // import interfaces
-import { IAnalysis } from "@analysis/interfaces/analysis.interface";
+import { IAnalysis, IOutput } from "@analysis/interfaces/analysis.interface";
 
 // import DTOs
 import { CreateAnalysisDTO } from "@analysis/dtos/analysis.dtos";
@@ -22,20 +22,20 @@ class AnalysisUseCase {
 
    // create
    public async create(data: CreateAnalysisDTO): Promise<IAnalysis> {
-      // 1. project validation
+      // project validation
       const project = await projectRepository.getById(data.projectId);
       if(!project) throw new Error('Projeto não encontrado'); 
 
-      // 2. vector search generation
+      // vector search generation
       const chunks = await retrieveContextService.execute(
          data.projectId,
          `${data.input.code} ${data.input.context || ''}`
       );
 
-      // 3. clean RAG context
+      // clean RAG context
       const ragContext = cleanContextService.execute(chunks);
 
-      // 4. build final prompt
+      // build final prompt
       const prompt = buildAnalysisPromptService.execute({
          projectContext: project.context,
          code: data.input.code,
@@ -43,10 +43,22 @@ class AnalysisUseCase {
          ragContext
       });
 
-      // 5. AI provider
-      const respose = await ollamaProvider.generate(prompt);
+      // AI provider
+      const response = await ollamaProvider.generate(prompt);
 
-      // 6. analysis persist
+      // clean prompt
+      const cleaned = response
+         .replace(/```json/g, '')
+         .replace(/```/g, '')
+         .trim();
+
+      // responseCleaned json parse + validation
+      const output: IOutput = JSON.parse(cleaned);
+      if(!output.explication || !output.problemsFound || !output.suggestions || !output.goodPractices){
+         throw new Error('Resposta da IA inválida');
+      }
+
+      // analysis persist
       const analysis = await analysisRepository.create({
          projectId: data.projectId,
          input: {
@@ -58,7 +70,10 @@ class AnalysisUseCase {
             score: chunk.score
          })),
          output: {
-            structuredAnalysis: respose
+            explication: output.explication,
+            problemsFound: output.problemsFound,
+            suggestions: output.suggestions,
+            goodPractices: output.goodPractices
          }
       });
 

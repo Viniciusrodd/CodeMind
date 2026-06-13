@@ -18,7 +18,10 @@ const analysisSchema: Schema = new Schema<IAnalysis>({
       score: { type: Number, required: true }
    }],
    output: {
-      structuredAnalysis: { type: String, required: true }
+      explication: { type: String, required: true },
+      problemsFound: { type: [String], required: true },
+      suggestions: { type: [String], required: true },
+      goodPractices: { type: [String], required: true },
    },
    createdAt: { type: Date, default: Date.now }
 });
