@@ -31,7 +31,7 @@ const ProjectDocuments = () => {
    //// variables
    const navigate = useNavigate();
    const { projectId } = useParams<string>();
-   const [ redirect, setRedirect ] = useState<boolean>(false);
+   const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
    const [ closeAdvice, setCloseAdvice ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
@@ -68,7 +68,7 @@ const ProjectDocuments = () => {
 
    // redirect
    useEffect(() => {
-      if(redirect){
+      if(projectRedirect){
          const clearMessage = setTimeout(() =>{
             modal_config({
                title: '', msg: '', btt_event: false, 
@@ -97,7 +97,7 @@ const ProjectDocuments = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [navigate, redirect, closeAdvice]);
+   }, [navigate, projectRedirect, closeAdvice]);
 
    // go prev
    const goPrev = () => {
@@ -127,7 +127,7 @@ const ProjectDocuments = () => {
             btt_event: false, btt_close: false, display: true
          });
 
-         setRedirect(true);
+         setProjectRedirect(true);
          throw error;
       }
    };
@@ -150,7 +150,7 @@ const ProjectDocuments = () => {
             btt_event: false, btt_close: false, display: true
          });
 
-         setRedirect(true);
+         setProjectRedirect(true);
          throw error;
       }
    };

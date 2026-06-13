@@ -20,7 +20,6 @@ import Modal from '@components/Modal';
 
 // import services
 import { projectService } from '@services/project.service';
-import { userService } from '@services/user.service';
 
 // import contexts
 import { loadingContext } from '@contexts/loading/loading.context';
@@ -29,7 +28,6 @@ import { loadingContext } from '@contexts/loading/loading.context';
 const ProjectDashboard = () => {
    //// variables
    const navigate = useNavigate();
-   const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ welcomeRedirect, setWelcomeRedirect ] = useState<boolean>(false);
    const [ closeAdvice, setCloseAdvice ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
@@ -74,22 +72,6 @@ const ProjectDashboard = () => {
 
    // redirect
    useEffect(() => {
-      if(registerRedirect){
-         const clearMessage = setTimeout(() =>{
-            modal_config({
-               title: '', msg: '', btt_event: false, 
-               btt_close: false, display: false
-            });
-
-            navigate('/');       
-         }, 4000);
-
-         return () =>{
-            setLoading(false);
-            clearTimeout(clearMessage);
-         };
-      }
-
       if(welcomeRedirect){
          const clearMessage = setTimeout(() =>{
             modal_config({
@@ -119,73 +101,40 @@ const ProjectDashboard = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, welcomeRedirect, closeAdvice, navigate]);
-
-   // check user
-   const checkUser = async () => {
-      try{
-         const response = await userService.getUser();
-         if(!response) throw new Error('Usuário não encontrado');
-      }
-      catch(error){
-         console.error('❌ Error at get user: ', error);
-
-         const errorMessage = error instanceof Error ? error.message : String(error);
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ errorMessage }`, 
-            btt_event: false, btt_close: false, display: true
-         });
-
-         setRegisterRedirect(true);
-         throw error;
-      }
-   };
+   }, [welcomeRedirect, closeAdvice, navigate]);
 
    // check project
-   const checkProject = async () => {
-      try{
-         const response = await projectService.getAllProject();
-         if(!response) throw new Error('Projetos não encontrados');
-
-         setProjects(response);
-
-         const getActualProject = response[0];
-         if(getActualProject) setActualProject(getActualProject);
-      }
-      catch(error){
-         console.error('❌ Error at get projects: ', error);
-
-         const errorMessage = error instanceof Error ? error.message : String(error);
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ errorMessage }`, 
-            btt_event: false, btt_close: false, display: true
-         });
-
-         setWelcomeRedirect(true);
-         throw error;
-      }
-   };
-
-   // validate access
    useEffect(() => {
-      const validateAccess = async () => {
+      const checkProject = async () => {
          setLoading(true);
 
          try{
-            await checkUser();
-            await checkProject();
+            const response = await projectService.getAllProject();
+            if(!response) throw new Error('Projetos não encontrados');
+   
+            setProjects(response);
+   
+            const getActualProject = response[0];
+            if(getActualProject) setActualProject(getActualProject);
+            
+            setLoading(false);
          }
          catch(error){
-            console.debug('Access validation interrupted - error already handled.', error);
-         }
-         finally{
+            console.error('❌ Error at get projects: ', error);
+   
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }`, 
+               btt_event: false, btt_close: false, display: true
+            });
+   
+            setWelcomeRedirect(true);
             setLoading(false);
          }
       };
 
-      validateAccess();
+      checkProject();
    }, []);
 
    // delete project advice

@@ -32,7 +32,7 @@ const ProjectEdit = () => {
    //// variables
    const navigate = useNavigate();
    const { projectId } = useParams<string>();
-   const [ redirect, setRedirect ] = useState<boolean>(false);
+   const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
    const [ isUpdated, setIsUpdated ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
@@ -76,14 +76,14 @@ const ProjectEdit = () => {
 
    // redirect
    useEffect(() =>{
-      if(redirect){
+      if(projectRedirect){
          const clearMessage = setTimeout(() =>{
             modal_config({
                title: '', msg: '', btt_event: false, 
                btt_close: false, display: false
             });
 
-            navigate('/');       
+            navigate('/project/dashboard');       
          }, 4000);
 
          return () =>{
@@ -107,7 +107,7 @@ const ProjectEdit = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [redirect, isUpdated, navigate]);
+   }, [projectRedirect, isUpdated, navigate]);
 
    // check project
    useEffect(() => {
@@ -133,7 +133,7 @@ const ProjectEdit = () => {
             });
 
             setLoading(false);
-            setRedirect(true);
+            setProjectRedirect(true);
          }
       };
 

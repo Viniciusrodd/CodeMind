@@ -20,7 +20,6 @@ import Title from '@components/Title';
 
 // import services
 import { projectService } from '@services/project.service';
-import { userService } from '@services/user.service';
 import { analysisService } from '@services/analysis.service';
 
 // import contexts
@@ -35,7 +34,6 @@ const ProjectAnalysis = () => {
    //// variables
    const navigate = useNavigate();
    const { projectId } = useParams<string>();
-   const [ registerRedirect, setRegisterRedirect ] = useState<boolean>(false);
    const [ projectRedirect, setProjectRedirect ] = useState<boolean>(false);
    const [ analysisRedirect, setAnalysisRedirect ] = useState<boolean>(false);
    const [ modal_display, setModal_display ] = useState<boolean>(false);
@@ -81,22 +79,6 @@ const ProjectAnalysis = () => {
 
    // redirect
    useEffect(() =>{
-      if(registerRedirect){
-         const clearMessage = setTimeout(() =>{
-            modal_config({
-               title: '', msg: '', btt_event: false, 
-               btt_close: false, display: false
-            });
-
-            navigate('/');       
-         }, 4000);
-
-         return () =>{
-            setLoading(false);
-            clearTimeout(clearMessage);
-         };
-      }
-
       if(projectRedirect){
          const clearMessage = setTimeout(() =>{
             modal_config({
@@ -129,69 +111,36 @@ const ProjectAnalysis = () => {
             clearTimeout(clearMessage);
          };
       }
-   }, [registerRedirect, projectRedirect, analysisRedirect, analysisId, navigate]);
-
-   // check user
-   const checkUser = async () => {
-      try{
-         const response = await userService.getUser();
-         if(!response) throw new Error('Usuário não encontrado');
-      }
-      catch(error){
-         console.error('❌ Error at get user: ', error);
-
-         const errorMessage = error instanceof Error ? error.message : String(error);
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ errorMessage }`, 
-            btt_event: false, btt_close: false, display: true
-         });
-
-         setRegisterRedirect(true);
-         throw error;
-      }
-   };
+   }, [projectRedirect, analysisRedirect, analysisId, navigate]);
 
    // check project
-   const checkProject = async () => {
-      try{
-         const response = await projectService.getProjectById(projectId as string);
-         if(!response) throw new Error('Projeto não encontrado');
-      }
-      catch(error){
-         console.error('❌ Error at get project: ', error);
-
-         const errorMessage = error instanceof Error ? error.message : String(error);
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ errorMessage }`, 
-            btt_event: false, btt_close: false, display: true
-         });
-
-         setProjectRedirect(true);
-         throw error;
-      }
-   };
-
-   // validate access
    useEffect(() => {
-      const validateAccess = async () => {
+      const checkProject = async () => {
          setLoading(true);
 
          try{
-            await checkUser();
-            await checkProject();
-         }
-         catch(error){
-            console.debug('Access validation interrupted - error already handled.', error);
-         }
-         finally{
+            const response = await projectService.getProjectById(projectId as string);
+            if(!response) throw new Error('Projeto não encontrado');
+
             setLoading(false);
          }
+         catch(error){
+            console.error('❌ Error at get project: ', error);
+   
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ errorMessage }`, 
+               btt_event: false, btt_close: false, display: true
+            });
+   
+            setLoading(false);
+            setProjectRedirect(true);
+         }
       };
-
-      validateAccess();
-   }, []);
+      
+      checkProject();
+   }, [projectId]);
 
    // code validation
    const codeValidation = () => {
