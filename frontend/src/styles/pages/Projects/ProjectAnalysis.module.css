@@ -22,17 +22,6 @@ div.page-container{
    height: 90vh;
    width: 85vw;
    background-color: transparent;
-
-   & button.analysis-btt{
-      height: 7vh;
-      width: 13vw;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: bold;
-      background-color: var(--color2b);
-      color: white;
-   }
 }
 
 div.inAnalysis-container{
@@ -225,5 +214,30 @@ div.context-container{
          font-weight: 600;
          text-align: left;
       }
+   }
+}
+
+button.analysis-btt{
+   height: 7vh;
+   width: 13vw;
+   border: none;
+   border-radius: 10px;
+   font-size: 15px;
+   font-weight: bold;
+   background-color: var(--color2b);
+   color: white;
+}
+
+div.footer{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+   height: 7vh;
+   width: 75vw;
+   background-color: transparent;
+
+   & span{
+      font-size: 35px;
    }
 }

@@ -438,6 +438,18 @@ const ProjectAnalysis = () => {
                GERAR ANÁLISE
             </button>
          ) }
+
+         {/* footer */}
+         { loading === false && (
+            <div className={ styles.footer }>
+               <span 
+                  className='material-symbols-outlined tooltip' data-tooltip="Voltar" 
+                  onClick={ () => navigate(`/project/dashboard`) }
+               >
+                  Undo
+               </span>
+            </div>
+         ) }
       </div>
    );
 };
