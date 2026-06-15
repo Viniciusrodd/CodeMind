@@ -14,7 +14,7 @@ div.page-container{
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   height: 95vh;
+   height: 90vh;
    width: 90vw;
    background-color: transparent;
 }
@@ -40,7 +40,7 @@ div.form-container{
    align-items: center;
    border: 2px solid white;
    border-radius: 10px;
-   height: 70vh;
+   height: 65vh;
    width: 70vw;
    z-index: 1;
    position: relative;
@@ -60,7 +60,7 @@ form{
    align-items: center;
    gap: 40px; /* Espaçamento entre elementos */
    padding: 0px 50px;
-   height: 40vh;
+   height: 30vh;
    width: 50vw;
    overflow-y: auto;  /* vertical scroll */
    overflow-x: hidden; /* hidden horizontal scroll */

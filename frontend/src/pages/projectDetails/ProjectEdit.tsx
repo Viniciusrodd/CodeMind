@@ -328,6 +328,18 @@ const ProjectEdit = () => {
                EDITAR CONTEXTO
             </button>  
          ) }
+
+         { /* footer */ }
+         { loading === false && (
+            <div className={ projectConfigStyles.footer }>
+               <span 
+                  className='material-symbols-outlined tooltip' data-tooltip="Voltar"
+                  onClick={ () => navigate(`/project/dashboard`) }
+               >
+                  Undo
+               </span>
+            </div>
+         ) }
       </div>
    );
 };
