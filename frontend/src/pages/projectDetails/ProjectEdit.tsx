@@ -5,7 +5,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // import css
-import projectConfigStyles from '@styles/pages/Projects/ProjectConfig.module.css';
+import projectConfigStyles from '@styles/pages/projectDetails/ProjectConfig.module.css';
 
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 
 // import css
-import styles from '@styles/pages/Projects/ProjectConfig.module.css';
+import styles from '@styles/pages/projectDetails/ProjectConfig.module.css';
 
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
@@ -317,6 +317,18 @@ const ProjectConfig = () => {
             >
                ENVIAR CONTEXTO
             </button>            
+         ) }
+
+         { /* footer */ }
+         { loading === false && (
+            <div className={ styles.footer }>
+               <span 
+                  className='material-symbols-outlined tooltip' data-tooltip="Voltar"
+                  onClick={ () => navigate(`/project/dashboard`) }
+               >
+                  Undo
+               </span>
+            </div>
          ) }
       </div>
    );

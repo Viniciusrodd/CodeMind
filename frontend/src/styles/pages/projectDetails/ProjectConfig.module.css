@@ -16,6 +16,7 @@ div.page-container{
    align-items: center;
    height: 95vh;
    width: 90vw;
+   background-color: transparent;
 }
 
 div.img{
@@ -39,7 +40,7 @@ div.form-container{
    align-items: center;
    border: 2px solid white;
    border-radius: 10px;
-   height: 75vh;
+   height: 70vh;
    width: 70vw;
    z-index: 1;
    position: relative;
@@ -111,4 +112,17 @@ button.btt{
    z-index: 2;
    position: relative;
    margin-top: -28px;
+}
+
+div.footer{
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   height: 8vh;
+   width: 70vw;
+   background-color: transparent;
+
+   & span{
+      font-size: 35px;
+   }
 }
