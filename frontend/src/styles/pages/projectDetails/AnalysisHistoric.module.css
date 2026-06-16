@@ -10,3 +10,33 @@
    --color5: #fffaff;
 }
 
+div.analysis{
+   display: flex;
+   justify-content: space-around;
+   align-items: flex-start;
+   height: 9vh;
+   width: 60vw;
+   background-color: transparent;
+
+   & span{
+      font-size: 40px;
+   }
+}
+
+div.buttons{
+   display: flex;
+   justify-content: center;
+   height: 57px;
+   width: 28vw;
+
+   & button{
+      height: 100%;
+      width: 48%;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--color2b);
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+   }
+}

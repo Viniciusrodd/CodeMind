@@ -9,7 +9,7 @@ import styles from '@styles/pages/Projects/AnalysisResult.module.css';
 
 // import interfaces
 import type { iModalConfig } from '@interfaces/modal.interface';
-import type { IAnalysis } from '@interfaces/analysis.interface';
+import type { IAnalysis, AnalysisOptions } from '@interfaces/analysis.interface';
 
 // import components
 import Modal from '@components/Modal';
@@ -23,9 +23,6 @@ import { loadingContext } from '@contexts/loading/loading.context';
 // import images
 import home_img from '@images/home.png';
 import loading_img from '@images/loading.png';
-
-// types
-type AnalysisOptions = 'Explicação' | 'Problemas encontrados' | 'Sugestões' | 'Boas práticas';
 
 
 const AnalysisResult = () => {
@@ -197,6 +194,7 @@ const AnalysisResult = () => {
                </div>
             ) }
 
+            {/* data */}
             <div className={ `${styles['data-container']} scroll` }>
                { analysisOptions === 'Explicação' && ( <p>{ analyse.output.explication }</p> ) }
 

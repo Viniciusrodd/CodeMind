@@ -35,3 +35,6 @@ export interface IAnalysisStatus {
    status2: boolean,
    status3: boolean,
 };
+
+// types
+export type AnalysisOptions = 'Explicação' | 'Problemas encontrados' | 'Sugestões' | 'Boas práticas';
