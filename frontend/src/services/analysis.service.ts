@@ -64,7 +64,7 @@ class AnalysisService {
       projectId: string
    ): Promise<IAnalysis[] | null> {
       try{
-         const res = await axios.get<iApiResponse<IAnalysis[] | null>>(`${analysisRoute}/${projectId}`);
+         const res = await axios.get<iApiResponse<IAnalysis[] | null>>(`${analysisRoute}/project/${projectId}`);
          return res.data.data!;
       }
       catch(error){

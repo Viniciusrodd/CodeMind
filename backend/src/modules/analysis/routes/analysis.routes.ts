@@ -34,7 +34,7 @@ analysisRoutes.get<{ id: string }>(
 
 // get analyse by project id
 analysisRoutes.get<{ projectId: string }>(
-   '/:projectId',
+   '/project/:projectId',
    analysisValidations.getByProjectId(),
    handleValidation,
    analysisController.getAnalysisByProjectId
