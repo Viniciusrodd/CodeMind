@@ -16,6 +16,7 @@ import ProjectDocuments from '@pages/projectDetails/ProjectDocuments';
 import ProjectEdit from '@pages/projectDetails/ProjectEdit';
 import ProjectAnalysis from '@pages/projects/ProjectAnalysis';
 import AnalysisResult from '@pages/projects/AnalysisResult';
+import AnalysisHistoric from '@pages/projectDetails/AnalysisHistoric';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
                <Route path='/project/informations/:projectId' element={ <ProjectInformations /> } />
                <Route path='/project/documents/:projectId' element={ <ProjectDocuments /> } />
                <Route path='/project/edit/:projectId' element={ <ProjectEdit /> } />
+               <Route path='/analysis/historic/:projectId' element={ <AnalysisHistoric /> } />
             </Routes>
          </BrowserRouter>
       </div>

@@ -298,7 +298,12 @@ const ProjectDashboard = () => {
                      >
                         Documentos associados
                      </p>
-                     <p className={ styles['project-options'] }>Histórico de análises</p>
+                     <p 
+                        className={ styles['project-options'] }
+                        onClick={ () => navigate(`/analysis/historic/${actualProject._id}`) }                           
+                     >
+                        Histórico de análises
+                     </p>
                   </div>
                   </>
                ) }
