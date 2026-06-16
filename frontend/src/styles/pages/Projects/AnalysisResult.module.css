@@ -29,7 +29,7 @@ div.analysis-container{
    flex-direction: column;
    justify-content: space-between;
    align-items: center;
-   height: 68vh;
+   height: 65vh;
    width: 85vw;
    background-color: transparent;
 
@@ -66,9 +66,9 @@ div.analysis-container{
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 38vh;
+      height: 32vh;
       width: 60vw;
-      padding: 30px;
+      padding: 50px 10px;
       background-color: #171d27;
       border: 0px solid white;
       border-radius: 10px;
@@ -93,7 +93,7 @@ div.analysis-container{
    & div.buttons{
       display: flex;
       justify-content: space-between;
-      height: 58px;
+      height: 57px;
       width: 28vw;
 
       & button{
