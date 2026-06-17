@@ -26,6 +26,9 @@ const ProjectDocuments = lazy(() => import('@pages/projectDetails/ProjectDocumen
 const ProjectEdit = lazy(() => import('@pages/projectDetails/ProjectEdit'));
 const AnalysisHistoric = lazy(() => import('@pages/projectDetails/AnalysisHistoric'));
 
+// import notFound page
+const NotFound = lazy(() => import('@pages/NotFound'));
+
 
 function App() {
    return (
@@ -59,6 +62,9 @@ function App() {
                   <Route path='/project/documents/:projectId' element={ <ProjectDocuments /> } />
                   <Route path='/project/edit/:projectId' element={ <ProjectEdit /> } />
                   <Route path='/analysis/historic/:projectId' element={ <AnalysisHistoric /> } />
+
+                  { /* NotFound page */ }
+                  <Route path='*' element={ <NotFound /> } />
                </Routes>
             </Suspense>
          </BrowserRouter>
