@@ -6,9 +6,6 @@ dist
 
 .vscode
 
-.env
-.env.*
-
 Dockerfile
 README.md
 

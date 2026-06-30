@@ -35,12 +35,13 @@ class Server {
       app.use(hpp()); // prevents against "HTTP Parameter Pollution"
       app.use(helmet()); // safety config HTTP headers
       app.use(cors({
-         origin: process.env.CLIENT_URL,
+         origin: process.env.CLIENT_URL_CONTAINER,
          credentials: true,
          methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
       }));
 
       console.log('✔️ Security middlewares');
+      console.log(process.env.CLIENT_URL_CONTAINER)
    };
 
 

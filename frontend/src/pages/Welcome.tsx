@@ -79,41 +79,41 @@ const Welcome = () => {
       }
    }, [registerRedirect, navigate]);
 
-   // get user name
-   useEffect(() => {
-      const getUser = async () => {
-         setLoading(true);
-         
-         try{
-            const response = await userService.getUser();
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
+      // get user name
+      useEffect(() => {
+         const getUser = async () => {
+            setLoading(true);
+            
+            try{
+               const response = await userService.getUser();
+               if(!response){
+                  console.error('⚠️ Unexpected return from API:', response);
+                  setLoading(false);
+
+                  return;
+               }
+
+               setName(response.name);
+
                setLoading(false);
-
-               return;
             }
+            catch(error){
+               console.error('❌ Error at get user: ', error);
 
-            setName(response.name);
+               const errorMessage = error instanceof Error ? error.message : error as string;
+               modal_config({
+                  title: 'Erro ❌', 
+                  msg: `${ errorMessage }`, 
+                  btt_event: false, btt_close: false, display: true
+               });
 
-            setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at get user: ', error);
+               setLoading(false);
+               setRegisterRedirect(true);
+            }
+         };
 
-            const errorMessage = error instanceof Error ? error.message : error as string;
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ errorMessage }`, 
-               btt_event: false, btt_close: false, display: true
-            });
-
-            setLoading(false);
-            setRegisterRedirect(true);
-         }
-      };
-
-      getUser();
-   }, []);
+         getUser();
+      }, []);
 
    // user projects check
    useEffect(() => {

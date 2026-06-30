@@ -14,10 +14,16 @@ RUN npm run build
 # stage 2 - Nginx
 # ==============================
 FROM nginx:alpine
+
 # remove default page
 RUN rm -rf /usr/share/nginx/html/*
+
+# nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # build copy
 COPY --from=builder /app/dist /usr/share/nginx/html
+
 # default nginx port
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
