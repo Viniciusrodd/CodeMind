@@ -1,12 +1,10 @@
 
-// user route - GET, PUT, POST, DELETE
-export const userRoute: string = 'http://localhost:5225/api/users';
+// imports
+const API = import.meta.env.VITE_API_URL;
 
-// project route - GET, PUT, POST, DELETE
-export const projectRoute: string = 'http://localhost:5225/api/projects';
 
-// document route - GET, PUT, POST, DELETE
-export const documentRoute: string = 'http://localhost:5225/api/documents';
-
-// analysis route - GET, POST, DELETE
-export const analysisRoute: string = 'http://localhost:5225/api/analysis';
+// routes
+export const userRoute: string = `${API}/users`;
+export const projectRoute: string = `${API}/projects`;
+export const documentRoute: string = `${API}/documents`;
+export const analysisRoute: string = `${API}/analysis`;
