@@ -19,7 +19,7 @@ class OllamaClient {
       if(!prompt) throw new Error('Prompt for AI model request is necessary');
 
       try{
-         const response = await axios.post(ollamaConfig.baseUrl + ollamaConfig.generatePath, {
+         const response = await axios.post(`${process.env.OLLAMA_URL}/api/generate`, {
             'model': ollamaConfig.models.qwen,
             'prompt': prompt,
             'stream': false
