@@ -3,7 +3,7 @@
       "ignoreDeprecations": "6.0",
       "baseUrl": ".",
       "outDir": "./dist",
-      "rootDir": "../",
+      "rootDir": "./src",
       "module": "commonjs",
       "target": "es2016",
       "types": [],
