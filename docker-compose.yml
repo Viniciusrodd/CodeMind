@@ -1,0 +1,51 @@
+
+services:
+
+  # mongo
+  mongodb:
+    image: mongo:8
+    container_name: codemind-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - codemind-network
+
+  # backend
+  backend:
+    build:
+      context: ./backend
+    container_name: codemind-backend
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5225:5225"
+    networks:
+      - codemind-network
+
+  # frontend
+  frontend:
+    build:
+      context: ./frontend
+    container_name: codemind-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+    networks:
+      - codemind-network
+
+
+volumes:
+  mongodb_data:
+
+
+networks:
+  codemind-network:
+    driver: bridge
