@@ -151,35 +151,72 @@ Esse fluxo permite que a IA produza **respostas mais contextualizadas** do que u
 
 ### IA
 - Ollama
-- Modelos locais, como: Mistral:7b, Qwen2.5-coder:7b
+- Qwen2.5-Coder 7B (geração de análises)
+- Nomic Embed Text (geração de embeddings)
 - Pipeline RAG
-- Embeddings
-- Busca Vetorial
+- MongoDB Vector Search
 
 
 ## 🚀 Instalação
 
 ### Pré-requisitos
-- Node.js
-- MongoDB
-- Ollama
+Antes de iniciar o CodeMind, certifique-se de possuir instalado:
+- Docker Desktop
 - Git
 
+> Não é necessário instalar Node.js, MongoDB ou Ollama separadamente. Todos esses serviços são executados em containers Docker.
+
+---
+
 ### Clonar o projeto
+```bash
 - git clone https://github.com/Viniciusrodd/CodeMind.git
 
 - cd codemind
+```
 
-### Backend
-- cd backend
-- npm install
-- npm run dev
+---
 
-### Frontend
-- cd frontend
-- npm install
-- npm run dev
+### Primeira execução
+Na primeira execução é necessário baixar os modelos utilizados pela IA.
+Abra a pasta `launcher` e execute:
+```
+install.bat
+```
+
+O instalador irá:
+- iniciar todos os containers
+- baixar o modelo `qwen2.5-coder:7b`
+- baixar o modelo `nomic-embed-text`
+
+> O primeiro download pode levar alguns minutos, dependendo da velocidade da internet.
+
+---
+
+### Executando a aplicação
+Após a instalação inicial, basta executar:
+```
+start.bat
+```
+O script irá:
+- iniciar todos os containers
+- abrir automaticamente o navegador em
+```
+http://localhost:3000
+```
+
+---
+
+### Encerrando a aplicação
+Quando terminar de utilizar o CodeMind, execute:
+```
+stop.bat
+```
+Esse script interrompe todos os containers da aplicação, liberando memória e processamento da máquina.
 
 
-A aplicação estará disponível em:
-- http://localhost:5173
+## ⚠️ Requisitos de hardware
+- 8 GB de RAM (mínimo)
+- 16 GB de RAM (recomendado)
+- CPU com múltiplos núcleos
+- Aproximadamente 8 GB de espaço livre para os modelos e imagens Docker
