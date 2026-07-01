@@ -3,49 +3,77 @@ services:
 
   # mongo
   mongodb:
-    image: mongo:8
-    container_name: codemind-mongodb
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-    networks:
-      - codemind-network
+      image: mongo:8
+      container_name: codemind-mongodb
+      restart: unless-stopped
+      
+      ports:
+        - "27017:27017"
+      
+      volumes:
+        - mongodb_data:/data/db
+      
+      networks:
+        - codemind-network
 
   # backend
   backend:
-    build:
-      context: ./backend
-    container_name: codemind-backend
-    restart: unless-stopped
-    depends_on:
-      - mongodb
-    env_file:
-      - ./backend/.env
-    ports:
-      - "5225:5225"
-    networks:
-      - codemind-network
+      build:
+        context: ./backend
+      
+      container_name: codemind-backend
+      restart: unless-stopped
+      
+      depends_on:
+        - mongodb
+      env_file:
+        - ./backend/.env
+      
+      ports:
+        - "5225:5225"
+      
+      networks:
+        - codemind-network
 
   # frontend
   frontend:
-    build:
-      context: ./frontend
-    container_name: codemind-frontend
-    restart: unless-stopped
-    depends_on:
-      - backend
-    ports:
-      - "3000:80"
-    networks:
-      - codemind-network
+      build:
+        context: ./frontend
+      
+      container_name: codemind-frontend
+      restart: unless-stopped
+      
+      depends_on:
+        - backend
+      
+      ports:
+        - "3000:80"
+      
+      networks:
+        - codemind-network
+
+  # ollama
+  ollama:
+      image: ollama/ollama
+      container_name: codemind-ollama
+      restart: unless-stopped
+
+      ports:
+        - "11434:11434"
+
+      volumes:
+        - ollama_data:/root/.ollama
+
+      networks:
+        - codemind-network
 
 
 volumes:
-  mongodb_data:
+    mongodb_data:
+    ollama_data:
+
 
 
 networks:
-  codemind-network:
-    driver: bridge
+    codemind-network:
+      driver: bridge
